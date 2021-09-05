@@ -61,18 +61,18 @@ namespace ProjectPangaea
 
         private static AnimalType CalculateAnimalType(ThingDef thingDef)
         {
+            ModExt_Extinct extinct = thingDef.GetModExtension<ModExt_Extinct>();
+            if (extinct != null)
+            {
+                return extinct.animalType;
+            }
+
             foreach (var categoryDef in DefDatabase<PangaeaAnimalCategorizationDef>.AllDefs.Reverse())
             {
                 if (categoryDef.ContainsDef(thingDef, out var entry))
                 {
                     return entry.animalType;
                 }
-            }
-
-            ModExt_Extinct extinct = thingDef.GetModExtension<ModExt_Extinct>();
-            if (extinct != null)
-            {
-                return extinct.animalType;
             }
 
             return AnimalType.Unspecified;

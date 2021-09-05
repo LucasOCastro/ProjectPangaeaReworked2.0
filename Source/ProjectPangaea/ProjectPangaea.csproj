@@ -79,7 +79,6 @@
     <Compile Include="PangaeaEnumExtension.cs" />
     <Compile Include="ExtinctUtility.cs" />
     <Compile Include="ExtinctSpawningOverride.cs" />
-    <Compile Include="Overrides\OverrideType.cs" />
     <Compile Include="Overrides\PangaeaAnimalCategorizationDef.cs" />
     <Compile Include="PangaeaCollectionExtension.cs" />
     <Compile Include="PangaeaEntryFilter.cs" />
