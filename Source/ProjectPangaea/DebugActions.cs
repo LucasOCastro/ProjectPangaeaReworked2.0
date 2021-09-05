@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ProjectPangaea
 {
-
+    //TODO turn these actions into gizmos on the items
     public static class Pangaea_DebugActions
     {
         [DebugAction("Project Pangaea", "Set Pangaea resource", actionType = DebugActionType.ToolMap, allowedGameStates = AllowedGameStates.PlayingOnMap)]
