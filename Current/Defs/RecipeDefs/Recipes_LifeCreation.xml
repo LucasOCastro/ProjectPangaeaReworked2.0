@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!--<RecipeDef Name="Pangaea_CreateEmbryo">
+		<defName>Pangaea_CreateEmbryo</defName>
+		<label>Create embryos from prehistoric DNA</label>
+		<description>Use advanced scientific techniques to recreate eggs of prehistoric animals using straps of their DNA.</description>
+		<jobString>Creating egg.</jobString>
+		<workAmount>2000</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Smelt</effectWorking>
+		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+		<modExtensions>
+			<li Class="ProjectPangaea.Production.Pangaea_CreateLifeRecipeExtension">
+				<yieldPerCreation>1~1</yieldPerCreation>
+			</li>
+		</modExtensions>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>PangaeaDNA</li>
+					</categories>
+				</filter>
+				<count>50</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>PangaeaDNA</li>
+			</categories>
+		</fixedIngredientFilter>
+	</RecipeDef>-->
+
+	<RecipeDef Name="Pangaea_CreateEggsFromDNA">
+		<defName>Pangaea_CreateEggsFromDNA</defName>
+		<label>Create eggs directly from prehistoric DNA</label>
+		<description>Use advanced scientific techniques to recreate eggs of prehistoric animals using straps of their DNA.</description>
+		<jobString>Creating egg.</jobString>
+		<workAmount>2000</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Smelt</effectWorking>
+		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+		<modExtensions>
+			<li Class="ProjectPangaea.Production.Pangaea_CreateLifeRecipeExtension">
+				<!--<yieldPerCreation>1~1</yieldPerCreation>-->
+			</li>
+		</modExtensions>
+		<products>
+			<EggChickenFertilized>1</EggChickenFertilized>
+		</products>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>PangaeaDNA</li>
+					</categories>
+				</filter>
+				<count>50</count>
+			</li>
+			<li>
+				<filter>
+					<categories>
+						<li>EggsUnfertilized</li>
+					</categories>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>PangaeaDNA</li>
+				<li>EggsUnfertilized</li>
+			</categories>
+		</fixedIngredientFilter>
+	</RecipeDef>
+
+	
+
+</Defs>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- MOD SETTINGS-->
+	<!--ExtinctSpawning-->
+	<PangaeaSetting_WildAnimalsName>Spawn wild animals</PangaeaSetting_WildAnimalsName>
+	<PangaeaSetting_WildAnimalsDescription>Spawns the extinct animals in the wild.</PangaeaSetting_WildAnimalsDescription>
+	<PangaeaSetting_WildPlantsName>Spawn wild plants</PangaeaSetting_WildPlantsName>
+	<PangaeaSetting_WildPlantsDescription>Spawns the extinct plants in the wild.</PangaeaSetting_WildPlantsDescription>
+	<!--RandomToNull-->
+	<PangaeaSetting_RandomResourceToNullName>Assign random to null resources</PangaeaSetting_RandomResourceToNullName>
+	<PangaeaSetting_RandomResourceToNullDescription>If a fossil or DNA has nothing assigned to it (for example, a mod was removed mid-game), assign a random one. This will avoid missing textures and useless resources, but means you may get resources you never had before.</PangaeaSetting_RandomResourceToNullDescription>
+	<!--UIConsiderStockpiled-->
+	<PangaeaSetting_UIConsiderStockpiledName>Bill UI considers only stockpiled</PangaeaSetting_UIConsiderStockpiledName>
+	<PangaeaSetting_UIConsiderStockpiledDescription>The UI for bill configuration only accounts for resources in stockpiles, just like the UI for vanilla recipes. Disabling this makes the UI count the items in the entire map, which may lead to lower performance.</PangaeaSetting_UIConsiderStockpiledDescription>
+	
+	<!--RESOURCES-->
+	<Pangaea_FossilLabel>{0} fossil</Pangaea_FossilLabel>
+	<Pangaea_FossilDescription>Remains of {0}.</Pangaea_FossilDescription>
+	<Pangaea_DNALabel>{0} DNA</Pangaea_DNALabel>
+	<Pangaea_ExtinctDNADescription>Genetic material of an extinct {0}.</Pangaea_ExtinctDNADescription>
+	<Pangaea_ExtantDNADescription>Genetic material of a common {0} found in the Rim.</Pangaea_ExtantDNADescription>
+	
+	<!--ERRORS-->
+	<Pangaea_MissingResourceLabel>PangaeaMissingResource</Pangaea_MissingResourceLabel>
+	<Pangaea_MissingResourceDescription>The pawn this resource belonged to was probably removed from your game. Sorry D:</Pangaea_MissingResourceDescription>
+
+	<!--RECIPE-->
+	<Pangaea_Fossil_Extraction>Fossil Extraction</Pangaea_Fossil_Extraction>
+	<Pangaea_EggMaking>Egg Making</Pangaea_EggMaking>
+	<Pangaea_SeedMaking>Seed Making</Pangaea_SeedMaking>
+	
+	<!--UI-->
+	<Pangaea_ToggleDisplayModeTooltip>Toggle display mode</Pangaea_ToggleDisplayModeTooltip>
+	<Pangaea_ShowUnavailableIngredients>Show unavailable ingredients</Pangaea_ShowUnavailableIngredients>
+	<Pangaea_AnimalGroupFilter>Filter by group</Pangaea_AnimalGroupFilter>
+	<Pangaea_ShowPlants>Show plants</Pangaea_ShowPlants>
+	<Pangaea_ExtinctionStatusFilter>Filter by extinction status</Pangaea_ExtinctionStatusFilter>
+	<Pangaea_DietFilter>Filter by diet</Pangaea_DietFilter>
+
+	<Pangaea_SortBy>Sort by</Pangaea_SortBy>
+	
+	<Pangaea_Toggle>toggle</Pangaea_Toggle>
+	<Pangaea_Allow>allow</Pangaea_Allow>
+	<Pangaea_Disallow>disallow</Pangaea_Disallow>
+	
+	<Pangaea_All>all</Pangaea_All>
+	<Pangaea_Visible>visible</Pangaea_Visible>
+	
+	<Pangaea_ToggleAll>Toggle all</Pangaea_ToggleAll>
+	<Pangaea_AllowAll>Allow all</Pangaea_AllowAll>
+	<Pangaea_DisallowAll>Disallow all</Pangaea_DisallowAll>
+
+	<Pangaea_ToggleVisible>Toggle visible</Pangaea_ToggleVisible>
+	<Pangaea_AllowVisible>Allow visible</Pangaea_AllowVisible>
+	<Pangaea_DisallowVisible>Disallow visible</Pangaea_DisallowVisible>
+	
+	<Pangaea_PossibleValues>Possible values</Pangaea_PossibleValues>
+	
+	<!--AnimalType-->
+	<Pangaea_AnimalType>Animal Type</Pangaea_AnimalType>
+	<Pangaea_AnimalTypeExplanation>The Pangaea category this animal fits into.</Pangaea_AnimalTypeExplanation>
+	<Pangaea_Unspecified>Unspecified</Pangaea_Unspecified>
+	<Pangaea_Mammal>Mammal</Pangaea_Mammal>
+	<Pangaea_Dinosaur>Dinosaur</Pangaea_Dinosaur>
+	<Pangaea_Reptile>Reptile</Pangaea_Reptile>
+	<Pangaea_Bird>Bird</Pangaea_Bird>
+	<Pangaea_Synapsid>Synapsid</Pangaea_Synapsid>
+	<Pangaea_Amphibian>Amphibian</Pangaea_Amphibian>
+	<Pangaea_Invertebrate>Invertebrate</Pangaea_Invertebrate>
+	<Pangaea_Fish>Fish</Pangaea_Fish>
+	
+	<!--ExtinctionStatus-->
+	<Pangaea_ExtinctionStatus>Extinction Status</Pangaea_ExtinctionStatus>
+	<Pangaea_ExtinctionStatusExplanation>The extinction status of this organism.</Pangaea_ExtinctionStatusExplanation>
+	<Pangaea_Extinct>Extinct</Pangaea_Extinct>
+	<Pangaea_Extant>Extant</Pangaea_Extant>
+
+</LanguageData>

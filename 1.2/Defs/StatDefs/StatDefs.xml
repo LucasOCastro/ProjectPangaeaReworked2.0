@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<StatCategoryDef>
+		<defName>PangaeaStats</defName>
+		<label>project pangaea</label>
+		<displayOrder>100</displayOrder>
+	</StatCategoryDef>
+
+	<StatDef>
+		<defName>Pangaea_DNAAmount</defName>
+		<label>DNA amount</label>
+		<description>The amount of DNA yielded when dissecting this creature.</description>
+		<category>PangaeaStats</category>
+		<defaultBaseValue>20</defaultBaseValue>
+		<workerClass>ProjectPangaea.StatWorker_DNAAmount</workerClass>
+		<minValue>0</minValue>
+		<showOnMechanoids>false</showOnMechanoids>
+		<toStringStyle>Integer</toStringStyle>
+		<parts>
+			<li Class="StatPart_BodySize" />
+			<li Class="StatPart_NaturalNotMissingBodyPartsCoverage" />
+		</parts>
+		<postProcessCurve>
+			<points>
+				<li>(0,0)</li>
+				<li>(5,14)</li>
+				<li>(40,40)</li>
+				<li>(100000,100000)</li>
+			</points>
+		</postProcessCurve>
+		<displayPriorityInCategory>1000</displayPriorityInCategory>
+	</StatDef>
+
+</Defs>

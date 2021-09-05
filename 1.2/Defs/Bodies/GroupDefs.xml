@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<BodyPartGroupDef>
+    <defName>Pangaea_Tail</defName>
+    <label>tail</label>
+    </BodyPartGroupDef>
+
+	<BodyPartGroupDef>
+    <defName>Pangaea_RearRightLeg</defName>
+    <label>rear right leg</label>
+    </BodyPartGroupDef>
+
+	<BodyPartGroupDef>
+    <defName>Pangaea_RearLeftLeg</defName>
+    <label>rear left leg</label>
+    </BodyPartGroupDef>
+	
+	<BodyPartGroupDef>
+    <defName>Pangaea_RearRightClaws</defName>
+    <label>rear right claws</label>
+    </BodyPartGroupDef>
+
+	<BodyPartGroupDef>
+    <defName>Pangaea_RearLeftClaws</defName>
+    <label>rear left claws</label>
+    </BodyPartGroupDef>
+
+</Defs>

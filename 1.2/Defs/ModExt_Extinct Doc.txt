@@ -1,0 +1,27 @@
+<modExtensions>
+	<li Class="ProjectPangaea.ModExt_Extinct">
+		<genus>tyrannosaurus</genus>
+		<species>rex</species>
+		<animalType>Dinosaur</animalType>
+		<fossilTexturePath>Things/Item/Fossils/Tyrannosaurid/Tyrannosaurid</fossilTexturePath>
+	</li>
+</modExtensions>
+
+This modExtension should be applied to the ThingDef of a pawn or plant. It makes it not spawn as normal, ensures it has an assigned DNA and a fossil.
+
+Nodes for the ModExt_Extinct extension:
+<genus> and <species> are used to generate the scientific name of the pawn/plant.
+<scientificName> can also be used to ovewrite the "{Genus} {species}" scheme.
+<animalType> is mainly used to generate the texture path of the DNA and the item category. It has these values:
+{
+	Unspecified,
+	Mammal,
+	Dinosaur,
+	Reptile,
+	Bird,
+	Synapsid,
+	Amphibian,
+	Invertebrate,
+	Fish
+}
+<fossilTexturePath> is quite obvious :)

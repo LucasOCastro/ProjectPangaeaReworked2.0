@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>PangaeaRoot</defName>
+		<label>Project Pangaea</label>
+		<parent>Root</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>PangaeaFossils</defName>
+		<label>fossils</label>
+		<parent>PangaeaRoot</parent>
+		<resourceReadoutRoot>false</resourceReadoutRoot>
+		<iconPath>UI/Icons/ThingCategories/Foods</iconPath>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>PangaeaDNA</defName>
+		<label>DNA</label>
+		<parent>PangaeaRoot</parent>
+		<resourceReadoutRoot>false</resourceReadoutRoot>
+		<iconPath>UI/Icons/ThingCategories/Foods</iconPath>
+	</ThingCategoryDef>
+
+</Defs>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<RecipeDef>
+		<defName>Pangaea_ExtractDNA</defName>
+		<label>Extract DNA from fossils</label>
+		<description>Use advanced scientific techniques to obtain soft tissue from fossilized organisms.</description>
+		<jobString>Extracting dna from a fossil.</jobString>
+		<workAmount>2000</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Smelt</effectWorking>
+		<allowMixingIngredients>false</allowMixingIngredients>
+		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<modExtensions>
+			<li Class="ProjectPangaea.Production.Pangaea_YieldDNARecipeExtension">
+				<!--<baseYieldPerExtraction>8~12</baseYieldPerExtraction>-->
+			</li>
+		</modExtensions>
+		<products>
+			<Pangaea_DNABase>10</Pangaea_DNABase>
+		</products>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>PangaeaFossils</li>
+					</categories>		
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>PangaeaFossils</li>
+			</categories>
+		</fixedIngredientFilter>
+	</RecipeDef>
+
+	<RecipeDef>
+		<defName>Pangaea_DissectCorpse</defName>
+		<label>dissect corpse</label>
+		<description>Dissect a corpse to harvest its DNA.</description>
+		<jobString>Dissecting corpse for DNA.</jobString>
+		<workAmount>750</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>ButcherFlesh</effectWorking>
+		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<modExtensions>
+			<li Class="ProjectPangaea.Production.Pangaea_DissectCorpseRecipeExtension">
+				<freshEfficiency>1</freshEfficiency>
+				<rottingEfficiency>0.6</rottingEfficiency>
+				<dessicatedEfficiency>0.3</dessicatedEfficiency>
+			</li>
+		</modExtensions>
+		<products>
+			<Pangaea_DNABase>1</Pangaea_DNABase>
+		</products>
+		<autoStripCorpses>true</autoStripCorpses>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>CorpsesAnimal</li>
+					</categories>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>CorpsesAnimal</li>
+			</categories>
+			<specialFiltersToAllow>
+				<li>AllowRotten</li>
+				<li>AllowFresh</li>
+			</specialFiltersToAllow>
+			<specialFiltersToDisallow>
+				<li>Pangaea_AllowCorpsesWithoutDNA</li>
+			</specialFiltersToDisallow>
+		</fixedIngredientFilter>
+	</RecipeDef>
+
+</Defs>

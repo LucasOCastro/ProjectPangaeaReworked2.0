@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="ResourceBase" Name="Pangaea_FossilBase">
+		<thingClass>ProjectPangaea.FossilThing</thingClass>
+		<defName>Pangaea_FossilBase</defName>
+		<label>fossil</label>
+		<description>Remains of extinct animals.</description>
+		<graphicData>
+			<texPath>Things/Item/Fossils/DefaultFossilTex</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<useHitPoints>false</useHitPoints>
+		<soundInteract>ChunkRock_Drop</soundInteract>
+		<soundDrop>ChunkRock_Drop</soundDrop>
+		<statBases>
+			<MarketValue>5</MarketValue>
+			<Mass>0.5</Mass>
+			<StuffPower_Armor_Sharp>0.9</StuffPower_Armor_Sharp>
+			<StuffPower_Armor_Blunt>0.45</StuffPower_Armor_Blunt>
+			<StuffPower_Armor_Heat>0.54</StuffPower_Armor_Heat>
+			<StuffPower_Insulation_Cold>3</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
+			<BluntDamageMultiplier>1.5</BluntDamageMultiplier>
+		</statBases>
+		<deepCommonality>0.5</deepCommonality>
+		<deepCountPerPortion>10</deepCountPerPortion>
+		<deepLumpSizeRange>1~5</deepLumpSizeRange>
+		<thingCategories>
+			<li>PangaeaFossils</li>
+		</thingCategories>
+	</ThingDef>
+
+</Defs>

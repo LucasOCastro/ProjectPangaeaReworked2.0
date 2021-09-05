@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!--=============== Cretaceous ====================-->
+
+	<ThingDef ParentName="RockBase">
+		<defName>CretaceousFossil</defName>
+		<label>Cretaceous Fossils</label>
+		<description>The remains of prehistoric animals from the Cretaceous Period. Mine it to learn more.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<color>(126,104,94)</color>
+			<colorTwo>(70,70,70)</colorTwo>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>1000</MaxHitPoints>
+		</statBases>
+		<building>
+			<isResourceRock>true</isResourceRock>
+			<mineableDropChance>0.875</mineableDropChance>
+			<mineableScatterCommonality><!--0.3-->1</mineableScatterCommonality>
+			<mineableScatterLumpSizeRange>1~15</mineableScatterLumpSizeRange>
+		</building>
+		<modExtensions>
+			<li Class="ProjectPangaea.ModExt_RandomFossilDrop">
+				<baseYield>2~14</baseYield>
+				<fossils>
+					<li>
+						<fossilParent>PangaeaTyrannosaurus</fossilParent>
+						<commonality>1</commonality>
+					</li>
+				</fossils>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!--=============== Jurassic ====================-->
+
+	<ThingDef ParentName="RockBase">
+		<defName>JurassicFossil</defName>
+		<label>Jurassic Fossils</label>
+		<description>The remains of prehistoric animals from the Jurassic Period. Mine it to learn more.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<color>(126,104,94)</color>
+			<colorTwo>(70,70,70)</colorTwo>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>1000</MaxHitPoints>
+		</statBases>
+		<building>
+			<isResourceRock>true</isResourceRock>
+			<mineableDropChance>0.875</mineableDropChance>
+			<mineableScatterCommonality><!--0.3-->1</mineableScatterCommonality>
+			<mineableScatterLumpSizeRange>1~15</mineableScatterLumpSizeRange>
+		</building>
+		<modExtensions>
+			<li Class="ProjectPangaea.ModExt_RandomFossilDrop">
+				<baseYield>2~14</baseYield>
+				<fossils>
+					<li>
+						<fossilParent>PangaeaDilophosaurus</fossilParent>
+						<commonality>1</commonality>
+					</li>
+				</fossils>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

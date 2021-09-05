@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ProjectPangaea.Overrides.PangaeaAnimalCategorizationDef>
+		<defName>ProjectPangaea_AnimalCategorization</defName>
+		<groups>
+			<li>
+				<animalType>Mammal</animalType>
+				<animals>
+					<li>Cow</li>
+					<li>Thrumbo</li>
+					<li>Boomalope</li>
+				</animals>
+			</li>
+		</groups>
+	</ProjectPangaea.Overrides.PangaeaAnimalCategorizationDef>
+
+</Defs>

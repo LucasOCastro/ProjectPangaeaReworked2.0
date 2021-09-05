@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<ThingDef ParentName="ResourceBase" Name="Pangaea_DNABase">
+		<thingClass>ProjectPangaea.DNAThing</thingClass>
+		<defName>Pangaea_DNABase</defName>
+		<label>DNA</label>
+		<description>Genetic material of an animal or plant.</description>
+		<graphicData>
+			<texPath>Things/Item/DNA/Default</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>1</Mass>
+			<SharpDamageMultiplier>0.5</SharpDamageMultiplier>
+		</statBases>
+		<thingCategories>
+			<li>PangaeaDNA</li>
+		</thingCategories>
+	</ThingDef>
+	
+</Defs>

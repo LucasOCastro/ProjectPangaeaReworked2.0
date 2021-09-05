@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ProjectPangaea.Overrides.PangaeaOverrideDef>
+		<defName>ProjectPangaea_ThrumboDNADescriptionOverride</defName>
+		<overridenThingDef>Thrumbo</overridenThingDef>
+		<dnaOverride>
+			<description>Genetic material of the rare and majestic Thrumbo, ocasionally found roaming the rim.</description>
+		</dnaOverride>
+	</ProjectPangaea.Overrides.PangaeaOverrideDef>
+	
+	<ProjectPangaea.Overrides.PangaeaOverrideDef>
+		<defName>ProjectPangaea_BoomalopeYieldCowDNA</defName>
+		<overridenThingDef>Boomalope</overridenThingDef>
+		<dnaExtractionYieldOverride>Cow</dnaExtractionYieldOverride>
+		<dnaExtractionYieldEfficiency>0.5</dnaExtractionYieldEfficiency>
+	</ProjectPangaea.Overrides.PangaeaOverrideDef>
+
+</Defs>

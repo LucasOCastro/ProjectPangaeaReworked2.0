@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--<SpecialThingFilterDef>
+    <defName>Pangaea_AllowCorpsesWithDNA</defName>
+    <label>allow corpses with DNA</label>
+    <description>Allow corpses with assigned DNA.</description>
+    <parentCategory>CorpsesAnimal</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <saveKey>pangaeaAllowCorpsesWithDNA</saveKey>
+    <workerClass>SpecialThingFilterWorker_CorpsesColonist</workerClass>
+  </SpecialThingFilterDef>-->
+  
+	<SpecialThingFilterDef>
+		<defName>Pangaea_AllowCorpsesWithoutDNA</defName>
+		<label>allow corpses without DNA</label>
+		<description>Allow corpses without assigned DNA.</description>
+		<parentCategory>CorpsesAnimal</parentCategory>
+		<saveKey>pangaeaAllowCorpsesWithoutDNA</saveKey>
+		<workerClass>ProjectPangaea.PangaeaSpecialThingFilterWorker_CorpsesWithoutDNA</workerClass>
+	</SpecialThingFilterDef>
+  
+</Defs>

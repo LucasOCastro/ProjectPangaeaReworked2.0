@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="BigBirdThingBase">
+		<defName>PangaeaTyrannosaurus</defName>
+		<label>tyrannosaurus</label>
+		<description>Tyrannosaurus rex. One of the largest theropods you will ever get to see. Tyrannosaurus is aggressive and dangerous. They have incredibly powerful jaws which can tear through flesh with no problem. Advised to stay away at all costs.</description>
+		<statBases>
+			<MoveSpeed>3.33</MoveSpeed>
+			<MarketValue>2000</MarketValue>
+			<ComfyTemperatureMin>-5</ComfyTemperatureMin>
+			<ComfyTemperatureMax>70</ComfyTemperatureMax>
+		</statBases>
+		<race>
+			<body>Tyrannosaurid</body>
+			<herdAnimal>false</herdAnimal>
+			<baseBodySize>5</baseBodySize>
+			<baseHealthScale>5</baseHealthScale>
+			<baseHungerRate>4</baseHungerRate>
+			<foodType>CarnivoreAnimal</foodType>
+			<wildness>0.75</wildness>
+			<lifeExpectancy>75</lifeExpectancy>
+			<meatLabel>dinosaur flesh</meatLabel>
+			<leatherDef>Leather_Dino</leatherDef>
+			<manhunterOnTameFailChance>0.65</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.65</manhunterOnDamageChance>
+			<lifeStageAges>
+				<li>
+					<def>AnimalBaby</def>
+					<minAge>0</minAge>
+				</li>
+				<li>
+					<def>AnimalJuvenile</def>
+					<minAge>0.2</minAge>
+				</li>
+				<li>
+					<def>AnimalAdult</def>
+					<minAge>0.5</minAge>
+				</li>
+			</lifeStageAges>
+		</race>
+		<comps>
+			<li Class="CompProperties_EggLayer">
+				<eggFertilizedDef>EggPangaeaTyrannosaurusFertilized</eggFertilizedDef>
+				<eggFertilizationCountMax>1</eggFertilizationCountMax>
+				<eggLayIntervalDays>17</eggLayIntervalDays>
+				<eggProgressUnfertilizedMax>0.5</eggProgressUnfertilizedMax>
+				<eggCountRange>1</eggCountRange>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="ProjectPangaea.ModExt_Extinct">
+				<genus>tyrannosaurus</genus>
+				<species>rex</species>
+				<animalType>Dinosaur</animalType>
+				<fossilTexturePath>Things/Item/Fossils/Tyrannosaurid</fossilTexturePath>
+			</li>
+		</modExtensions>
+		<tools>
+			<li>
+				<label>teeth</label>
+				<capacities>
+					<li>Bite</li>
+				</capacities>
+				<power>50</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+				<surpriseAttack>
+					<extraMeleeDamages>
+						<li>
+							<def>Stun</def>
+							<amount>65</amount>
+						</li>
+					</extraMeleeDamages>
+				</surpriseAttack>
+			</li>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>18</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+			<li>
+				<label>right leg</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>3.5</cooldownTime>
+				<linkedBodyPartsGroup>Pangaea_RearRightLeg</linkedBodyPartsGroup>
+				<chanceFactor>0.8</chanceFactor>
+			</li>
+			<li>
+				<label>left leg</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>3.5</cooldownTime>
+				<linkedBodyPartsGroup>Pangaea_RearLeftLeg</linkedBodyPartsGroup>
+				<chanceFactor>0.8</chanceFactor>
+			</li>
+		</tools>
+		<tradeTags>
+			<li>AnimalUncommon</li>
+		</tradeTags>
+	</ThingDef>
+
+	<PawnKindDef ParentName="BigBirdKindBase">
+		<defName>PangaeaTyrannosaurus</defName>
+		<label>tyrannosaurus</label>
+		<labelPlural>tyrannosaurus</labelPlural>
+		<race>PangaeaTyrannosaurus</race>
+		<combatPower>1000</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CarnivoreDinos/Tyrannosaurids/Tyrannosaurus/Tyrannosaurus</texPath>
+					<drawSize>1.75</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/CarnivoreDinos/Tyrannosaurids/Tyrannosaurus/Tyrannosaurus_dessicated</texPath>
+					<drawSize>1.1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CarnivoreDinos/Tyrannosaurids/Tyrannosaurus/Tyrannosaurus</texPath>
+					<drawSize>3</drawSize>
+					<shadowData>
+						<volume>(0.3, 0.3, 0.3)</volume>
+						<offset>(0,0,-0.3)</offset>
+					</shadowData>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/CarnivoreDinos/Tyrannosaurids/Tyrannosaurus/Tyrannosaurus_dessicated</texPath>
+					<drawSize>1.4</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CarnivoreDinos/Tyrannosaurids/Tyrannosaurus/Tyrannosaurus</texPath>
+					<drawSize>10</drawSize>
+					<shadowData>
+						<volume>(0.4, 0.4, 0.4)</volume>
+						<offset>(0,0,-0.2)</offset>
+					</shadowData>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/CarnivoreDinos/Tyrannosaurids/Tyrannosaurus/Tyrannosaurus_dessicated</texPath>
+					<drawSize>1.8</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+</Defs>
