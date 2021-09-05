@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ProjectPangaea.Overrides
 {
+
     public partial class PangaeaOverrideDef : Def
     {
         [System.Serializable]
@@ -30,19 +31,12 @@ namespace ProjectPangaea.Overrides
         public PangaeaOverride dnaOverride;
         public PangaeaOverride fossilOverride;
 
-        public List<ThingEfficiency> dnaExtractionExtraProducts;
-
         public override IEnumerable<string> ConfigErrors()
         {
             foreach (string error in base.ConfigErrors())
-            {
                 yield return error;
-            }
-
             if (overridenThingDef == null)
-            {
                 yield return $"{nameof(PangaeaOverrideDef)} of defName {defName} has null overridenThingDef!";
-            }
         }
     }
 }
