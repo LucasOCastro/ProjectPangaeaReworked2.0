@@ -75,6 +75,7 @@
     <Compile Include="Categorization\Animal\AnimalCategory.cs" />
     <Compile Include="Categorization\Animal\AnimalType.cs" />
     <Compile Include="Categorization\ExtinctionStatus.cs" />
+    <Compile Include="Database\PangaeaThingEntry.cs" />
     <Compile Include="PangaeaEnumExtension.cs" />
     <Compile Include="ExtinctUtility.cs" />
     <Compile Include="ExtinctSpawningOverride.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="DebugActions.cs" />
     <Compile Include="ModExt_Extinct.cs" />
     <Compile Include="Categorization\OrganismCategory.cs" />
-    <Compile Include="PangaeaDatabase.cs" />
+    <Compile Include="Database\PangaeaDatabase.cs" />
     <Compile Include="Categorization\Animal\PangaeaDiet.cs" />
     <Compile Include="Stats\PangaeaStatsDisplayOverride.cs" />
     <Compile Include="Production\Bills\CustomBillCreationOverride.cs" />

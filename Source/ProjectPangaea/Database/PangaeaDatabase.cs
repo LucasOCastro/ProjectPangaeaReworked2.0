@@ -5,88 +5,18 @@ using ProjectPangaea.Overrides;
 
 namespace ProjectPangaea
 {
-    public class PangaeaThingEntry
-    {
-        public ThingDef ThingDef { get; }
-
-        public ModExt_Extinct ExtinctExtension { get; }
-
-        public OrganismCategory Category { get; }
-
-        private DNA dna;
-        public DNA DNA => dna;
-
-        //TODO remove dna overriding and instead have dna splicing
-        public bool IsDNAOverriden { get; private set; }
-
-        public float dissectionYieldEfficiency = 1;
-
-        public Fossil Fossil { get; }
-
-        public List<ThingEfficiency> ExtraDNAExtractionProducts { get; } = new List<ThingEfficiency>();
-        public bool overrideBaseDrops;
-
-        public PangaeaThingEntry(ThingDef thingDef, AnimalType animalType = AnimalType.Unspecified)
-        {
-            ThingDef = thingDef;
-            ExtinctExtension = thingDef.GetModExtension<ModExt_Extinct>();
-            Category = GetCategory(thingDef, animalType);
-
-            dna = new DNA(thingDef, Category);
-
-            if (ExtinctExtension != null)
-            {
-                Fossil = new Fossil(thingDef, ExtinctExtension);
-            }
-        }
-
-        public PangaeaResource GetResourceOfCategory(ThingCategoryDef category)
-        {
-            if (category == PangaeaThingCategoryDefOf.PangaeaDNA)
-            {
-                return DNA;
-            }
-            if (category == PangaeaThingCategoryDefOf.PangaeaFossils)
-            {
-                return Fossil;
-            }
-            return null;
-        }
-
-        public PangaeaResource GetResourceOfDef(ThingDef def)
-        {
-            if (def == PangaeaThingDefOf.Pangaea_DNABase)
-            {
-                return DNA;
-            }
-            if (def == PangaeaThingDefOf.Pangaea_FossilBase)
-            {
-                return Fossil;
-            }
-            //TODO embryo
-            return null;
-        }
-
-        public void OverrideDNA(DNA newDNA)
-        {
-            dna = newDNA;
-            IsDNAOverriden = true;
-        }
-
-        private static OrganismCategory GetCategory(ThingDef thingDef, AnimalType animalType)
-        {
-            if (thingDef.plant != null)
-            {
-                return new PlantCategory(thingDef);
-            }
-            return new AnimalCategory(thingDef, animalType);
-        }
-    }
-
     public static class PangaeaDatabase
     {
         private static Dictionary<string, PangaeaThingEntry> database = new Dictionary<string, PangaeaThingEntry>();
         private static Dictionary<string, PangaeaThingEntry> extinctOnlyDatabase = new Dictionary<string, PangaeaThingEntry>();
+
+        public static PangaeaThingEntry RandomEntry() => database.RandomElement().Value;
+        public static PangaeaThingEntry RandomExtinctEntry() => extinctOnlyDatabase.RandomElement().Value;
+
+        public static IEnumerable<PangaeaThingEntry> AllEntries => database.Values;
+        public static IEnumerable<PangaeaThingEntry> AllExtinctEntries => extinctOnlyDatabase.Values;
+
+
 
         public static bool TryGetEntry(ThingDef thingDef, out PangaeaThingEntry entry)
         {
@@ -185,57 +115,20 @@ namespace ProjectPangaea
                 entry.ExtraDNAExtractionProducts.AddRange(extraProducts);
             }
 
-            ThingDef dnaDropOverrideOwner = overrideDef.dnaExtractionYieldOverride;
-            if (dnaDropOverrideOwner != null)
-            {
-                if (TryGetEntry(dnaDropOverrideOwner, out PangaeaThingEntry overrideDNAEntry))
-                {
-                    entry.OverrideDNA(overrideDNAEntry.DNA);
-                }
-            }
-
-            float dnaDropEfficiencyOverride = overrideDef.dnaExtractionYieldEfficiency;
-            if (dnaDropEfficiencyOverride >= 0)
-            {
-                entry.dissectionYieldEfficiency = dnaDropEfficiencyOverride;
-            }
-
             var dnaOverride = overrideDef.dnaOverride;
-            if (dnaOverride != null)
+            if (dnaOverride != null && entry.DNA != null)
             {
-                if (!dnaOverride.label.NullOrEmpty())
-                {
-                    entry.DNA.overrideLabel = dnaOverride.label;
-                }
-
-                if (!dnaOverride.description.NullOrEmpty())
-                {
-                    entry.DNA.overrideDescription = dnaOverride.description;
-                }
+                dnaOverride.Override(entry.DNA);
             }
 
             var fossilOverride = overrideDef.fossilOverride;
             if (fossilOverride != null && entry.Fossil != null)
             {
-                if (!fossilOverride.label.NullOrEmpty())
-                {
-                    entry.Fossil.overrideLabel = fossilOverride.label;
-                }
-
-                if (!fossilOverride.description.NullOrEmpty())
-                {
-                    entry.Fossil.overrideDescription = fossilOverride.description;
-                }
+                fossilOverride.Override(entry.Fossil);
             }
 
             return entry;
         }
-
-        public static PangaeaThingEntry RandomEntry() => database.RandomElement().Value;
-        public static PangaeaThingEntry RandomExtinctEntry() => extinctOnlyDatabase.RandomElement().Value;
-
-        public static IEnumerable<PangaeaThingEntry> AllEntries => database.Values;
-        public static IEnumerable<PangaeaThingEntry> AllExtinctEntries => extinctOnlyDatabase.Values;
 
         public static bool HasDNA(this ThingDef thingDef, out PangaeaThingEntry e) => TryGetEntry(thingDef, out e) && e.DNA != null;
         public static bool HasDNA(this ThingDef thingDef) => thingDef.HasDNA(out _);

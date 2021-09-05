@@ -1,5 +1,4 @@
-﻿using RimWorld;
-using Verse;
+﻿using Verse;
 using System.Collections.Generic;
 
 namespace ProjectPangaea.Overrides
@@ -11,6 +10,19 @@ namespace ProjectPangaea.Overrides
         {
             public string label;
             public string description;
+
+            public void Override(PangaeaResource resource)
+            {
+                if (!label.NullOrEmpty())
+                {
+                    resource.overrideLabel = label;
+                }
+
+                if (!description.NullOrEmpty())
+                {
+                    resource.overrideDescription = description;
+                }
+            }
         }
 
         public ThingDef overridenThingDef;
@@ -20,7 +32,17 @@ namespace ProjectPangaea.Overrides
 
         public List<ThingEfficiency> dnaExtractionExtraProducts;
 
-        public ThingDef dnaExtractionYieldOverride;
-        public float dnaExtractionYieldEfficiency = -1;
+        public override IEnumerable<string> ConfigErrors()
+        {
+            foreach (string error in base.ConfigErrors())
+            {
+                yield return error;
+            }
+
+            if (overridenThingDef == null)
+            {
+                yield return $"{nameof(PangaeaOverrideDef)} of defName {defName} has null overridenThingDef!";
+            }
+        }
     }
 }
