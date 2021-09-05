@@ -6,7 +6,7 @@ namespace ProjectPangaea
     {
         public void SetResource (DNA dna)
         {
-            resource = dna;
+            Resource = dna;
         }
 
         protected override PangaeaResource GetRandomResource() => PangaeaDatabase.RandomEntry().DNA;

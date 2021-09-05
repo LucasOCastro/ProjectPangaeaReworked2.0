@@ -53,7 +53,10 @@
 					<genus>dilophosaurus</genus>
 					<species>wetherilli</species>
 					<animalType>Dinosaur</animalType>
-					<fossilTexturePath>Things/Item/Fossils/Dilophosaurid</fossilTexturePath>
+					<fossilGraphicData>
+						<texPath>Things/Item/Fossils/Dilophosaurid</texPath>
+						<graphicClass>Graphic_StackCount</graphicClass>
+					</fossilGraphicData>
 				</li>
 			</modExtensions>
 

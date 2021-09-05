@@ -9,12 +9,13 @@ namespace ProjectPangaea
         public Fossil(ThingDef parent, ModExt_Extinct extinctExtension) : base(parent)
         {
             ExtinctExtension = extinctExtension;
-            TexturePath = extinctExtension.fossilTexturePath;
         }
 
         public Fossil() : base()
         {
         }
+
+        public override Graphic Graphic => ExtinctExtension.fossilGraphicData.Graphic;
 
         protected override string GetLabel() => "Pangaea_FossilLabel".Translate(ParentThingDef.label);
         protected override string GetDescription() => "Pangaea_FossilDescription".Translate(ExtinctExtension.ScientificName);
@@ -28,7 +29,6 @@ namespace ProjectPangaea
                 if (entry == null || entry.ExtinctExtension == null) return;
 
                 ExtinctExtension = entry.ExtinctExtension;
-                TexturePath = ExtinctExtension.fossilTexturePath;
             }
         }
     }

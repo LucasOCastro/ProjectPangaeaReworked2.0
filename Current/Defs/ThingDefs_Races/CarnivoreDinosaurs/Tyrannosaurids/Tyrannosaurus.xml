@@ -53,7 +53,10 @@
 				<genus>tyrannosaurus</genus>
 				<species>rex</species>
 				<animalType>Dinosaur</animalType>
-				<fossilTexturePath>Things/Item/Fossils/Tyrannosaurid</fossilTexturePath>
+				<fossilGraphicData>
+						<texPath>Things/Item/Fossils/Tyrannosaurid</texPath>
+						<graphicClass>Graphic_StackCount</graphicClass>
+				</fossilGraphicData>
 			</li>
 		</modExtensions>
 		<tools>

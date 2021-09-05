@@ -30,6 +30,9 @@ namespace ProjectPangaea
                 return;
             }
 
+            DNAGraphicsLister.Init();
+
+
             HashSet<ThingDef> alreadyAddedDefs = new HashSet<ThingDef>();
             foreach (var categoryDef in DefDatabase<PangaeaAnimalCategorizationDef>.AllDefs.Reverse())
             {

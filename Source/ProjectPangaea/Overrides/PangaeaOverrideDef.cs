@@ -10,7 +10,7 @@ namespace ProjectPangaea.Overrides
         {
             public string label;
             public string description;
-
+            //TODO add texture override
             public void Override(PangaeaResource resource)
             {
                 if (!label.NullOrEmpty())

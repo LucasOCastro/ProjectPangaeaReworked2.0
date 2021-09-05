@@ -14,7 +14,8 @@ namespace ProjectPangaea.Production
 
         public override List<PangaeaThingEntry> GetListerEntries(RecipeDef recipe)
         {
-            return PangaeaDatabase.AllEntries.Where(e => !e.IsDNAOverriden && e.ThingDef.HasComp(typeof(CompEggLayer))).ToList();
+            //TODO currently only supports eggs
+            return PangaeaDatabase.AllEntries.Where(e => e.ThingDef.HasComp(typeof(CompEggLayer))).ToList();
         }
     }
 }

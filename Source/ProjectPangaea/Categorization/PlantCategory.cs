@@ -6,6 +6,7 @@ namespace ProjectPangaea
     {
         public PlantCategory(ThingDef thingDef) : base(thingDef)
         {
+            throw new System.NotImplementedException("Plants have not been implemented yet.");
         }
 
         public override string GetSubTexPath() => "Plant";

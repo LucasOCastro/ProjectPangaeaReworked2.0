@@ -5,7 +5,7 @@ namespace ProjectPangaea
 {
     public abstract class PangaeaResourceThingBase : ThingWithComps
     {
-        protected PangaeaResource resource;
+        private PangaeaResource resource;
         public PangaeaResource Resource
         {
             get
@@ -17,25 +17,22 @@ namespace ProjectPangaea
                 }
                 return resource;
             }
+            protected set
+            {
+                resource = value;
+                DirtyMapMesh(Map);
+            }
         }
 
-        private Graphic graphic;
         public override Graphic Graphic
         {
             get
             {
-                if (Resource == null || resource.TexturePath.NullOrEmpty())
+                if (resource == null)
                 {
                     return BaseContent.BadGraphic;
                 }
-
-                if (graphic == null || graphic.path != Resource.TexturePath)
-                {
-                    graphic = DefaultGraphic.GetCopy(DefaultGraphic.drawSize);
-                    graphic.path = Resource.TexturePath;
-                }
-
-                return graphic.GetCopy(DefaultGraphic.drawSize);
+                return resource.Graphic ?? base.Graphic;
             }
         }
 

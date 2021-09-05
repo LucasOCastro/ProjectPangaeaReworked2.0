@@ -9,8 +9,7 @@ namespace ProjectPangaea
 
         public AnimalCategory(ThingDef thingDef, AnimalType type) : base(thingDef)
         {
-            DietCategory diet = thingDef.race.ResolvedDietCategory;
-            Diet = diet.ToPangaeaDiet();
+            Diet = thingDef.race.ResolvedDietCategory.ToPangaeaDiet();
             Type = type;
         }
 

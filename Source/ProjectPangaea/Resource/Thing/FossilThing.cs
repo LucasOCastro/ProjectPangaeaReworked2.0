@@ -6,7 +6,7 @@ namespace ProjectPangaea
     {
         public void SetResource(Fossil fossil)
         {
-            resource = fossil;
+            Resource = fossil;
         }
 
         protected override PangaeaResource GetRandomResource() => PangaeaDatabase.RandomExtinctEntry().Fossil;

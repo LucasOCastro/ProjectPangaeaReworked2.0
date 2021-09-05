@@ -6,7 +6,8 @@ namespace ProjectPangaea
     {
         private ThingDef parentThingDef;
         public ThingDef ParentThingDef => parentThingDef;
-        public string TexturePath { get; protected set; }
+        //public string TexturePath { get; protected set; }
+        public abstract Graphic Graphic { get; }
 
         public bool IsFromAnimal => ParentThingDef.race != null;
         public bool IsFromPlant => ParentThingDef.plant != null;
@@ -18,8 +19,6 @@ namespace ProjectPangaea
 
         protected abstract string GetLabel();
         protected abstract string GetDescription();
-
-        public virtual bool IsValid => ParentThingDef != null && (IsFromAnimal || IsFromPlant);
 
         public PangaeaResource(ThingDef parent)
         {

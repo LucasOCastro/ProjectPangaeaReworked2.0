@@ -6,7 +6,7 @@ namespace ProjectPangaea
     {
         public string genus;
         public string species;
-        public string fossilTexturePath;
+        public GraphicData fossilGraphicData;
         public AnimalType animalType;
 
         private string scientificName;
@@ -21,6 +21,5 @@ namespace ProjectPangaea
                 return scientificName;
             }
         }
-
     }
 }
