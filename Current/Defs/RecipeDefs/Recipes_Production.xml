@@ -91,6 +91,7 @@
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>ButcherFlesh</effectWorking>
 		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.Splicing.Pangaea_DNASplicingRecipeExtension">
 				<divideDNA>true</divideDNA>
@@ -110,6 +111,9 @@
 			<categories>
 				<li>PangaeaDNA</li>
 			</categories>
+			<specialFiltersToDisallow>
+				<li>Pangaea_NonSplicedDNA</li>
+			</specialFiltersToDisallow>
 		</fixedIngredientFilter>
 	</RecipeDef>
 

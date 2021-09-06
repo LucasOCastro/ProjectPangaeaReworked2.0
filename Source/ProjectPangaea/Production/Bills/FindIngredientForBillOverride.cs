@@ -112,7 +112,6 @@ namespace ProjectPangaea.Production
         private static FieldInfo thingDefFieldInfo = AccessTools.Field(typeof(Thing), "def");
         private static MethodInfo requiredCountMethodInfo = AccessTools.Method(typeof(IngredientCount), "CountRequiredOfFor", new Type[] { typeof(ThingDef), typeof(RecipeDef) });
 
-        //todo make this pretty iterator thing yield return
         [HarmonyDebug]
         [HarmonyReversePatch(HarmonyReversePatchType.Original)]
         public static bool ResourceSelectionForBillReversePatch(List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)

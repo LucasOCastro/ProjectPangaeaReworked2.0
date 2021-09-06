@@ -8,5 +8,10 @@ namespace ProjectPangaea
     {
         public static SpecialThingFilterDef Pangaea_CorpsesWithoutDNA;
         public static SpecialThingFilterDef Pangaea_NonSplicedDNA;
+
+        static PangaeaSpecialThingFilterDefOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(SpecialThingFilterDef));
+        }
     }
 }
