@@ -76,7 +76,7 @@ namespace ProjectPangaea
 
             if (sortBy == SortBy.Allowed)
             {
-                return bill.Allows(entry) ? 1 : 0;
+                return bill.ResourceFilter.Allows(entry) ? 1 : 0;
             }
 
             return 0;

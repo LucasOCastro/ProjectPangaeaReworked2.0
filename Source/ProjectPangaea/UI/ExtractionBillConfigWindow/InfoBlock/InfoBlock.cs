@@ -43,10 +43,10 @@ namespace ProjectPangaea.PangaeaUI
             if (doCheckmark && cornerDetailsSize > 0 && Bill != null)
             {
                 Rect checkMarkRect = rect.LowerRightCorner(cornerDetailsSize);
-                bool allowed = Bill.Allows(PangaeaEntry);
+                bool allowed = Bill.ResourceFilter.Allows(PangaeaEntry);
                 if (PangaeaUIGen.CheckMarkButton(checkMarkRect, allowed))
                 {
-                    Bill.Toggle(PangaeaEntry);
+                    Bill.ResourceFilter.Toggle(PangaeaEntry);
                 }
             }
 

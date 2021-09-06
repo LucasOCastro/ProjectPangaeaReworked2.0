@@ -28,8 +28,8 @@ namespace ProjectPangaea.PangaeaUI
             allPossibleInfoBlocks = GetAllPossibleInfoBlocks();
             doCloseButton = false;
             settings = new PangaeaBillWindowSettings(this);
-            globalToggler = new PangaeaMassToggler(bill, ExtractionBill.AllPossibleEntries);
-            visibleToggler = new PangaeaMassToggler(bill, GetVisibleInfoBlocks().Select(b => b.PangaeaEntry));
+            globalToggler = new PangaeaMassToggler(bill.ResourceFilter, ExtractionBill.AllPossibleEntries);
+            visibleToggler = new PangaeaMassToggler(bill.ResourceFilter, GetVisibleInfoBlocks().Select(b => b.PangaeaEntry));
 
             globalToggler.buttonSuffixLabel = " " + "Pangaea_All".Translate();
             visibleToggler.buttonSuffixLabel = " " + "Pangaea_Visible".Translate();

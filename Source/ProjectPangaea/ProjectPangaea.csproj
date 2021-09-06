@@ -91,6 +91,8 @@
     <Compile Include="Utility\PangaeaCollectionExtension.cs" />
     <Compile Include="PangaeaEntryFilter.cs" />
     <Compile Include="IPangaeaEntryAllower.cs" />
+    <Compile Include="Production\Bills\MakePangaeaBillIngredientsOverride.cs" />
+    <Compile Include="Production\Bills\PangaeaThingFilter.cs" />
     <Compile Include="Resource\RandomOreDrop\ModExt_RandomFossilDrop.cs" />
     <Compile Include="Resource\RandomOreDrop\RandomDrillYieldOverride.cs" />
     <Compile Include="Resource\RandomOreDrop\RandomOreDropOverride.cs" />
