@@ -78,6 +78,7 @@
     <Compile Include="Database\PangaeaThingEntry.cs" />
     <Compile Include="Production\Splicing\DNASplicingDef.cs" />
     <Compile Include="Production\Splicing\DNASplicingWorker.cs" />
+    <Compile Include="Production\Splicing\PangaeaSpecialThingFilterWorker_NonSplicedDNA.cs" />
     <Compile Include="Production\Splicing\Pangaea_DNASplicingRecipeExtension.cs" />
     <Compile Include="Production\Splicing\SplicingProductsOverride.cs" />
     <Compile Include="Resource\DNAGraphicsLister.cs" />

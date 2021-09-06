@@ -86,7 +86,7 @@ namespace ProjectPangaea.Production
         public static bool ProcessAvailableThingsPrefix(ref bool __result, List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)
         {
             Pangaea_ResourceRecipeExtension resourceExtension = bill.recipe?.GetModExtension<Pangaea_ResourceRecipeExtension>();
-            if (resourceExtension == null)
+            if (resourceExtension == null || resourceExtension.allowMixingResources)
             {
                 return true;
             }

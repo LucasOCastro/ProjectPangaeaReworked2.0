@@ -37,7 +37,7 @@ namespace ProjectPangaea.Production
 
         public override PangaeaBillCounter GetBillCounter(RecipeDef recipe)
         {
-            return new PangaeaBillCounter(recipe, ThingCategoryDefOf.CorpsesAnimal, specialFilterToDisallow: PangaeaSpecialThingFilterDefOf.Pangaea_AllowCorpsesWithoutDNA);
+            return new PangaeaBillCounter(recipe, ThingCategoryDefOf.CorpsesAnimal, specialFilterToDisallow: PangaeaSpecialThingFilterDefOf.Pangaea_CorpsesWithoutDNA);
         }
 
         public override List<PangaeaThingEntry> GetListerEntries(RecipeDef recipe)

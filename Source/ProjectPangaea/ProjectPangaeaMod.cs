@@ -81,7 +81,7 @@ namespace ProjectPangaea
                 PangaeaDatabase.AddOrUpdateFromOverrideDef(overrideDef);
             }
 
-            Production.DNASplicingWorker.Init();
+            Production.Splicing.DNASplicingWorker.Init();
 
             HasInitiatedDatabase = true;
             PangaeaSettings.UpdateSettings(Settings);

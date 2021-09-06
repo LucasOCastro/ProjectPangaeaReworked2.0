@@ -1,7 +1,7 @@
 ﻿using Verse;
 using System.Collections.Generic;
 
-namespace ProjectPangaea.Production
+namespace ProjectPangaea.Production.Splicing
 {
     public class DNASplicingDef : Def
     {

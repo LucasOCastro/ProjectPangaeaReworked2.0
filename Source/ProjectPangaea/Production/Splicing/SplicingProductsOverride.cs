@@ -2,7 +2,7 @@
 using HarmonyLib;
 using System.Collections.Generic;
 
-namespace ProjectPangaea.Production
+namespace ProjectPangaea.Production.Splicing
 {
     [HarmonyPatch(typeof(GenRecipe), "MakeRecipeProducts")]
     public class SplicingProductsOverride

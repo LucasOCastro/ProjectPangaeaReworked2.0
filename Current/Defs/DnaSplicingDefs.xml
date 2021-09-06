@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<ProjectPangaea.Production.DNASplicingDef>
+	<ProjectPangaea.Production.Splicing.DNASplicingDef>
 		<defName>ProjectPangaea_BoomalopeDNASplicing</defName>
 		<parentDNAOwner>Boomalope</parentDNAOwner>
 		<splicePortions>
@@ -14,6 +14,6 @@
 				<portion>0.5</portion>
 			</li>
 		</splicePortions>
-	</ProjectPangaea.Production.DNASplicingDef>
+	</ProjectPangaea.Production.Splicing.DNASplicingDef>
 
 </Defs>

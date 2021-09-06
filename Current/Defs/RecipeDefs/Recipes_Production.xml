@@ -77,7 +77,7 @@
 				<li>AllowFresh</li>
 			</specialFiltersToAllow>
 			<specialFiltersToDisallow>
-				<li>Pangaea_AllowCorpsesWithoutDNA</li>
+				<li>Pangaea_CorpsesWithoutDNA</li>
 			</specialFiltersToDisallow>
 		</fixedIngredientFilter>
 	</RecipeDef>
@@ -92,7 +92,7 @@
 		<effectWorking>ButcherFlesh</effectWorking>
 		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
 		<modExtensions>
-			<li Class="ProjectPangaea.Production.Pangaea_DNASplicingRecipeExtension">
+			<li Class="ProjectPangaea.Production.Splicing.Pangaea_DNASplicingRecipeExtension">
 				<divideDNA>true</divideDNA>
 			</li>
 		</modExtensions>

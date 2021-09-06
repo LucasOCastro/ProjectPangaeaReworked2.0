@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace ProjectPangaea.Production
+namespace ProjectPangaea.Production.Splicing
 {
     public static class DNASplicingWorker
     {
@@ -43,6 +43,8 @@ namespace ProjectPangaea.Production
 
             return spliceResults;
         }
+
+        public static bool IsSpliced(DNA dna) => dict.ContainsKey(dna);
 
         private static void EqualizePortions(int stackCount, int currentCount)
         {
