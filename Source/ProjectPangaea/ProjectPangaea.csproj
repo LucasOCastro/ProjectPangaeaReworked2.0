@@ -83,6 +83,8 @@
     <Compile Include="PangaeaCollectionExtension.cs" />
     <Compile Include="PangaeaEntryFilter.cs" />
     <Compile Include="IPangaeaEntryAllower.cs" />
+    <Compile Include="Production\Bills\MakePangaeaBillIngredientsOverride.cs" />
+    <Compile Include="Production\Bills\PangaeaThingFilter.cs" />
     <Compile Include="Resource\RandomOreDrop\ModExt_RandomFossilDrop.cs" />
     <Compile Include="Resource\RandomOreDrop\RandomDrillYieldOverride.cs" />
     <Compile Include="Resource\RandomOreDrop\RandomOreDropOverride.cs" />
@@ -92,7 +94,6 @@
     <Compile Include="PangaeaResourceCounter.cs" />
     <Compile Include="PangaeaSpecialThingFilterWorker_CorpsesWithoutDNA.cs" />
     <Compile Include="Production\Bills\PangaeaBillCounter.cs" />
-    <Compile Include="Production\Bills\CustomBillAllowanceOverride.cs" />
     <Compile Include="PangaeaSpecialThingFilterDefOf.cs" />
     <Compile Include="Stats\PangaeaStatCategoryDefOf.cs" />
     <Compile Include="Stats\PangaeaStatDefOf.cs" />
