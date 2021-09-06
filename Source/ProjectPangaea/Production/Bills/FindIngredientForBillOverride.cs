@@ -78,7 +78,6 @@ namespace ProjectPangaea.Production
 
     }
 
-
     [HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestBillIngredientsInSet_NoMix")]
     public static class FindIngredientForBillOverride
     {
@@ -141,7 +140,7 @@ namespace ProjectPangaea.Production
                     .ForwardUntil(i => og[i].opcode == OpCodes.Stloc_S,
                     matchCallback: i => insert.Add(new CodeInstruction(OpCodes.Ldloc_S, og[i].operand)));
 
-                //Get the final boolean and, if true, continue;
+                //Get the final ShouldSkip bool and, if true, skip this loop
                 insert.AddRange(new CodeInstruction[] {
                         new CodeInstruction(OpCodes.Conv_I4),
                         new CodeInstruction(OpCodes.Call, shouldSkipResourceMethodInfo),

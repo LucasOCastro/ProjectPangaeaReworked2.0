@@ -21,12 +21,9 @@ namespace ProjectPangaea.Production
 
             if (PangaeaDatabase.TryGetEntryFromThing(thing, out PangaeaThingEntry entry, out bool shouldHaveEntry))
             {
-                __result = pangaeaBill.AllowedEntries.Contains(entry);
+                __result = pangaeaBill.Allows(entry);
             }
-            else if (shouldHaveEntry)
-            {
-                __result = shouldHaveEntry;
-            }
+            else __result = !shouldHaveEntry;
         }
     }
 }

@@ -11,6 +11,27 @@ namespace ProjectPangaea.Production.Splicing
             public ThingDef thing;
             public ThingDef dnaOwner;
             public float portion;
+
+            public Thing MakeThing()
+            {
+                if (thing == null && dnaOwner == null)
+                {
+                    return null;
+                }
+                if (thing != null)
+                {
+                    return ThingMaker.MakeThing(thing);
+                }
+                DNA spliceDNA = PangaeaDatabase.GetOrNull(dnaOwner)?.DNA;
+                return (spliceDNA != null) ? DNAThing.MakeDNAThing(spliceDNA) : null;
+            }
+
+            public Thing MakeThing(int parentStackCount)
+            {
+                Thing thing = MakeThing();
+                thing.stackCount = UnityEngine.Mathf.CeilToInt(parentStackCount * portion);
+                return thing;
+            }
         }
 
         private ThingDef parentDNAOwner = null;

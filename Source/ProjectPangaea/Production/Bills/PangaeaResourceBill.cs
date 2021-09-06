@@ -17,6 +17,7 @@ namespace ProjectPangaea.Production
             AllPossibleEntries = possibleEntries.AsReadOnly();
             AllowedEntries = new HashSet<PangaeaThingEntry>(possibleEntries);
             Counter = counter;
+            ingredientFilter =
         }
 
         public bool Allows(PangaeaThingEntry entry) => AllowedEntries.Contains(entry);

@@ -76,6 +76,7 @@
     <Compile Include="Categorization\Animal\AnimalType.cs" />
     <Compile Include="Categorization\ExtinctionStatus.cs" />
     <Compile Include="Database\PangaeaThingEntry.cs" />
+    <Compile Include="Production\Splicing\DNASplicingBill.cs" />
     <Compile Include="Production\Splicing\DNASplicingDef.cs" />
     <Compile Include="Production\Splicing\DNASplicingWorker.cs" />
     <Compile Include="Production\Splicing\PangaeaSpecialThingFilterWorker_NonSplicedDNA.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Production\Bills\FindIngredientForBillOverride.cs" />
     <Compile Include="Production\Pangaea_ResourceRecipeExtension.cs" />
     <Compile Include="Production\RecipeProductsOverride.cs" />
-    <Compile Include="Production\PangaeaRecipeDefOf.cs" />
+    <Compile Include="DefOf\PangaeaRecipeDefOf.cs" />
     <Compile Include="Production\DNAExtraction\Pangaea_DissectCorpseRecipeExtension.cs" />
     <Compile Include="Production\DNAExtraction\Pangaea_YieldDNARecipeExtension.cs" />
     <Compile Include="Production\DNAExtraction\RecipeWorkerCounter_ExtractDNA.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="UI\FloatMenuWithCheckmarks\FloatMenuWithCheckmarks.cs" />
     <Compile Include="UI\FloatMenuWithCheckmarks\PangaeaEntrySorter.cs" />
     <Compile Include="UI\PangaeaUIGen.cs" />
+    <Compile Include="Utility\ThingDefCountUtility.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

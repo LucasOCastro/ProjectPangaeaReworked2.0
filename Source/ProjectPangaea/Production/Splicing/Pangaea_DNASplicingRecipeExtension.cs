@@ -10,12 +10,17 @@ namespace ProjectPangaea.Production.Splicing
 
         public override PangaeaBillCounter GetBillCounter(RecipeDef recipe)
         {
+            //TODO consider using the recipeDefs specialFilters instead of passing directly, in corpses bill too
             return new PangaeaBillCounter(recipe, PangaeaThingCategoryDefOf.PangaeaDNA, specialFilterToDisallow: PangaeaSpecialThingFilterDefOf.Pangaea_NonSplicedDNA);
         }
 
         public override List<PangaeaThingEntry> GetListerEntries(RecipeDef recipe)
         {
-            return PangaeaDatabase.AllEntries.Where(e => DNASplicingWorker.IsSpliced(e.DNA)).ToList();
+            if (divideDNA)
+            {
+                return PangaeaDatabase.AllEntries.Where(e => DNASplicingWorker.IsSpliced(e.DNA)).ToList();
+            }
+            return PangaeaThingCategoryDefOf.PangaeaDNA.childThingDefs;
         }
     }
 }

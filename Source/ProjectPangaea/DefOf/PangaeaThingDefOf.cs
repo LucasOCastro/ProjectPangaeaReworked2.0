@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace ProjectPangaea
 {
-    [RimWorld.DefOf]
+    [DefOf]
     public class PangaeaThingDefOf
     {
         public static ThingDef Pangaea_FossilBase;

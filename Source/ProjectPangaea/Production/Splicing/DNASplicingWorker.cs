@@ -1,4 +1,5 @@
 ﻿using Verse;
+using RimWorld;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -7,6 +8,13 @@ namespace ProjectPangaea.Production.Splicing
     public static class DNASplicingWorker
     {
         private static Dictionary<DNA, DNASplicingDef> dict = new Dictionary<DNA, DNASplicingDef>();
+
+        public static bool IsSpliced(DNA dna) => dict.ContainsKey(dna);
+
+        private static Bill GenSplicingBill(DNASplicingDef spliceDef)
+        {
+            BillUtility.MakeNewBill();
+        }
 
         private static List<Thing> spliceResults = new List<Thing>();
         public static IEnumerable<Thing> GetSpliceResults(DNAThing dnaThing)
@@ -20,31 +28,15 @@ namespace ProjectPangaea.Production.Splicing
             int totalCount = 0;
             foreach (var splice in splicingDef.splicePortions)
             {
-                Thing result = null;
-                if (splice.thing != null)
-                {
-                    result = ThingMaker.MakeThing(splice.thing);
-                }
-                else if (splice.dnaOwner != null)
-                {
-                    DNA spliceDNA = PangaeaDatabase.GetOrNull(splice.dnaOwner)?.DNA;
-                    result = (spliceDNA != null) ? DNAThing.MakeDNAThing(spliceDNA) : null;
-                }
+                Thing result = splice.MakeThing(dnaThing.stackCount);
                 if (result == null) continue;
-
-                int stackCount = Mathf.CeilToInt(splice.portion * dnaThing.stackCount);
-                result.stackCount = stackCount;
-                totalCount += stackCount;
-
+                totalCount += result.stackCount;
                 spliceResults.Add(result);
             }
-
             EqualizePortions(dnaThing.stackCount, totalCount);
 
             return spliceResults;
-        }
-
-        public static bool IsSpliced(DNA dna) => dict.ContainsKey(dna);
+        }        
 
         private static void EqualizePortions(int stackCount, int currentCount)
         {
