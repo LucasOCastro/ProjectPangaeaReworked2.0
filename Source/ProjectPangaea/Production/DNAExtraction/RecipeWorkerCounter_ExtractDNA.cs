@@ -22,12 +22,14 @@ namespace ProjectPangaea.Production
 				num += bill.Map.GetComponent<PangaeaResourceCounter>().GetCount(allowedEntry.DNA);
 			}
 			//TODO possible option for count all DNA instead of only allowed
-			/*List<ThingDef> childThingDefs = PangaeaThingCategoryDefOf.PangaeaDNA.childThingDefs;
+			/*
+			List<ThingDef> childThingDefs = PangaeaThingCategoryDefOf.PangaeaDNA.childThingDefs;
 			for (int i = 0; i < childThingDefs.Count; i++)
 			{
 				
 				num += bill.Map.resourceCounter.GetCount(childThingDefs[i]);
-			}*/
+			}
+			*/
 			return num;
 		}
 
