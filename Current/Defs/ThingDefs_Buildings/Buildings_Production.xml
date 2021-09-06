@@ -47,6 +47,7 @@
 		<surfaceType>Item</surfaceType>
 		<recipes>
 			<li>Pangaea_ExtractDNA</li>
+			<li>Pangaea_SplitSplicedDNA</li>
 		</recipes>
 		<inspectorTabs>
 			<li>ITab_Bills</li>

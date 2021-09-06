@@ -46,7 +46,6 @@ namespace ProjectPangaea
                     dict.Add(tuple, dnaGraphic);
                 }
                 else dict[tuple] = dnaGraphic;
-                Log.Message("JUST ADDED: " + tuple + " AND THE DEFNAME IS: " + dnaGraphic.defName);
             }
         }
     }

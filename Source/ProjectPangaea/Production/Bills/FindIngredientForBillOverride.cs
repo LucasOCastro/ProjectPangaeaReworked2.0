@@ -72,7 +72,6 @@ namespace ProjectPangaea.Production
                 return true;
             }
 
-            Log.Message($"Wont skip {pt.Resource.Label} while lastResource = {lastResource?.Label ?? "null"}");
             lastResource = pt.Resource;
             return false;
         }

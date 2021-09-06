@@ -20,7 +20,10 @@ namespace ProjectPangaea
             protected set
             {
                 resource = value;
-                DirtyMapMesh(Map);
+                if (Map != null)
+                {
+                    DirtyMapMesh(Map);
+                }
             }
         }
 

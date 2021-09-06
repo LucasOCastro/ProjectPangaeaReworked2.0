@@ -109,12 +109,6 @@ namespace ProjectPangaea
 
             PangaeaThingEntry entry = GetOrAddEntry(thingDef);
 
-            List<ThingEfficiency> extraProducts = overrideDef.dnaExtractionExtraProducts;
-            if (!extraProducts.NullOrEmpty())
-            {
-                entry.ExtraDNAExtractionProducts.AddRange(extraProducts);
-            }
-
             var dnaOverride = overrideDef.dnaOverride;
             if (dnaOverride != null && entry.DNA != null)
             {

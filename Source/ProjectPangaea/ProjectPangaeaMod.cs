@@ -32,7 +32,6 @@ namespace ProjectPangaea
 
             DNAGraphicsLister.Init();
 
-
             HashSet<ThingDef> alreadyAddedDefs = new HashSet<ThingDef>();
             foreach (var categoryDef in DefDatabase<PangaeaAnimalCategorizationDef>.AllDefs.Reverse())
             {
@@ -82,11 +81,14 @@ namespace ProjectPangaea
                 PangaeaDatabase.AddOrUpdateFromOverrideDef(overrideDef);
             }
 
+            Production.DNASplicingWorker.Init();
+
             HasInitiatedDatabase = true;
             PangaeaSettings.UpdateSettings(Settings);
         }
     }
 
+    //TODO settings shouldnt be static, dumbass
     public static class PangaeaSettings
     {
         public static bool AssignRandomPawnToNullResource { get; private set; }

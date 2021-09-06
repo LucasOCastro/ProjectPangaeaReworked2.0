@@ -13,7 +13,7 @@ namespace ProjectPangaea.Production
             public float portion;
         }
 
-        private ThingDef parentThingDef;
+        private ThingDef parentDNAOwner = null;
         public List<SplicePortionData> splicePortions = new List<SplicePortionData>();
 
         private DNA parentDNA;
@@ -23,7 +23,7 @@ namespace ProjectPangaea.Production
             {
                 if (parentDNA == null)
                 {
-                    parentDNA = PangaeaDatabase.GetOrNull(parentThingDef)?.DNA;
+                    parentDNA = PangaeaDatabase.GetOrNull(parentDNAOwner)?.DNA;
                 }
                 return parentDNA;
             }
@@ -33,6 +33,11 @@ namespace ProjectPangaea.Production
         {
             foreach (string error in base.ConfigErrors())
                 yield return error;
+
+            if (parentDNAOwner == null)
+            {
+                yield return $"{this.defName} has no parentThingDef!";
+            }
 
             float sum = 0;
             for (int i = 0; i < splicePortions.Count; i++)

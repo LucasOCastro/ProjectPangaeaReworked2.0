@@ -16,9 +16,6 @@ namespace ProjectPangaea
 
         public Fossil Fossil { get; }
 
-        public List<ThingEfficiency> ExtraDNAExtractionProducts { get; } = new List<ThingEfficiency>();
-        public bool overrideBaseDrops;
-
         public PangaeaThingEntry(ThingDef thingDef, AnimalType animalType = AnimalType.Unspecified)
         {
             ThingDef = thingDef;

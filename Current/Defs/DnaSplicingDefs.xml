@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ProjectPangaea.Production.DNASplicingDef>
+		<defName>ProjectPangaea_BoomalopeDNASplicing</defName>
+		<parentDNAOwner>Boomalope</parentDNAOwner>
+		<splicePortions>
+			<li>
+				<dnaOwner>Cow</dnaOwner>
+				<portion>0.5</portion>
+			</li>
+			<li>
+				<dnaOwner>Thrumbo</dnaOwner>
+				<portion>0.5</portion>
+			</li>
+		</splicePortions>
+	</ProjectPangaea.Production.DNASplicingDef>
+
+</Defs>

@@ -10,7 +10,7 @@ namespace ProjectPangaea.Production
     [HarmonyPatch(typeof(GenRecipe), "MakeRecipeProducts")]
     public class RecipeProductsOverride
     {
-        public static IEnumerable<Thing> Postfix(IEnumerable<Thing> originalResult, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients, IBillGiver billGiver)
+        public static IEnumerable<Thing> Postfix(IEnumerable<Thing> originalResult, RecipeDef recipeDef, List<Thing> ingredients)
         {
             var yieldDNAExtension = recipeDef.GetModExtension<Pangaea_YieldDNARecipeExtension>();
             var createLifeExtension = recipeDef.GetModExtension<Pangaea_CreateLifeRecipeExtension>();
@@ -36,8 +36,6 @@ namespace ProjectPangaea.Production
             }
             if (entry == null)
             {
-                //TODO REMOVE
-                Log.Error("Couldnt locate entry!");
                 foreach (Thing result in originalResult)
                 {
                     yield return result;
@@ -50,7 +48,6 @@ namespace ProjectPangaea.Production
                 if (yieldDNAExtension != null && result is DNAThing dnaThing)
                 {
                     dnaThing.SetResource(entry.DNA);
-                    //TODO currently ignores yieldDNAExtension.baseYieldPerExtraction and corpse efficiency
                     float efficiency = yieldDNAExtension.ResolveEfficiencyFromIngredient(entryIngredient);
                     dnaThing.stackCount = Mathf.Max(1, Mathf.CeilToInt(dnaThing.stackCount * efficiency));
                 }
