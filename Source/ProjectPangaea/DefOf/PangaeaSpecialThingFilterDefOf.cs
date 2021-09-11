@@ -11,7 +11,7 @@ namespace ProjectPangaea
 
         static PangaeaSpecialThingFilterDefOf()
         {
-            DefOfHelper.EnsureInitializedInCtor(typeof(SpecialThingFilterDef));
+            DefOfHelper.EnsureInitializedInCtor(typeof(SpecialThingFilterDefOf));
         }
     }
 }

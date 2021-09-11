@@ -65,5 +65,10 @@ namespace ProjectPangaea
             }
             return new AnimalCategory(thingDef, animalType);
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + " " + ThingDef;
+        }
     }
 }

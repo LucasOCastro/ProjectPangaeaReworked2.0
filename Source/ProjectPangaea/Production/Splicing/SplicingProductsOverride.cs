@@ -20,16 +20,19 @@ namespace ProjectPangaea.Production.Splicing
                 yield break;
             }
 
-            //TODO make this shit better this aint what i want
-            foreach (Thing ingredient in ingredients)
+            /*foreach (Thing result in DNASplicingWorker.GenRecipeResults(recipeDef, ingredients))
             {
-                if (ingredient is DNAThing dnaThing)
+                yield return result;
+            }*/
+            //TODO currently guessing, but i want to pass directly from bill. look into 'internal void <FinishRecipeAndStartStoringProduct>b__0()'
+            if (DNASplicingWorker.TryGuessDefFromIngredients(ingredients, out DNASplicingDef splicingDef, out bool divideDNA))
+            {
+                if (divideDNA)
                 {
-                    foreach (Thing spliceResult in DNASplicingWorker.GetSpliceResults(dnaThing))
-                    {
-                        yield return spliceResult;
-                    }
+                    foreach (var result in splicingDef.MakePortionThings())
+                        yield return result;
                 }
+                else yield return splicingDef.MakeResultThing();
             }
         }
     }

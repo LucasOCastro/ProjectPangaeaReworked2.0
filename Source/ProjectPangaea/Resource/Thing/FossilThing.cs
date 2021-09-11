@@ -4,9 +4,11 @@ namespace ProjectPangaea
 {
     public class FossilThing : PangaeaResourceThingBase
     {
+        public Fossil FossilResource { get; private set; }
         public void SetResource(Fossil fossil)
         {
             Resource = fossil;
+            FossilResource = fossil;
         }
 
         protected override PangaeaResource GetRandomResource() => PangaeaDatabase.RandomExtinctEntry().Fossil;

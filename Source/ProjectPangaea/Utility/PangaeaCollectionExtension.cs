@@ -35,5 +35,10 @@ namespace ProjectPangaea
         {
             return sorter.Sort(items, entryGetter);
         }
+
+        public static IEnumerable<T> Yield<T>(this T t)
+        {
+            yield return t;
+        }
     }
 }

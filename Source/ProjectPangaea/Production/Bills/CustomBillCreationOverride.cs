@@ -2,6 +2,7 @@
 using Verse;
 using HarmonyLib;
 using System.Collections.Generic;
+using ProjectPangaea.Production.Splicing;
 
 namespace ProjectPangaea.Production
 {
@@ -15,6 +16,15 @@ namespace ProjectPangaea.Production
                 __result = new PangaeaResourceBill(recipe, entries, counter);
                 return false;
             }
+
+            //todo this will be moved to a custom window later
+            Pangaea_DNASplicingRecipeExtension spliceExtension = recipe.GetModExtension<Pangaea_DNASplicingRecipeExtension>();
+            if (spliceExtension != null)
+            {
+                __result = new DNASplicingBill(recipe, DNASplicingWorker.AllSpliceDefs.FirstOrFallback());
+                return false;
+            }
+
             return true;
         }
 

@@ -1,39 +1,39 @@
 ﻿using Verse;
 using RimWorld;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace ProjectPangaea.Production.Splicing
 {
-    public class DNASplicingBill : PangaeaResourceBill
+    public class DNASplicingBill : Bill_Production
     {
-        public DNA Result { get; }
-        public List<ThingDefCount> ThingParts { get; } = new List<ThingDefCount>();
-        public List<DNA> DNAParts { get; } = new List<DNA>();
-        private DNASplicingDef spliceDef;
-
-        public DNASplicingBill(DNASplicingDef spliceDef) : base (PangaeaRecipeDefOf.Pangaea_SpliceDNA, )
+        public DNASplicingDef SpliceDef { get; }
+        public Pangaea_DNASplicingRecipeExtension SpliceExtension { get; }
+        public DNASplicingBill(RecipeDef recipe, DNASplicingDef spliceDef) : base(recipe)
         {
-            ThingRequest a = new ThingRequest()
+            SpliceDef = spliceDef;
+            SpliceExtension = recipe.GetModExtension<Pangaea_DNASplicingRecipeExtension>();
+            if (SpliceExtension == null)
             {
-                singleDef = null
-            };
-            a.
-            Result = spliceDef.ParentDNA;
-            this.spliceDef = spliceDef;
-            int stackCount = (int)recipe.ingredients.Find(i => i.filter.Allows(PangaeaThingDefOf.Pangaea_DNABase)).GetBaseCount();
-            foreach (var portion in spliceDef.splicePortions)
-            {
-                int count = Mathf.CeilToInt(portion.portion * stackCount);
-                if (portion.thing != null)
-                {
-                    ThingParts.Add(new ThingDefCount(portion.thing, count));
-                }
-                else if (portion.dnaOwner != null && PangaeaDatabase.TryGetEntry(portion.dnaOwner, out PangaeaThingEntry entry))
-                {
-                    DNAParts.Add(entry.DNA);
-                }
+                Log.Error(nameof(DNASplicingBill) + " was made with recipe of def " + recipe.defName + " which has no " + nameof(Pangaea_DNASplicingRecipeExtension));
             }
+        }
+
+        public IEnumerable<Thing> MakeResults()
+        {
+            if (SpliceExtension.divideDNA)
+            {
+                return SpliceDef.MakePortionThings();
+            }
+            return SpliceDef.MakeResultThing().Yield();
+        }
+
+        public IEnumerable<IngredientCount> MakeIngredients()
+        {
+            if (SpliceExtension.divideDNA)
+            {
+                return SpliceDef.MakeResultIngredient().Yield();
+            }
+            return SpliceDef.MakePortionIngredients();
         }
     }
 }

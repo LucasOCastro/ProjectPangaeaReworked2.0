@@ -8,7 +8,7 @@ namespace ProjectPangaea.Production
     {
         public override bool CanCountProducts(Bill_Production bill)
         {
-            return bill is PangaeaResourceBill && !bill.recipe.HasModExtension<Splicing.Pangaea_DNASplicingRecipeExtension>();
+			return bill is PangaeaResourceBill;
         }
 
 		public override int CountProducts(Bill_Production bill)
@@ -17,7 +17,7 @@ namespace ProjectPangaea.Production
 
 			int num = 0;
 
-			foreach (var allowedEntry in resourceBill.AllowedEntries)
+			foreach (var allowedEntry in resourceBill.ResourceFilter.AllowedEntries)
             {
 				num += bill.Map.GetComponent<PangaeaResourceCounter>().GetCount(allowedEntry.DNA);
 			}

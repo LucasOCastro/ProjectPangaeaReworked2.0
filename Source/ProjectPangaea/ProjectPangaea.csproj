@@ -76,9 +76,12 @@
     <Compile Include="Categorization\Animal\AnimalType.cs" />
     <Compile Include="Categorization\ExtinctionStatus.cs" />
     <Compile Include="Database\PangaeaThingEntry.cs" />
+    <Compile Include="Production\Bills\PangaeaBillIngFinder.cs" />
+    <Compile Include="Production\Bills\VanillaFindIngredientsFix.cs" />
     <Compile Include="Production\Splicing\DNASplicingBill.cs" />
     <Compile Include="Production\Splicing\DNASplicingDef.cs" />
     <Compile Include="Production\Splicing\DNASplicingWorker.cs" />
+    <Compile Include="Production\Splicing\FindIngredientForSplicingBillOverride.cs" />
     <Compile Include="Production\Splicing\PangaeaSpecialThingFilterWorker_NonSplicedDNA.cs" />
     <Compile Include="Production\Splicing\Pangaea_DNASplicingRecipeExtension.cs" />
     <Compile Include="Production\Splicing\SplicingProductsOverride.cs" />
@@ -91,8 +94,8 @@
     <Compile Include="Utility\PangaeaCollectionExtension.cs" />
     <Compile Include="PangaeaEntryFilter.cs" />
     <Compile Include="IPangaeaEntryAllower.cs" />
-    <Compile Include="Production\Bills\MakePangaeaBillIngredientsOverride.cs" />
-    <Compile Include="Production\Bills\PangaeaThingFilter.cs" />
+    <Compile Include="Production\Bills\MakeBillIngredientsOverride.cs" />
+    <Compile Include="Production\PangaeaThingFilter.cs" />
     <Compile Include="Resource\RandomOreDrop\ModExt_RandomFossilDrop.cs" />
     <Compile Include="Resource\RandomOreDrop\RandomDrillYieldOverride.cs" />
     <Compile Include="Resource\RandomOreDrop\RandomOreDropOverride.cs" />
@@ -102,7 +105,6 @@
     <Compile Include="PangaeaResourceCounter.cs" />
     <Compile Include="PangaeaSpecialThingFilterWorker_CorpsesWithoutDNA.cs" />
     <Compile Include="Production\Bills\PangaeaBillCounter.cs" />
-    <Compile Include="Production\Bills\CustomBillAllowanceOverride.cs" />
     <Compile Include="DefOf\PangaeaSpecialThingFilterDefOf.cs" />
     <Compile Include="Stats\PangaeaStatCategoryDefOf.cs" />
     <Compile Include="Stats\PangaeaStatDefOf.cs" />
@@ -145,7 +147,6 @@
     <Compile Include="UI\FloatMenuWithCheckmarks\FloatMenuWithCheckmarks.cs" />
     <Compile Include="UI\FloatMenuWithCheckmarks\PangaeaEntrySorter.cs" />
     <Compile Include="UI\PangaeaUIGen.cs" />
-    <Compile Include="Utility\ThingDefCountUtility.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

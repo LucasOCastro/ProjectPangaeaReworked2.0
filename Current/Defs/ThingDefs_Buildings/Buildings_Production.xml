@@ -48,6 +48,7 @@
 		<recipes>
 			<li>Pangaea_ExtractDNA</li>
 			<li>Pangaea_SplitSplicedDNA</li>
+			<li>Pangaea_SpliceDNA</li>
 		</recipes>
 		<inspectorTabs>
 			<li>ITab_Bills</li>

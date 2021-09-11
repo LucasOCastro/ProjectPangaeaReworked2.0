@@ -2,87 +2,17 @@
 using Verse;
 using HarmonyLib;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System;
 
 namespace ProjectPangaea.Production
 {
-    public static class PangaeaBillIngFinder
-    {
-        private static Dictionary<PangaeaResource, int> availableResourceCountDict = new Dictionary<PangaeaResource, int>();
-        private static List<PangaeaResourceThingBase> availableResourceThings = new List<PangaeaResourceThingBase>();
-        private static PangaeaResource lastResource = null;
-
-        public static void Clear()
-        {
-            availableResourceCountDict.Clear();
-            availableResourceThings.Clear();
-            lastResource = null;
-        }
-
-        public static void RegisterThing(PangaeaResourceThingBase pangaeaThing)
-        {
-            if (pangaeaThing == null || pangaeaThing.Resource == null)
-            {
-                return;
-            }
-
-            availableResourceThings.Add(pangaeaThing);
-            if (!availableResourceCountDict.ContainsKey(pangaeaThing.Resource))
-            {
-                availableResourceCountDict.Add(pangaeaThing.Resource, pangaeaThing.stackCount);
-            }
-            else
-            {
-                availableResourceCountDict[pangaeaThing.Resource] += pangaeaThing.stackCount;
-            }
-        }
-
-        private static bool HasRequiredCount(PangaeaResource resource, int required)
-        {
-            if (resource == null)
-            {
-                return false;
-            }
-
-            return availableResourceCountDict.TryGetValue(resource, out int count) &&  count >= required;
-        }
-
-        private static bool IsSameResourceAsLast(PangaeaResource resource)
-        {
-            if (resource == null)
-            {
-                return false;
-            }
-
-            return (lastResource == null || resource == lastResource);
-        }
-
-        public static bool ShouldSkipThing(Thing thing, int required)
-        {
-            if (!(thing is PangaeaResourceThingBase pt))
-            {
-                return false;
-            }
-
-            if (pt == null || !HasRequiredCount(pt.Resource, required) || !IsSameResourceAsLast(pt.Resource))
-            {
-                return true;
-            }
-
-            lastResource = pt.Resource;
-            return false;
-        }
-
-    }
-
     [HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestBillIngredientsInSet_NoMix")]
     public static class FindIngredientForBillOverride
     {
         [HarmonyPrefix]
-        public static bool ProcessAvailableThingsPrefix(ref bool __result, List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)
+        private static bool ProcessAvailableThingsPrefix(ref bool __result, List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)
         {
             Pangaea_ResourceRecipeExtension resourceExtension = bill.recipe?.GetModExtension<Pangaea_ResourceRecipeExtension>();
             if (resourceExtension == null || resourceExtension.allowMixingResources)
@@ -100,7 +30,6 @@ namespace ProjectPangaea.Production
                     PangaeaBillIngFinder.RegisterThing(pangaeaThing);
                 }
             }
-
             __result =  ResourceSelectionForBillReversePatch(availableThings, bill, chosen, rootCell, alreadySorted);
             return false;
         }
@@ -111,43 +40,36 @@ namespace ProjectPangaea.Production
         private static FieldInfo thingDefFieldInfo = AccessTools.Field(typeof(Thing), "def");
         private static MethodInfo requiredCountMethodInfo = AccessTools.Method(typeof(IngredientCount), "CountRequiredOfFor", new Type[] { typeof(ThingDef), typeof(RecipeDef) });
 
-        [HarmonyDebug]
         [HarmonyReversePatch(HarmonyReversePatchType.Original)]
-        public static bool ResourceSelectionForBillReversePatch(List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)
+        private static bool ResourceSelectionForBillReversePatch(List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)
         {
             IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
             {
-                List<CodeInstruction> og = instructions.ToList();
-                int index = -1;
-                og.ForwardUntil(i => og[i].opcode == OpCodes.Bne_Un && og[i - 1].Calls(getDefMethodInfo),
-                    matchCallback: i => index = i);
-                var continueDestination = og[index].operand;
+                List<CodeInstruction> og = VanillaFindIngredientsFix.FixFindIngredientBugs(instructions, out int patchEndIndex, out object skipThingDestination);
 
                 List<CodeInstruction> insert = new List<CodeInstruction>();
-
                 //Get thing from the array
-                int thingFromArrayStartIndex = index - 1;
                 int stopIndex = -1;
-                og.BackUntil(i => og[i].LoadsField(thingDefFieldInfo), thingFromArrayStartIndex,
+                og.BackUntil(i => og[i].LoadsField(thingDefFieldInfo), patchEndIndex,
                     matchCallback: i => stopIndex = i)
                     .BackUntil(i => og[i].opcode == OpCodes.Br)
                     .ForwardUntil(i => i == stopIndex - 1,
-                    callback: i => insert.Add(new CodeInstruction(og[i].opcode, og[i].operand)));
+                    action: i => insert.Add(new CodeInstruction(og[i].opcode, og[i].operand)));
 
-                //Get local required amount variable
-                int requiredCountStartingIndex = index - 1;
-                og.BackUntil(i => og[i].Calls(requiredCountMethodInfo), requiredCountStartingIndex)
+                //Get local required amount variable and convert it to int
+                og.BackUntil(i => og[i].Calls(requiredCountMethodInfo), patchEndIndex)
                     .ForwardUntil(i => og[i].opcode == OpCodes.Stloc_S,
-                    matchCallback: i => insert.Add(new CodeInstruction(OpCodes.Ldloc_S, og[i].operand)));
+                    matchCallback: i => insert.AddRange(new CodeInstruction[] {
+                        new CodeInstruction(OpCodes.Ldloc_S, og[i].operand),
+                        new CodeInstruction(OpCodes.Conv_I4)
+                    }));
 
                 //Get the final ShouldSkip bool and, if true, skip this loop
                 insert.AddRange(new CodeInstruction[] {
-                        new CodeInstruction(OpCodes.Conv_I4),
                         new CodeInstruction(OpCodes.Call, shouldSkipResourceMethodInfo),
-                        new CodeInstruction(OpCodes.Brtrue, continueDestination),
+                        new CodeInstruction(OpCodes.Brtrue, skipThingDestination),
                     });
-
-                int insertIndex = index + 1;
+                int insertIndex = patchEndIndex;
                 og.InsertRange(insertIndex, insert);
                 return og;
             }

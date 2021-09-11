@@ -41,6 +41,7 @@
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Smelt</effectWorking>
 		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.Pangaea_CreateLifeRecipeExtension">
 				<!--<yieldPerCreation>1~1</yieldPerCreation>-->

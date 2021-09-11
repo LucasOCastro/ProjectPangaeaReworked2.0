@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace ProjectPangaea
 {
-    [RimWorld.DefOf]
+    [DefOf]
     public static class PangaeaThingCategoryDefOf
     {
         public static ThingCategoryDef PangaeaRoot;
@@ -12,7 +12,7 @@ namespace ProjectPangaea
 
         static PangaeaThingCategoryDefOf()
         {
-            DefOfHelper.EnsureInitializedInCtor(typeof(ThingCategoryDef));
+            DefOfHelper.EnsureInitializedInCtor(typeof(ThingCategoryDefOf));
         }
     }
 }

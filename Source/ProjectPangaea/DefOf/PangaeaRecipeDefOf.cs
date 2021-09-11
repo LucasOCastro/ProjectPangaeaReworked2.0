@@ -13,7 +13,7 @@ namespace ProjectPangaea.Production
 
         static PangaeaRecipeDefOf()
         {
-            DefOfHelper.EnsureInitializedInCtor(typeof(RecipeDef));
+            DefOfHelper.EnsureInitializedInCtor(typeof(RecipeDefOf));
         }
     }
 }

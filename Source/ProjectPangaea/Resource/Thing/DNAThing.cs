@@ -4,9 +4,11 @@ namespace ProjectPangaea
 {
     public class DNAThing : PangaeaResourceThingBase
     {
+        public DNA DNAResource { get; private set; }
         public void SetResource (DNA dna)
         {
             Resource = dna;
+            DNAResource = dna;
         }
 
         protected override PangaeaResource GetRandomResource() => PangaeaDatabase.RandomEntry().DNA;

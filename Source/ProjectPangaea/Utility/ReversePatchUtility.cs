@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using System.Reflection.Emit;
 using System.Collections.Generic;
 using HarmonyLib;
 
@@ -8,6 +6,8 @@ namespace ProjectPangaea
 {
     public static class ReversePatchUtility
     {
+        public static bool throwOnFail = true;
+
         public class ReversePatchContainer
         {
             public CodeInstruction code;
@@ -28,9 +28,9 @@ namespace ProjectPangaea
         {
             return MoveUntil(-1, rp, condition, callback, matchCallback);
         }
-        public static ReversePatchContainer ForwardUntil(this ReversePatchContainer rp, Func<int, bool> condition, Action<int> callback = null, Action<int> matchCallback = null)
+        public static ReversePatchContainer ForwardUntil(this ReversePatchContainer rp, Func<int, bool> condition, Action<int> action = null, Action<int> matchCallback = null)
         {
-            return MoveUntil(1, rp, condition, callback, matchCallback);
+            return MoveUntil(1, rp, condition, action, matchCallback);
         }
         private static ReversePatchContainer MoveUntil(int loopModifier, ReversePatchContainer rp, Func<int, bool> breakCondition, Action<int> callback, Action<int> matchCallback)
         {
@@ -60,6 +60,10 @@ namespace ProjectPangaea
                     matchCallback?.Invoke(i);
                     return new ReversePatchContainer(code, list, i, startingIndex);
                 }
+            }
+            if (throwOnFail)
+            {
+                throw new Exception($"ProjectPangaea ReversePatchUtility failed with loopModifier={loopModifier} and startingIndex={startingIndex}");
             }
             return new ReversePatchContainer(null, null, -1, startingIndex);
         }

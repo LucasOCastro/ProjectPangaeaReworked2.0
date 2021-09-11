@@ -4,15 +4,17 @@
 	<ProjectPangaea.Production.Splicing.DNASplicingDef>
 		<defName>ProjectPangaea_BoomalopeDNASplicing</defName>
 		<parentDNAOwner>Boomalope</parentDNAOwner>
+		<!--If not defined, this is calculated automatically based on the portions.-->
+		<count>10</count>
 		<splicePortions>
 			<li>
 				<dnaOwner>Cow</dnaOwner>
-				<portion>0.5</portion>
+				<count>5</count>
 			</li>
 			<li>
 				<!--This is temporary until we add in boomgenes.-->
 				<dnaOwner>Thrumbo</dnaOwner>
-				<portion>0.5</portion>
+				<count>5</count>
 			</li>
 		</splicePortions>
 	</ProjectPangaea.Production.Splicing.DNASplicingDef>

@@ -7,7 +7,16 @@ namespace ProjectPangaea.Production
     {
         public HashSet<PangaeaThingEntry> AllowedEntries { get; private set; } = new HashSet<PangaeaThingEntry>();
 
-        public PangaeaThingFilter() { }
+        public PangaeaThingFilter(params PangaeaThingEntry[] allowedEntries)
+        {
+            if (allowedEntries != null)
+            {
+                for (int i = 0; i < allowedEntries.Length; i++)
+                {
+                    Allow(allowedEntries[i]);
+                }
+            }
+        }
         public PangaeaThingFilter(IEnumerable<PangaeaThingEntry> allowedEntries)
         {
             foreach (var entry in allowedEntries)
@@ -23,6 +32,8 @@ namespace ProjectPangaea.Production
 
         public override bool Allows(Thing t)
         {
+            Log.Message("Called allow on custom filter for " + t.ToString());
+
             if (!base.Allows(t))
             {
                 return false;
@@ -30,6 +41,7 @@ namespace ProjectPangaea.Production
 
             if (PangaeaDatabase.TryGetEntryFromThing(t, out PangaeaThingEntry entry, out bool shouldHaveEntry))
             {
+                Log.Message(t+"is allowed = " + Allows(entry).ToString());
                 return Allows(entry);
             }
             return shouldHaveEntry;

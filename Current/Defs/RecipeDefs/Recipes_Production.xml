@@ -9,9 +9,9 @@
 		<workAmount>2000</workAmount>
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Smelt</effectWorking>
-		<allowMixingIngredients>false</allowMixingIngredients>
 		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
 		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.Pangaea_YieldDNARecipeExtension">
 				<!--<baseYieldPerExtraction>8~12</baseYieldPerExtraction>-->
@@ -47,6 +47,7 @@
 		<effectWorking>ButcherFlesh</effectWorking>
 		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
 		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.Pangaea_DissectCorpseRecipeExtension">
 				<freshEfficiency>1</freshEfficiency>
@@ -92,6 +93,7 @@
 		<effectWorking>ButcherFlesh</effectWorking>
 		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
 		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.Splicing.Pangaea_DNASplicingRecipeExtension">
 				<divideDNA>true</divideDNA>
@@ -114,6 +116,38 @@
 			<specialFiltersToDisallow>
 				<li>Pangaea_NonSplicedDNA</li>
 			</specialFiltersToDisallow>
+		</fixedIngredientFilter>
+	</RecipeDef>
+	
+	<RecipeDef>
+		<defName>Pangaea_SpliceDNA</defName>
+		<label>splice DNA</label>
+		<description>Join genomes into a hybridized DNA.</description>
+		<jobString>Joining genomes.</jobString>
+		<workAmount>750</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>ButcherFlesh</effectWorking>
+		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<modExtensions>
+			<li Class="ProjectPangaea.Production.Splicing.Pangaea_DNASplicingRecipeExtension">
+				<divideDNA>false</divideDNA>
+			</li>
+		</modExtensions>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>PangaeaDNA</li>
+					</categories>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>PangaeaDNA</li>
+			</categories>
 		</fixedIngredientFilter>
 	</RecipeDef>
 

@@ -4,16 +4,16 @@ using Verse;
 
 namespace ProjectPangaea.Production.Splicing
 {
-    public class Pangaea_DNASplicingRecipeExtension : Pangaea_ResourceRecipeExtension
+    public class Pangaea_DNASplicingRecipeExtension : DefModExtension //Pangaea_ResourceRecipeExtension
     {
         public bool divideDNA;
 
-        public override PangaeaBillCounter GetBillCounter(RecipeDef recipe)
+        /*public override PangaeaBillCounter GetBillCounter(RecipeDef recipe)
         {
             //TODO consider using the recipeDefs specialFilters instead of passing directly, in corpses bill too
             return new PangaeaBillCounter(recipe, PangaeaThingCategoryDefOf.PangaeaDNA, specialFilterToDisallow: PangaeaSpecialThingFilterDefOf.Pangaea_NonSplicedDNA);
         }
-
+        //TODO i need a custom window for this stuff
         public override List<PangaeaThingEntry> GetListerEntries(RecipeDef recipe)
         {
             if (divideDNA)
@@ -21,6 +21,6 @@ namespace ProjectPangaea.Production.Splicing
                 return PangaeaDatabase.AllEntries.Where(e => DNASplicingWorker.IsSpliced(e.DNA)).ToList();
             }
             return PangaeaThingCategoryDefOf.PangaeaDNA.childThingDefs;
-        }
+        }*/
     }
 }
