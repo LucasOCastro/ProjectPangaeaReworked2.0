@@ -32,8 +32,6 @@ namespace ProjectPangaea.Production
 
         public override bool Allows(Thing t)
         {
-            Log.Message("Called allow on custom filter for " + t.ToString());
-
             if (!base.Allows(t))
             {
                 return false;
@@ -41,10 +39,9 @@ namespace ProjectPangaea.Production
 
             if (PangaeaDatabase.TryGetEntryFromThing(t, out PangaeaThingEntry entry, out bool shouldHaveEntry))
             {
-                Log.Message(t+"is allowed = " + Allows(entry).ToString());
                 return Allows(entry);
             }
-            return shouldHaveEntry;
+            return !shouldHaveEntry;
         }
 
         public bool Allows(PangaeaThingEntry entry) => AllowedEntries.Contains(entry);
