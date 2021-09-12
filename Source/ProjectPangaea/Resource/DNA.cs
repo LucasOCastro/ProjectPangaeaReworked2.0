@@ -22,10 +22,23 @@ namespace ProjectPangaea
             {
                 if (graphic == null)
                 {
-                    graphic = DNAGraphicsLister.GetDNAGraphicType(Category)?.Graphic;
+                    graphic = GraphicType?.Graphic;
                 }
                 return graphic;
             }
+        }
+
+        private DNAGraphicTypeDef graphicType = null;
+        public DNAGraphicTypeDef GraphicType 
+        {
+            get
+            {
+                if (graphicType == null)
+                {
+                    graphicType = DNAGraphicsLister.GetDNAGraphicType(Category);
+                }
+                return graphicType;
+            } 
         }
 
         protected override string GetLabel() => "Pangaea_DNALabel".Translate(ParentThingDef.label);

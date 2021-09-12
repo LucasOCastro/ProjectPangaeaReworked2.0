@@ -9,6 +9,7 @@
 		<description>Genetic material of an animal or plant.</description>
 		<graphicData>
 			<texPath>Things/Item/DNA/Default</texPath>
+			<shaderType>CutoutComplex</shaderType>
 			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
 		<statBases>

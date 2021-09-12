@@ -22,7 +22,7 @@ namespace ProjectPangaea
 
         public override int GetHashCode()
         {
-            return base.GetHashCode() + Diet.GetHashCode() + Type.GetHashCode();
+            return Gen.HashCombineStruct(Gen.HashCombineStruct(base.GetHashCode(), Diet), Type.GetHashCode());
         }
     }
 }
