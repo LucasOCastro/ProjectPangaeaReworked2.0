@@ -21,7 +21,7 @@ namespace ProjectPangaea.Production.Splicing
                 }
                 else if (dnaOwner != null && PangaeaDatabase.TryGetEntry(dnaOwner, out PangaeaThingEntry entry))
                 {
-                    result = DNAThing.MakeDNAThing(entry.DNA);
+                    result = PangaeaThing.MakePangaeaThing(entry.DNA);
                 }
 
                 if (result != null)
@@ -58,9 +58,9 @@ namespace ProjectPangaea.Production.Splicing
 
             public bool MatchesThing(Thing thing)
             {
-                if (thing is DNAThing dnaThing)
+                if (thing is PangaeaThing pangaeaThing)
                 {
-                    return dnaThing.DNAResource?.ParentThingDef == dnaOwner;
+                    return pangaeaThing.Resource is DNA dna && dna.ParentThingDef == dnaOwner;
                 }
                 return thing.def == this.thing;
             }
@@ -126,9 +126,9 @@ namespace ProjectPangaea.Production.Splicing
             return ingredient;
         }
 
-        public DNAThing MakeResultThing()
+        public PangaeaThing MakeResultThing()
         {
-            DNAThing result = DNAThing.MakeDNAThing(ParentDNA);
+            PangaeaThing result = PangaeaThing.MakePangaeaThing(ParentDNA);
             result.stackCount = count;
             return result;
         }

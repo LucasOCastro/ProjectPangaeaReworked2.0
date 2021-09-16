@@ -39,7 +39,7 @@ namespace ProjectPangaea
             }
 
             IntRange yieldRange = YieldForEntry(dropEntry);
-            Thing result = FossilThing.MakeFossilThing(databaseEntry.Fossil);
+            Thing result = PangaeaThing.MakePangaeaThing(databaseEntry.Fossil);
             result.stackCount = yieldRange.RandomInRange;
             return result;
         }

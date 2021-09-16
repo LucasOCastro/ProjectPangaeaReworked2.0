@@ -6,9 +6,40 @@ using System.Linq;
 
 namespace ProjectPangaea
 {
-    //TODO turn these actions into gizmos on the items
-    public static class Pangaea_DebugActions
+    public static class DebugActions
     {
+        public static Command_Action GenAction(CompPangaeaResourceHolder resourceHolder)
+        {
+            Command_Action action = new Command_Action();
+            action.defaultLabel = "Debug: Set Pangaea resource";
+            action.action = () => Find.WindowStack.Add(new Dialog_DebugOptionListLister(GenMenuOptions(resourceHolder)));
+            return action;
+        }
+
+        private static IEnumerable<DebugMenuOption> GenMenuOptions(CompPangaeaResourceHolder resourceHolder)
+        {
+            HashSet<PangaeaResource> closedSet = new HashSet<PangaeaResource>();
+            foreach (PangaeaResource resource in resourceHolder.Props.GetAllPossibleResources())
+            {
+                if (closedSet.Contains(resource))
+                {
+                    continue;
+                }
+                var option = new DebugMenuOption(resource.Label, DebugMenuOptionMode.Action, () => resourceHolder.Resource = resource);
+                yield return option;
+                closedSet.Add(resource);
+            }
+        }
+    }
+
+    //TODO turn these actions into gizmos on the items
+    /*public static class Pangaea_DebugActions
+    {
+        public static Command_Action GenAction(PangaeaResourceThingBase thing)
+        {
+
+        }
+
         [DebugAction("Project Pangaea", "Set Pangaea resource", actionType = DebugActionType.ToolMap, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         public static void SetResource()
         {
@@ -70,7 +101,7 @@ namespace ProjectPangaea
             }
             return actions;
         }
-    }
+    }*/
 }
 
 #endif

@@ -57,6 +57,20 @@ namespace ProjectPangaea
             return null;
         }
 
+        public PangaeaResource GetResourceOfType(System.Type type)
+        {
+            if (type == typeof(DNA))
+            {
+                return DNA;
+            }
+            if (type == typeof(Fossil))
+            {
+                return Fossil;
+            }
+            //TODO embryo
+            return null;
+        }
+
         private static OrganismCategory GetCategory(ThingDef thingDef, AnimalType animalType)
         {
             if (thingDef.plant != null)

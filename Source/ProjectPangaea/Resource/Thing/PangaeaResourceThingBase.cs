@@ -1,72 +1,148 @@
 ﻿using RimWorld;
-using UnityEngine;
+using System.Collections.Generic;
 using Verse;
+using System;
+using System.Linq;
 
 namespace ProjectPangaea
 {
-    public abstract class PangaeaResourceThingBase : ThingWithComps
+    public class CompProperties_PangaeaResourceHolder : CompProperties
     {
+        public Type resourceType;
+
+        public CompProperties_PangaeaResourceHolder()
+        {
+            compClass = typeof(CompPangaeaResourceHolder);
+        }
+
+        public bool Allows(PangaeaResource resource) => resource.GetType() == resourceType;
+
+        //TODO cache
+        public PangaeaResource GetRandomResource() => GetAllPossibleEntries().RandomElement().GetResourceOfType(resourceType);
+        public IEnumerable<PangaeaResource> GetAllPossibleResources() => GetAllPossibleEntries().Select(e => e.GetResourceOfType(resourceType));
+        public IEnumerable<PangaeaThingEntry> GetAllPossibleEntries() => PangaeaDatabase.AllEntries.Where(e => e.GetResourceOfType(resourceType) != null);
+
+        public override IEnumerable<string> ConfigErrors(ThingDef parentDef)
+        {
+            foreach (string error in base.ConfigErrors(parentDef))
+                yield return error;
+            if (resourceType == null || !typeof(PangaeaResource).IsAssignableFrom(resourceType))
+                yield return "Invalid " + nameof(resourceType) + " in " + this;
+        }
+    }
+
+    public class CompPangaeaResourceHolder : ThingComp
+    {
+        public CompProperties_PangaeaResourceHolder Props => (CompProperties_PangaeaResourceHolder)props;
+
         private PangaeaResource resource;
         public PangaeaResource Resource
         {
             get
             {
-                //TODO: (if) After rarity is implemented, assign a random resource of similar rarity to reduce exploits and whatever blabla
                 if (resource == null && PangaeaSettings.AssignRandomPawnToNullResource)
                 {
-                    resource = GetRandomResource();
+                    resource = Props.GetRandomResource();
                 }
                 return resource;
             }
-            protected set
+            set
             {
                 resource = value;
-                if (Map != null)
+                if (parent.Map != null)
                 {
-                    DirtyMapMesh(Map);
+                    parent.DirtyMapMesh(parent.Map);
                 }
             }
         }
+
+        public override bool AllowStackWith(Thing other)
+        {
+            return base.AllowStackWith(other) && other is PangaeaThing pt && pt.Resource == Resource;
+        }
+
+        public override void PostSplitOff(Thing piece)
+        {
+            (piece as PangaeaThing).Resource = Resource;
+        }
+
+        public override void PostPostGeneratedForTrader(TraderKindDef trader, int forTile, Faction forFaction)
+        {
+            Resource = Props.GetRandomResource();
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (DebugSettings.godMode)
+            {
+                yield return DebugActions.GenAction(this);
+            }
+        }
+
+        public override void PostExposeData()
+        {
+            Scribe_Deep.Look(ref resource, "ResourceThingResource");
+        }
+    }
+
+    public class PangaeaThing : ThingWithComps
+    {
+        private CompPangaeaResourceHolder resourceHolder;
+        public CompPangaeaResourceHolder ResourceHolder
+        {
+            get
+            {
+                if (resourceHolder == null)
+                {
+                    resourceHolder = GetComp<CompPangaeaResourceHolder>();
+                }
+                return resourceHolder;
+            }
+        }
+
+        public PangaeaResource Resource
+        {
+            get => ResourceHolder.Resource;
+            set => ResourceHolder.Resource = value;
+        }
+
+        public bool Allows(PangaeaResource resource) => ResourceHolder.Props.Allows(resource);
 
         public override Graphic Graphic
         {
             get
             {
-                if (resource == null)
+                if (Resource == null)
                 {
                     return BaseContent.BadGraphic;
                 }
-                return resource.Graphic ?? base.Graphic;
+                return Resource.Graphic ?? base.Graphic;
             }
         }
 
         public override string LabelNoCount => Resource?.Label ?? "Pangaea_MissingResourceLabel".Translate();
         public override string DescriptionFlavor => Resource?.Description ?? "Pangaea_MissingResourceDescription".Translate();
 
-        protected abstract PangaeaResource GetRandomResource();
-
-        public override bool CanStackWith(Thing other)
+        private static Dictionary<Type, ThingDef> resourceTypeDefCache = new Dictionary<Type, ThingDef>();
+        public static PangaeaThing MakePangaeaThing(PangaeaResource resource)
         {
-            return base.CanStackWith(other) && ((PangaeaResourceThingBase)other).Resource == this.Resource;
-        }
-
-        public override Thing SplitOff(int count)
-        {
-            PangaeaResourceThingBase thing = (PangaeaResourceThingBase)base.SplitOff(count);
-            thing.resource = Resource;
+            Type type = resource.GetType();
+            if (!resourceTypeDefCache.TryGetValue(type, out ThingDef def))
+            {
+                foreach (var thingDef in DefDatabase<ThingDef>.AllDefs)
+                {
+                    var compProps = thingDef.GetCompProperties<CompProperties_PangaeaResourceHolder>();
+                    if (compProps != null && compProps.Allows(resource))
+                    {
+                        def = thingDef;
+                        break;
+                    }
+                }
+                resourceTypeDefCache.Add(type, def);
+            }
+            PangaeaThing thing = ThingMaker.MakeThing(def) as PangaeaThing;
+            thing.Resource = resource;
             return thing;
-        }
-
-        public override void PostGeneratedForTrader(TraderKindDef trader, int forTile, Faction forFaction)
-        {
-            base.PostGeneratedForTrader(trader, forTile, forFaction);
-            resource = GetRandomResource();
-        }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Deep.Look(ref resource, "ResourceThingResource");
         }
     }
 }

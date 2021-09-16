@@ -3,7 +3,7 @@
 <Defs>
 
 	<ThingDef ParentName="ResourceBase" Name="Pangaea_DNABase">
-		<thingClass>ProjectPangaea.DNAThing</thingClass>
+		<thingClass>ProjectPangaea.PangaeaThing</thingClass>
 		<defName>Pangaea_DNABase</defName>
 		<label>DNA</label>
 		<description>Genetic material of an animal or plant.</description>
@@ -19,6 +19,11 @@
 		<thingCategories>
 			<li>PangaeaDNA</li>
 		</thingCategories>
+		<comps>
+			<li Class="ProjectPangaea.CompProperties_PangaeaResourceHolder">
+				<resourceType>ProjectPangaea.DNA</resourceType>
+			</li>
+		</comps>
 	</ThingDef>
 	
 </Defs>

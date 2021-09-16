@@ -6,7 +6,7 @@ namespace ProjectPangaea.Production
     public static class PangaeaBillIngFinder
     {
         private static Dictionary<PangaeaResource, int> availableResourceCountDict = new Dictionary<PangaeaResource, int>();
-        private static List<PangaeaResourceThingBase> availableResourceThings = new List<PangaeaResourceThingBase>();
+        private static List<PangaeaThing> availableResourceThings = new List<PangaeaThing>();
         private static PangaeaResource lastResource = null;
 
         public static void Clear()
@@ -16,7 +16,7 @@ namespace ProjectPangaea.Production
             lastResource = null;
         }
 
-        public static void RegisterThing(PangaeaResourceThingBase pangaeaThing)
+        public static void RegisterThing(PangaeaThing pangaeaThing)
         {
             if (pangaeaThing == null || pangaeaThing.Resource == null)
             {
@@ -36,7 +36,7 @@ namespace ProjectPangaea.Production
 
         public static bool ShouldSkipThing(Thing thing, int required)
         {
-            if (!(thing is PangaeaResourceThingBase pt))
+            if (!(thing is PangaeaThing pt))
             {
                 return false;
             }

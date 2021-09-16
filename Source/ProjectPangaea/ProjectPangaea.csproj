@@ -129,11 +129,9 @@
     <Compile Include="Overrides\PangaeaOverrideDef.cs" />
     <Compile Include="Resource\PangaeaResource.cs" />
     <Compile Include="Resource\StatWorker_DNAAmount.cs" />
-    <Compile Include="Resource\Thing\DNAThing.cs" />
     <Compile Include="Categorization\PlantCategory.cs" />
     <Compile Include="ProjectPangaeaMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource\Thing\FossilThing.cs" />
     <Compile Include="Resource\Thing\PangaeaResourceThingBase.cs" />
     <Compile Include="DefOf\PangaeaThingCategoryDefOf.cs" />
     <Compile Include="DefOf\PangaeaThingDefOf.cs" />

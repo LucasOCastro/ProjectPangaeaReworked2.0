@@ -6,7 +6,7 @@ namespace ProjectPangaea.Production.Splicing
     {
         public override bool Matches(Thing t)
         {
-            return t is DNAThing dnat && dnat.Resource is DNA dna && !DNASplicingWorker.IsSpliced(dna);
+            return t is PangaeaThing pt && pt.Resource is DNA dna && !DNASplicingWorker.IsSpliced(dna);
         }
 
         public override bool CanEverMatch(ThingDef def)

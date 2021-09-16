@@ -2,7 +2,7 @@
 <Defs>
 
 	<ThingDef ParentName="ResourceBase" Name="Pangaea_FossilBase">
-		<thingClass>ProjectPangaea.FossilThing</thingClass>
+		<thingClass>ProjectPangaea.PangaeaThing</thingClass>
 		<defName>Pangaea_FossilBase</defName>
 		<label>fossil</label>
 		<description>Remains of extinct animals.</description>
@@ -29,6 +29,11 @@
 		<thingCategories>
 			<li>PangaeaFossils</li>
 		</thingCategories>
+		<comps>
+			<li Class="ProjectPangaea.CompProperties_PangaeaResourceHolder">
+				<resourceType>ProjectPangaea.Fossil</resourceType>
+			</li>
+		</comps>
 	</ThingDef>
 
 </Defs>

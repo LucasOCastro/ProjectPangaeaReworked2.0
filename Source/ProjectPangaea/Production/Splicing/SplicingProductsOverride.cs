@@ -20,14 +20,11 @@ namespace ProjectPangaea.Production.Splicing
                     t => AccessTools.FirstMethod(t, m =>
                             m.Name.Contains(nameof(Toils_Recipe.FinishRecipeAndStartStoringProduct))
                             && !m.IsStatic && m.ReturnType == typeof(void)));
-            Log.Message("PATCHED THE: " + method.Name);
             return method;
         }
 
         private static bool Prefix(Toil ___toil)
         {
-            Log.Message("THIS WORKS AAA");
-
             if (___toil.actor.jobs.curJob.bill is DNASplicingBill splicingBill)
             {
                 CurrentBill = splicingBill;

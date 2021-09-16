@@ -65,7 +65,7 @@ namespace ProjectPangaea
 			ResetResourceCounts();
 			foreach (Thing thing in GetResources())
             {
-				if (thing is PangaeaResourceThingBase pangaeaThing && pangaeaThing.Resource != null)
+				if (thing is PangaeaThing pangaeaThing && pangaeaThing.Resource != null)
 				{
 					countedAmounts[pangaeaThing.Resource] += pangaeaThing.stackCount;
 				}

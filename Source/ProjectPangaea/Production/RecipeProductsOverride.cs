@@ -54,11 +54,11 @@ namespace ProjectPangaea.Production
 
             foreach (Thing result in originalResult)
             {
-                if (yieldDNAExtension != null && result is DNAThing dnaThing)
+                if (yieldDNAExtension != null && result is PangaeaThing pt && pt.Allows(entry.DNA))
                 {
-                    dnaThing.SetResource(entry.DNA);
+                    pt.Resource = entry.DNA;
                     float efficiency = yieldDNAExtension.ResolveEfficiencyFromIngredient(entryIngredient);
-                    dnaThing.stackCount = Mathf.Max(1, Mathf.CeilToInt(dnaThing.stackCount * efficiency));
+                    pt.stackCount = Mathf.Max(1, Mathf.CeilToInt(pt.stackCount * efficiency));
                 }
                 else if (createLifeExtension != null && result.def.IsEgg)
                 {

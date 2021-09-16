@@ -20,7 +20,7 @@ namespace ProjectPangaea
         private static MethodInfo makeThingMethodInfo = AccessTools.Method(typeof(ThingMaker), nameof(ThingMaker.MakeThing));
         private static MethodInfo randomEntryMethodInfo = AccessTools.Method(typeof(PangaeaDatabase), nameof(PangaeaDatabase.RandomExtinctEntry));
         private static MethodInfo entryFossilGetterInfo = AccessTools.PropertyGetter(typeof(PangaeaThingEntry), "Fossil");
-        private static MethodInfo makeFossilThingMethodInfo = AccessTools.Method(typeof(FossilThing), nameof(FossilThing.MakeFossilThing));
+        private static MethodInfo makeFossilThingMethodInfo = AccessTools.Method(typeof(PangaeaThing), nameof(PangaeaThing.MakePangaeaThing));
 
         [HarmonyReversePatch(HarmonyReversePatchType.Original)]
 #if LACKSDRILLERPARAM

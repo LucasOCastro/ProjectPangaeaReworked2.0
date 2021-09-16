@@ -17,7 +17,6 @@ namespace ProjectPangaea
         public static IEnumerable<PangaeaThingEntry> AllExtinctEntries => extinctOnlyDatabase.Values;
 
 
-
         public static bool TryGetEntry(ThingDef thingDef, out PangaeaThingEntry entry)
         {
             if (thingDef == null)
@@ -133,7 +132,7 @@ namespace ProjectPangaea
         {
             var thingLister = map.listerThings;
             return thingLister.ThingsInGroup(ThingRequestGroup.HaulableEver)
-                .Count(t => t is PangaeaResourceThingBase pt && pt.Resource == resource);
+                .Count(t => t is PangaeaThing pt && pt.Resource == resource);
         }
 
         public static bool TryGetEntryFromThing(Thing thing, out PangaeaThingEntry entry) => TryGetEntryFromThing(thing, out entry, out _);
@@ -141,7 +140,7 @@ namespace ProjectPangaea
         /// <param name="shouldYieldEntry">Returns true if this should have yielded an entry.</param>
         public static bool TryGetEntryFromThing(Thing thing, out PangaeaThingEntry entry, out bool shouldYieldEntry)
         {
-            if (thing is PangaeaResourceThingBase pangaeaThing)
+            if (thing is PangaeaThing pangaeaThing)
             {
                 shouldYieldEntry = true;
                 return TryGetEntry(pangaeaThing.Resource?.ParentThingDef, out entry);
