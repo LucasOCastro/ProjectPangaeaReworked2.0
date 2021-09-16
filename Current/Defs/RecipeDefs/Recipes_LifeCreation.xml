@@ -44,7 +44,6 @@
 		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.Pangaea_CreateLifeRecipeExtension">
-				<!--<yieldPerCreation>1~1</yieldPerCreation>-->
 			</li>
 		</modExtensions>
 		<products>

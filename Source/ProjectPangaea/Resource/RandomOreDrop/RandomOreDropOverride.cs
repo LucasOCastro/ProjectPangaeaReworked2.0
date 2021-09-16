@@ -66,7 +66,6 @@ namespace ProjectPangaea
                 }
 
                 RandomDropReversePatch(__instance, map, yieldChance, moteOnWaste, pawn);
-                Log.Message("drop ore");
                 return false;
             }
             return true;

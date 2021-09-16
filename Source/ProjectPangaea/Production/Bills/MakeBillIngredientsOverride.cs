@@ -19,13 +19,6 @@ namespace ProjectPangaea.Production
                     filter.CopyAllowancesFrom(ingredientsOrdered[i].filter);
                     filter.SyncAllowedEntries(pangBill.ResourceFilter);
                     ingredientsOrdered[i].filter = filter;
-                    /*IngredientCount newIngredient = new IngredientCount();
-                    PangaeaThingFilter filter = new PangaeaThingFilter();
-                    filter.CopyAllowancesFrom(ingredientsOrdered[i].filter);
-                    filter.SyncAllowedEntries(pangBill.ResourceFilter);
-                    newIngredient.filter = filter;
-
-                    ingredientsOrdered[i] = newIngredient;*/
                 }
                 return;
             }
@@ -37,7 +30,6 @@ namespace ProjectPangaea.Production
                 {
                     ingredientsOrdered.Add(ing);
                 }
-                Log.Message((ingredientsOrdered[0].filter as PangaeaThingFilter).AllowedEntries.ToStringSafeEnumerable());
                 return;
             }
         }
