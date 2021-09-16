@@ -16,8 +16,8 @@ namespace ProjectPangaea.Production
         {
             AllPossibleEntries = possibleEntries.AsReadOnly();
             Counter = counter;
-
             ResourceFilter = new PangaeaThingFilter(possibleEntries);
+            ResourceFilter.CopyAllowancesFrom(ingredientFilter);
             ingredientFilter = ResourceFilter;
         }
     }

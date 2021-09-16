@@ -30,7 +30,6 @@ namespace ProjectPangaea.Production
      * in this situation, which seems to be exactly why such a method would exist (and be overrideable).
      * I've changed the code to use the Allows(Thing) method when processing possible ingredients.
      */
-    //[HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestBillIngredientsInSet_NoMix")]
     public static class VanillaFindIngredientsFix
     {
         private static FieldInfo orderedIngFieldInfo = AccessTools.Field(typeof(WorkGiver_DoBill), "ingredientsOrdered");
@@ -90,6 +89,7 @@ namespace ProjectPangaea.Production
 
         //For compatibility sake, dont transpile.
         /*
+        [HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestBillIngredientsInSet_NoMix")]
         [HarmonyTranspiler]
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {

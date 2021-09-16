@@ -25,6 +25,8 @@ namespace ProjectPangaea.Production
             {
                 Thing thing = availableThings[i];
 
+
+
                 if (thing is PangaeaResourceThingBase pangaeaThing)
                 {
                     PangaeaBillIngFinder.RegisterThing(pangaeaThing);

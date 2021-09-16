@@ -36,7 +36,7 @@ namespace ProjectPangaea.Production
             {
                 return false;
             }
-
+            
             if (PangaeaDatabase.TryGetEntryFromThing(t, out PangaeaThingEntry entry, out bool shouldHaveEntry))
             {
                 return Allows(entry);
