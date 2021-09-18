@@ -24,14 +24,8 @@
 	<!--ERRORS-->
 	<Pangaea_MissingResourceLabel>PangaeaMissingResource</Pangaea_MissingResourceLabel>
 	<Pangaea_MissingResourceDescription>The pawn this resource belonged to was probably removed from your game. Sorry D:</Pangaea_MissingResourceDescription>
-
-	<!--RECIPE-->
-	<Pangaea_Fossil_Extraction>Fossil Extraction</Pangaea_Fossil_Extraction>
-	<Pangaea_EggMaking>Egg Making</Pangaea_EggMaking>
-	<Pangaea_SeedMaking>Seed Making</Pangaea_SeedMaking>
 	
 	<!--UI-->
-	<Pangaea_ToggleDisplayModeTooltip>Toggle display mode</Pangaea_ToggleDisplayModeTooltip>
 	<Pangaea_ShowUnavailableIngredients>Show unavailable ingredients</Pangaea_ShowUnavailableIngredients>
 	<Pangaea_AnimalGroupFilter>Filter by group</Pangaea_AnimalGroupFilter>
 	<Pangaea_ShowPlants>Show plants</Pangaea_ShowPlants>
@@ -46,14 +40,6 @@
 	
 	<Pangaea_All>all</Pangaea_All>
 	<Pangaea_Visible>visible</Pangaea_Visible>
-	
-	<Pangaea_ToggleAll>Toggle all</Pangaea_ToggleAll>
-	<Pangaea_AllowAll>Allow all</Pangaea_AllowAll>
-	<Pangaea_DisallowAll>Disallow all</Pangaea_DisallowAll>
-
-	<Pangaea_ToggleVisible>Toggle visible</Pangaea_ToggleVisible>
-	<Pangaea_AllowVisible>Allow visible</Pangaea_AllowVisible>
-	<Pangaea_DisallowVisible>Disallow visible</Pangaea_DisallowVisible>
 	
 	<Pangaea_PossibleValues>Possible values</Pangaea_PossibleValues>
 	
