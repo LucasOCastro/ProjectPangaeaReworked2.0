@@ -26,6 +26,7 @@ namespace ProjectPangaea
         }
 
         public bool AllowsTypeOfResource(PangaeaResource resource) => ResourceHolder.Props.AllowsTypeOfResource(resource);
+        public bool IsOfType(Type type) => resourceHolder.Props.IsOfType(type);
 
         public override Graphic Graphic
         {
