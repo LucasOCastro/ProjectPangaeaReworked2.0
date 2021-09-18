@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace ProjectPangaea.Production
@@ -14,7 +15,7 @@ namespace ProjectPangaea.Production
 
         public override List<PangaeaThingEntry> GetListerEntries(RecipeDef recipe)
         {
-            return new List<PangaeaThingEntry>(PangaeaDatabase.AllExtinctEntries);
+            return PangaeaDatabase.AllEntries.Where(e => e.Fossil != null).ToList();
         }
     }
 }

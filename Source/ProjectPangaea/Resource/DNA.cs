@@ -2,7 +2,6 @@
 
 namespace ProjectPangaea
 {
-
     public class DNA : PangaeaResource
     {
         public OrganismCategory Category { get; private set; }
@@ -15,18 +14,8 @@ namespace ProjectPangaea
         {
         }
 
-        private Graphic graphic;
-        public override Graphic Graphic
-        {
-            get
-            {
-                if (graphic == null)
-                {
-                    graphic = GraphicType?.Graphic;
-                }
-                return graphic;
-            }
-        }
+        //todo add fallback to default maybe
+        public override Graphic Graphic => GraphicType?.Graphic;
 
         private DNAGraphicTypeDef graphicType = null;
         public DNAGraphicTypeDef GraphicType 

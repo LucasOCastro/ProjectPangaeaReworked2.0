@@ -8,14 +8,7 @@ namespace ProjectPangaea
     public static class PangaeaDatabase
     {
         private static Dictionary<string, PangaeaThingEntry> database = new Dictionary<string, PangaeaThingEntry>();
-        private static Dictionary<string, PangaeaThingEntry> extinctOnlyDatabase = new Dictionary<string, PangaeaThingEntry>();
-
-        public static PangaeaThingEntry RandomEntry() => database.RandomElement().Value;
-        public static PangaeaThingEntry RandomExtinctEntry() => extinctOnlyDatabase.RandomElement().Value;
-
         public static IEnumerable<PangaeaThingEntry> AllEntries => database.Values;
-        public static IEnumerable<PangaeaThingEntry> AllExtinctEntries => extinctOnlyDatabase.Values;
-
 
         public static bool TryGetEntry(ThingDef thingDef, out PangaeaThingEntry entry)
         {
@@ -37,7 +30,7 @@ namespace ProjectPangaea
 
             if (!database.TryGetValue(thingDef.defName, out PangaeaThingEntry entry))
             {
-                entry = AddEntry(thingDef);
+                entry = AddEntry(thingDef, CalculateAnimalType(thingDef));
             }
             return entry;
         }
@@ -55,8 +48,6 @@ namespace ProjectPangaea
             }
             return entry;
         }
-
-        public static PangaeaThingEntry AddEntry(ThingDef thingDef) => AddEntry(thingDef, CalculateAnimalType(thingDef));
 
         private static AnimalType CalculateAnimalType(ThingDef thingDef)
         {
@@ -89,11 +80,6 @@ namespace ProjectPangaea
             {
                 entry = new PangaeaThingEntry(thingDef, animalType);
                 database.Add(thingDef.defName, entry);
-
-                if (thingDef.HasModExtension<ModExt_Extinct>())
-                {
-                    extinctOnlyDatabase.Add(thingDef.defName, entry);
-                }
             }
             return entry;
         }
@@ -137,7 +123,7 @@ namespace ProjectPangaea
 
         public static bool TryGetEntryFromThing(Thing thing, out PangaeaThingEntry entry) => TryGetEntryFromThing(thing, out entry, out _);
         /// <returns>Returns true if the returned entry is not null.</returns>
-        /// <param name="shouldYieldEntry">Returns true if this should have yielded an entry.</param>
+        /// <param name="shouldYieldEntry">Outs true if this should have yielded an entry.</param>
         public static bool TryGetEntryFromThing(Thing thing, out PangaeaThingEntry entry, out bool shouldYieldEntry)
         {
             if (thing is PangaeaThing pangaeaThing)

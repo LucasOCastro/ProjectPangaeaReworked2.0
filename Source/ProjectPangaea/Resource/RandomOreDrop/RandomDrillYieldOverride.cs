@@ -13,13 +13,20 @@ using System.Linq;
 
 namespace ProjectPangaea
 {
+    public static class DrillYieldHelper
+    {
+        public static Fossil GetRandomFossil()
+        {
+            return PangaeaDatabase.AllEntries.Where(e => e.Fossil != null).RandomElement().Fossil;
+        }
+    }
+
     //TODO: Make changes to the DeepResourceGrid to organize each fossil clump by time period, just like above ground fossil ores
     [HarmonyPatch(typeof(CompDeepDrill), "TryProducePortion")]
     public static class RandomDrillYieldOverride
     {
         private static MethodInfo makeThingMethodInfo = AccessTools.Method(typeof(ThingMaker), nameof(ThingMaker.MakeThing));
-        private static MethodInfo randomEntryMethodInfo = AccessTools.Method(typeof(PangaeaDatabase), nameof(PangaeaDatabase.RandomExtinctEntry));
-        private static MethodInfo entryFossilGetterInfo = AccessTools.PropertyGetter(typeof(PangaeaThingEntry), "Fossil");
+        private static MethodInfo randomFossilMethodInfo = AccessTools.Method(typeof(DrillYieldHelper), nameof(DrillYieldHelper.GetRandomFossil));
         private static MethodInfo makeFossilThingMethodInfo = AccessTools.Method(typeof(PangaeaThing), nameof(PangaeaThing.MakePangaeaThing));
 
         [HarmonyReversePatch(HarmonyReversePatchType.Original)]
@@ -41,8 +48,7 @@ namespace ProjectPangaea
 
                 og.RemoveRange(thingPatchStart, thingPatchEnd - thingPatchStart + 1);
                 og.InsertRange(thingPatchStart, new CodeInstruction[] {
-                    new CodeInstruction(OpCodes.Call, randomEntryMethodInfo),
-                    new CodeInstruction(OpCodes.Call, entryFossilGetterInfo),
+                    new CodeInstruction(OpCodes.Call, randomFossilMethodInfo),
                     new CodeInstruction(OpCodes.Call, makeFossilThingMethodInfo)
                 });
 
