@@ -87,6 +87,8 @@
     <Compile Include="Production\Splicing\SplicingProductsOverride.cs" />
     <Compile Include="Resource\DNAGraphicsLister.cs" />
     <Compile Include="Resource\DNAGraphicTypeDef.cs" />
+    <Compile Include="Resource\Thing\CompPangaeaResourceHolder.cs" />
+    <Compile Include="Resource\Thing\CompProperties_PangaeaResourceHolder.cs" />
     <Compile Include="Utility\PangaeaEnumExtension.cs" />
     <Compile Include="Utility\ExtinctUtility.cs" />
     <Compile Include="ExtinctSpawningOverride.cs" />
@@ -132,7 +134,7 @@
     <Compile Include="Categorization\PlantCategory.cs" />
     <Compile Include="ProjectPangaeaMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource\Thing\PangaeaResourceThingBase.cs" />
+    <Compile Include="Resource\Thing\PangaeaThing.cs" />
     <Compile Include="DefOf\PangaeaThingCategoryDefOf.cs" />
     <Compile Include="DefOf\PangaeaThingDefOf.cs" />
     <Compile Include="ThingEfficiency.cs" />

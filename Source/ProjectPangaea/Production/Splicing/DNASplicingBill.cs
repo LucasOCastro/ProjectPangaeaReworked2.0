@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ProjectPangaea.Production.Splicing
 {
     public class DNASplicingBill : Bill_Production
-    {;
+    {
         private DNASplicingDef spliceDef;
         public DNASplicingDef SpliceDef => spliceDef;
 
