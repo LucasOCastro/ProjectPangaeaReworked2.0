@@ -54,7 +54,7 @@ namespace ProjectPangaea.Production
 
             foreach (Thing result in originalResult)
             {
-                if (yieldDNAExtension != null && result is PangaeaThing pt && pt.Allows(entry.DNA))
+                if (yieldDNAExtension != null && result is PangaeaThing pt && pt.AllowsTypeOfResource(entry.DNA))
                 {
                     pt.Resource = entry.DNA;
                     float efficiency = yieldDNAExtension.ResolveEfficiencyFromIngredient(entryIngredient);

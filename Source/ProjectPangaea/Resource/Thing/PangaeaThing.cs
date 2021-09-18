@@ -25,7 +25,7 @@ namespace ProjectPangaea
             set => ResourceHolder.Resource = value;
         }
 
-        public bool Allows(PangaeaResource resource) => ResourceHolder.Props.Allows(resource);
+        public bool AllowsTypeOfResource(PangaeaResource resource) => ResourceHolder.Props.AllowsTypeOfResource(resource);
 
         public override Graphic Graphic
         {
@@ -51,7 +51,7 @@ namespace ProjectPangaea
                 foreach (var thingDef in DefDatabase<ThingDef>.AllDefs)
                 {
                     var compProps = thingDef.GetCompProperties<CompProperties_PangaeaResourceHolder>();
-                    if (compProps != null && compProps.Allows(resource))
+                    if (compProps != null && compProps.IsOfType(type))
                     {
                         def = thingDef;
                         break;

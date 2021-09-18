@@ -14,7 +14,8 @@ namespace ProjectPangaea
             compClass = typeof(CompPangaeaResourceHolder);
         }
 
-        public bool Allows(PangaeaResource resource) => resource.GetType() == resourceType;
+        public bool IsOfType(Type type) => resourceType == type;
+        public bool AllowsTypeOfResource(PangaeaResource resource) => IsOfType(resource.GetType());
 
         //TODO cache
         public PangaeaResource GetRandomResource() => GetAllPossibleEntries().RandomElement().GetResourceOfType(resourceType);
