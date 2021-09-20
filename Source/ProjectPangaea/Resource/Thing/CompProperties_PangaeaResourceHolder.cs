@@ -17,7 +17,7 @@ namespace ProjectPangaea
         public bool IsOfType(Type type) => resourceType == type;
         public bool AllowsTypeOfResource(PangaeaResource resource) => IsOfType(resource.GetType());
 
-        //TODO cache
+        //TODO cache the ienumerables into lists as to avoid too much linq
         public PangaeaResource GetRandomResource() => GetAllPossibleEntries().RandomElement().GetResourceOfType(resourceType);
         public IEnumerable<PangaeaResource> GetAllPossibleResources() => GetAllPossibleEntries().Select(e => e.GetResourceOfType(resourceType));
         public IEnumerable<PangaeaThingEntry> GetAllPossibleEntries() => PangaeaDatabase.AllEntries.Where(e => e.GetResourceOfType(resourceType) != null);

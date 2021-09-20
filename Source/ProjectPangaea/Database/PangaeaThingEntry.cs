@@ -11,8 +11,7 @@ namespace ProjectPangaea
 
         public OrganismCategory Category { get; }
 
-        private DNA dna;
-        public DNA DNA => dna;
+        public DNA DNA { get; }
 
         public Fossil Fossil { get; }
 
@@ -22,7 +21,7 @@ namespace ProjectPangaea
             ExtinctExtension = thingDef.GetModExtension<ModExt_Extinct>();
             Category = GetCategory(thingDef, animalType);
 
-            dna = new DNA(thingDef, Category);
+            DNA = new DNA(thingDef, Category);
 
             if (ExtinctExtension != null)
             {

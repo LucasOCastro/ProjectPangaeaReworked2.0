@@ -2,6 +2,7 @@
 
 namespace ProjectPangaea
 {
+    //TODO maybe turn this into a single class defined by a custom def
     public abstract class PangaeaResource : IExposable
     {
         private ThingDef parentThingDef;
