@@ -1,5 +1,5 @@
-﻿using Verse;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Verse;
 
 namespace ProjectPangaea
 {
@@ -10,9 +10,30 @@ namespace ProjectPangaea
             public ThingDef fossilParent;
             public float commonality;
             public IntRange yield = new IntRange(-1,-1);
+
+            private PangaeaResource fossil;
+            public PangaeaResource Fossil
+            {
+                get
+                {
+                    if (fossil == null)
+                    {
+                        fossil = PangaeaDatabase.GetOrNull(fossilParent)?.GetResourceOfDef(ResourceTypeDefOf.Pangaea_Fossil);
+                    }
+
+                    if (fossil == null)
+                    {
+                        throw new System.Exception(this + " with null fossil!");
+                    }
+                    return fossil;
+                }
+            }
+
+            public override string ToString() => base.ToString() + $"[{fossilParent}]({commonality})";
+            
         }
 
-        public IntRange baseYield;
+        public IntRange baseYield = new IntRange(1,1);
         public List<RandomOreDropEntry> fossils;
 
         private IntRange YieldForEntry(RandomOreDropEntry entry) 
@@ -32,14 +53,8 @@ namespace ProjectPangaea
             }
 
             RandomOreDropEntry dropEntry = fossils.RandomElementByWeight(e => e.commonality);
-            PangaeaThingEntry databaseEntry = PangaeaDatabase.GetOrNull(dropEntry.fossilParent);
-            if (databaseEntry == null || databaseEntry.Fossil == null)
-            {
-                return null;
-            }
-
+            Thing result = dropEntry.Fossil.MakeThing();
             IntRange yieldRange = YieldForEntry(dropEntry);
-            Thing result = PangaeaThing.MakePangaeaThing(databaseEntry.Fossil);
             result.stackCount = yieldRange.RandomInRange;
             return result;
         }

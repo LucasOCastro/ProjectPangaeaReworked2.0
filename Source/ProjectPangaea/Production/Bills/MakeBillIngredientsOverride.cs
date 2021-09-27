@@ -23,7 +23,7 @@ namespace ProjectPangaea.Production
                 return;
             }
 
-            if (bill is DNASplicingBill splicingBill)
+            if (bill is PangaeaDirectBill splicingBill)
             {
                 ingredientsOrdered.Clear();
                 foreach (var ing in splicingBill.MakeIngredients())

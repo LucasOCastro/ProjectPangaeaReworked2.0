@@ -2,7 +2,7 @@
 
 namespace ProjectPangaea
 {
-    public class DNA : PangaeaResource
+    /*public class DNA : PangaeaResource
     {
         public OrganismCategory Category { get; private set; }
         public DNA(ThingDef parent, OrganismCategory category) : base(parent)
@@ -51,5 +51,5 @@ namespace ProjectPangaea
                 Category = entry.Category;
             }
         }
-    }
+    }*/
 }

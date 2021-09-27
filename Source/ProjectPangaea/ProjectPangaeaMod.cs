@@ -2,7 +2,6 @@
 using Verse;
 using System.Linq;
 using System.Collections.Generic;
-using ProjectPangaea.Overrides;
 
 namespace ProjectPangaea
 {
@@ -22,6 +21,15 @@ namespace ProjectPangaea
             PangaeaSettings.UpdateSettings(Settings);
         }
 
+        private bool ShouldAddToDB(ThingDef thingDef)
+        {
+            if (thingDef.plant == null && !thingDef.race.Animal)
+            {
+                return false;
+            }
+            return thingDef.IsExtinct();
+        }
+
         public override void DefsLoaded()
         {
             base.DefsLoaded();
@@ -30,58 +38,31 @@ namespace ProjectPangaea
                 return;
             }
 
-            DNAGraphicsLister.Init();
+            ResourceGraphicLister.Init();
 
-            HashSet<ThingDef> alreadyAddedDefs = new HashSet<ThingDef>();
-            foreach (var categoryDef in DefDatabase<PangaeaAnimalCategorizationDef>.AllDefs.Reverse())
-            {
-                foreach (var group in categoryDef.groups)
-                {
-                    foreach (var thingDef in group.animals)
-                    {
-                        if (alreadyAddedDefs.Contains(thingDef))
-                        {
-                            continue;
-                        }
-                        PangaeaDatabase.AddEntry(thingDef, group.animalType);
-                        alreadyAddedDefs.Add(thingDef);
-                    }
-                }
-            }
-
+            //Add initial entries (currently only extinct)
+            //TODO add setting for all blablabla
             foreach (ThingDef thingDef in DefDatabase<ThingDef>.AllDefs)
             {
-                if (alreadyAddedDefs.Contains(thingDef))
+                if (ShouldAddToDB(thingDef))
                 {
-                    continue;
-                }
-
-                bool isPlant = thingDef.plant != null;
-                bool isPawn = thingDef.race != null;
-                if (!isPlant && !isPawn)
-                {
-                    continue;
-                }
-
-                ModExt_Extinct extinct = thingDef.GetModExtension<ModExt_Extinct>();
-                if (extinct != null)
-                {
-                    PangaeaDatabase.AddEntry(thingDef, extinct.animalType);
-                    alreadyAddedDefs.Add(thingDef);
+                    PangaeaDatabase.AddEntry(thingDef);
                 }
             }
 
-            foreach (PangaeaOverrideDef overrideDef in DefDatabase<PangaeaOverrideDef>.AllDefs)
+            //Overrides the entries from the custom defs and adds if missing
+            OverrideHelper.Init();
+            OverrideHelper.DoOverrides();
+
+            //Adds any extinct resources to extinct entries
+            List<ResourceTypeDef> extinctResourceTypes = DefDatabase<ResourceTypeDef>.AllDefs.Where(r => r.addToExtinct).ToList();
+            foreach (var extinctEntry in PangaeaDatabase.AllEntries.Where(e => e.IsExtinct))
             {
-                if (overrideDef.overridenThingDef == null)
+                for (int i = 0; i < extinctResourceTypes.Count; i++)
                 {
-                    continue;
+                    extinctEntry.AddResourceOfType(extinctResourceTypes[i]);
                 }
-
-                PangaeaDatabase.AddOrUpdateFromOverrideDef(overrideDef);
             }
-
-            Production.Splicing.DNASplicingWorker.Init();
 
             HasInitiatedDatabase = true;
             PangaeaSettings.UpdateSettings(Settings);

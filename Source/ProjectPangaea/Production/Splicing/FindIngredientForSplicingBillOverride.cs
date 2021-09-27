@@ -10,7 +10,7 @@ namespace ProjectPangaea.Production.Splicing
     {
         private static bool Prefix(ref bool __result, List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)
         {
-            if (bill is DNASplicingBill)
+            if (bill is PangaeaDirectBill)
             {
                 __result = ResourceSelectionForBillReversePatch(availableThings, bill, chosen, rootCell, alreadySorted);
                 return false;

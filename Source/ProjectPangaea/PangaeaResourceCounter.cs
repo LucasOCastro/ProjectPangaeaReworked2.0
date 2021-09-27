@@ -11,18 +11,11 @@ namespace ProjectPangaea
 
 		public PangaeaResourceCounter(Map map) : base(map)
         {
-			HashSet<PangaeaResource> alreadyAddedResources = new HashSet<PangaeaResource>();
 			foreach (var entry in PangaeaDatabase.AllEntries)
 			{
-				if (entry.DNA != null && !alreadyAddedResources.Contains(entry.DNA))
-				{
-					countedAmounts.Add(entry.DNA, 0);
-					alreadyAddedResources.Add(entry.DNA);
-				}
-				if (entry.Fossil != null && !alreadyAddedResources.Contains(entry.Fossil))
-				{
-					countedAmounts.Add(entry.Fossil, 0);
-					alreadyAddedResources.Add(entry.Fossil);
+				foreach (var resource in entry.AllResources)
+                {
+					countedAmounts.Add(resource, 0);
 				}
 				countedCorpseAmounts.Add(entry.ThingDef, 0);
 			}
@@ -46,8 +39,8 @@ namespace ProjectPangaea
 		{
 			foreach (var entry in PangaeaDatabase.AllEntries)
 			{
-				if (entry.DNA != null) countedAmounts[entry.DNA] = 0;
-				if (entry.Fossil != null) countedAmounts[entry.Fossil] = 0;
+				foreach (var resource in entry.AllResources)
+					countedAmounts[resource] = 0;
 				countedCorpseAmounts[entry.ThingDef] = 0;
 			}
 		}
@@ -69,7 +62,7 @@ namespace ProjectPangaea
 				{
 					countedAmounts[pangaeaThing.Resource] += pangaeaThing.stackCount;
 				}
-				else if (thing is Corpse corpse && corpse.InnerPawn.def.HasDNA())
+				else if (thing is Corpse corpse && PangaeaDatabase.GetOrNull(corpse.InnerPawn.def) != null)
 				{
 					countedCorpseAmounts[corpse.InnerPawn.def]++;
 				}

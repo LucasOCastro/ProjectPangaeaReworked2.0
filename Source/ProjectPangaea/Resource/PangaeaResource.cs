@@ -1,39 +1,77 @@
 ﻿using Verse;
 
-namespace ProjectPangaea
+namespace ProjectPangaea.Production
 {
-    //TODO maybe turn this into a single class defined by a custom def
-    public abstract class PangaeaResource : IExposable
+    [System.Serializable]
+    //TODO i dont like this :(
+    public class PangaeaResourceReference
     {
-        private ThingDef parentThingDef;
-        public ThingDef ParentThingDef => parentThingDef;
-        //public string TexturePath { get; protected set; }
-        public abstract Graphic Graphic { get; }
+        private ThingDef owner;
+        public bool 
+        private ResourceTypeDef def;
 
-        public bool IsFromAnimal => ParentThingDef.race != null;
-        public bool IsFromPlant => ParentThingDef.plant != null;
+        private PangaeaResource value = null;
+        public PangaeaResource Value
+        {
+            get
+            {
+                if (value == null)
+                {
+                    value = PangaeaDatabase.GetOrNull(owner)?.GetResourceOfDef(def);
+                }
+                return value;
+            }
+        }
+
+        public PangaeaThingFilter GetFilter()
+        {
+            PangaeaThingFilter filter = new PangaeaThingFilter()
+        }
+    }
+
+    public class PangaeaResource
+    {
+        public const string ownerNodeName = "owner";
+        public const string defNodeName = "def";
+
+        public ResourceTypeDef ResourceDef { get; }
+
+        public PangaeaThingEntry Entry { get; }
+
+        public ThingDef ThingDef => Entry.ThingDef;
+
+        public PangaeaResource(ResourceTypeDef resourceDef, PangaeaThingEntry entry)
+        {
+            ResourceDef = resourceDef;
+            Entry = entry;
+        }
+
+        private Graphic graphic;
+        public Graphic Graphic
+        {
+            get
+            {
+                if (graphic == null)
+                {
+                    graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef).Graphic;
+                }
+                return graphic;
+            }
+        }
 
         public string overrideLabel;
         public string overrideDescription;
         public string Label => overrideLabel.NullOrEmpty() ? GetLabel() : overrideLabel;
         public string Description => overrideDescription.NullOrEmpty() ? GetDescription() : overrideDescription;
 
-        protected abstract string GetLabel();
-        protected abstract string GetDescription();
-
-        public PangaeaResource(ThingDef parent)
+        public PangaeaThing MakeThing()
         {
-            parentThingDef = parent;
+            PangaeaThing thing = ResourceDef.MakeThing();
+            thing.Resource = this;
+            return thing;
         }
 
-        //Constructor for saving/loading
-        public PangaeaResource()
-        {
-        }
-
-        public virtual void ExposeData()
-        {
-            Scribe_Defs.Look(ref parentThingDef, "ResourceParentThingDef");
-        }
+        private string GetLabel() => ResourceDef.label.Formatted(Entry.Label);
+        private string GetDescription() => ResourceDef.description.Formatted(Entry.Label);
     }
 }

@@ -7,7 +7,6 @@ namespace ProjectPangaea
         public string genus;
         public string species;
         public GraphicData fossilGraphicData;
-        public AnimalType animalType;
 
         private string scientificName;
         public string ScientificName

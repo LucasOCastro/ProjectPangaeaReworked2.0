@@ -2,7 +2,7 @@
 
 namespace ProjectPangaea
 {
-    public class Fossil : PangaeaResource
+    /*public class Fossil : PangaeaResource
     {
         public ModExt_Extinct ExtinctExtension { get; private set; }
 
@@ -31,5 +31,5 @@ namespace ProjectPangaea
                 ExtinctExtension = entry.ExtinctExtension;
             }
         }
-    }
+    }*/
 }

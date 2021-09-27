@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ProjectPangaea.ResourceTypeDef>
+		<defName>Pangaea_DNA</defName>
+		<label>{0} DNA</label>
+		<description>Genetic material of a common {0} found in the Rim.</description>
+		<addToAny>true</addToAny>
+	</ProjectPangaea.ResourceTypeDef>
+	
+	<ProjectPangaea.PangaeaEntryDef>
+		<defName>ExtinctDescriptionChangeDNAOverride</defName>
+		<applyFilter>
+			<extinctionFilter>
+				<extinct>true</extinct>
+			</extinctionFilter>
+		</applyFilter>
+		
+		<resourceOverrides>
+			<Pangaea_DNA>
+				<description>Genetic material of an extinct {0}.</description>
+			</Pangaea_DNA>
+		</resourceOverrides>
+	</ProjectPangaea.PangaeaEntryDef>
+	
+	<ProjectPangaea.ResourceTypeDef>
+		<defName>Pangaea_Fossil</defName>
+		<label>{0} fossil</label>
+		<description>Remains of {0}.</description>
+		<addToExtinct>true</addToExtinct>
+	</ProjectPangaea.ResourceTypeDef>
+
+</Defs>

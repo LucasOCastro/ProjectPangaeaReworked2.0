@@ -12,7 +12,7 @@ namespace ProjectPangaea.Production.Splicing
     [HarmonyPatch]
     public class SplicingProductsOverride
     {
-        public static DNASplicingBill CurrentBill { get; private set; }
+        public static PangaeaDirectBill CurrentBill { get; private set; }
 
         private static MethodBase TargetMethod()
         {
@@ -25,7 +25,7 @@ namespace ProjectPangaea.Production.Splicing
 
         private static bool Prefix(Toil ___toil)
         {
-            if (___toil.actor.jobs.curJob.bill is DNASplicingBill splicingBill)
+            if (___toil.actor.jobs.curJob.bill is PangaeaDirectBill splicingBill)
             {
                 CurrentBill = splicingBill;
             }

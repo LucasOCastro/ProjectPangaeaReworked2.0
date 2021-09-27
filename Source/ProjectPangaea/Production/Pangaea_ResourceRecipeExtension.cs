@@ -9,8 +9,5 @@ namespace ProjectPangaea.Production
         public bool allowMixingResources = false;
 
         public virtual float ResolveEfficiencyFromIngredient(Thing ingredient) => 1;
-
-        public abstract List<PangaeaThingEntry> GetListerEntries(RecipeDef recipe);
-        public abstract PangaeaBillCounter GetBillCounter(RecipeDef recipe);
     }
 }

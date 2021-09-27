@@ -8,7 +8,5 @@ namespace ProjectPangaea
         {
             throw new System.NotImplementedException("Plants have not been implemented yet.");
         }
-
-        public override string GetSubTexPath() => "Plant";
     }
 }

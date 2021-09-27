@@ -18,10 +18,10 @@ namespace ProjectPangaea.Production
             }
 
             //todo this will be moved to a custom window later
-            Pangaea_DNASplicingRecipeExtension spliceExtension = recipe.GetModExtension<Pangaea_DNASplicingRecipeExtension>();
+            DirectRecipeExtension spliceExtension = recipe.GetModExtension<DirectRecipeExtension>();
             if (spliceExtension != null)
             {
-                __result = new DNASplicingBill(recipe, DNASplicingWorker.AllSpliceDefs.FirstOrFallback());
+                __result = new PangaeaDirectBill(recipe, DefDatabase<PangaeaDirectRecipeDef>.AllDefsListForReading[0]);
                 return false;
             }
 

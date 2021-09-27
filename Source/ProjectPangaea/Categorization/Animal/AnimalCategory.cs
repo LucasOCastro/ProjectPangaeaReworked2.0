@@ -5,15 +5,19 @@ namespace ProjectPangaea
     public class AnimalCategory : OrganismCategory
     {
         public PangaeaDiet Diet { get; }
-        public AnimalType Type { get; }
 
-        public AnimalCategory(ThingDef thingDef, AnimalType type) : base(thingDef)
+        private AnimalType type;
+        public AnimalType Type => type;
+
+        public AnimalCategory(ThingDef thingDef) : base(thingDef)
         {
             Diet = thingDef.race.ResolvedDietCategory.ToPangaeaDiet();
-            Type = type;
         }
 
-        public override string GetSubTexPath() => (Type != AnimalType.Unspecified) ? $"{Diet}{Type}/{ExtinctionStatus}" : "Default";
+        public void OverrideAnimalType(AnimalType newType)
+        {
+            type = newType;
+        }
 
         public override bool Equals(object obj)
         {
@@ -22,7 +26,7 @@ namespace ProjectPangaea
 
         public override int GetHashCode()
         {
-            return Gen.HashCombineStruct(Gen.HashCombineStruct(base.GetHashCode(), Diet), Type.GetHashCode());
+            return Gen.HashCombineStruct(Gen.HashCombineStruct(base.GetHashCode(), Diet), Type);
         }
     }
 }

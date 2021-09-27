@@ -13,7 +13,7 @@ namespace ProjectPangaea.Production
     {
         public static IEnumerable<Thing> Postfix(IEnumerable<Thing> originalResult, RecipeDef recipeDef, List<Thing> ingredients)
         {
-            var spliceExtension = recipeDef.GetModExtension<Pangaea_DNASplicingRecipeExtension>();
+            /var spliceExtension = recipeDef.GetModExtension<DirectRecipeExtension>();
             if (spliceExtension != null)
             {
                 foreach (var result in SplicingProductsOverride.CurrentBill.MakeResults())
@@ -76,7 +76,7 @@ namespace ProjectPangaea.Production
                 //TODO embryo
 
                 yield return result;
-            }
+            }*/
         }
     }
 }

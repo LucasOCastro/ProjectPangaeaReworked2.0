@@ -1,83 +1,49 @@
 ﻿using Verse;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectPangaea
 {
     public class PangaeaThingEntry
     {
         public ThingDef ThingDef { get; }
+        public string Label => ExtinctExtension?.ScientificName ?? ThingDef.LabelCap;
 
         public ModExt_Extinct ExtinctExtension { get; }
+        public bool IsExtinct => ExtinctExtension != null;
 
         public OrganismCategory Category { get; }
 
-        public DNA DNA { get; }
+        private Dictionary<ResourceTypeDef, PangaeaResource> resources = new Dictionary<ResourceTypeDef, PangaeaResource>();
+        public IEnumerable<PangaeaResource> AllResources => resources.Values;
 
-        public Fossil Fossil { get; }
 
-        public PangaeaThingEntry(ThingDef thingDef, AnimalType animalType = AnimalType.Unspecified)
+        private static List<ResourceTypeDef> generalResourceCache = DefDatabase<ResourceTypeDef>.AllDefs.Where(r=>r.addToAny).ToList();
+        public PangaeaThingEntry(ThingDef thingDef)
         {
             ThingDef = thingDef;
             ExtinctExtension = thingDef.GetModExtension<ModExt_Extinct>();
-            Category = GetCategory(thingDef, animalType);
+            Category = OrganismCategory.For(thingDef, ExtinctExtension);
 
-            DNA = new DNA(thingDef, Category);
-
-            if (ExtinctExtension != null)
+            foreach (var generalResourceType in generalResourceCache)
             {
-                Fossil = new Fossil(thingDef, ExtinctExtension);
+                AddResourceOfType(generalResourceType);
+            }
+        }
+
+        public void AddResourceOfType(ResourceTypeDef resourceType)
+        {
+            if (!resources.ContainsKey(resourceType))
+            {
+                resources.Add(resourceType, new PangaeaResource(resourceType, this));
             }
         }
 
         public PangaeaResource GetResourceOfCategory(ThingCategoryDef category)
         {
-            if (category == PangaeaThingCategoryDefOf.PangaeaDNA)
-            {
-                return DNA;
-            }
-            if (category == PangaeaThingCategoryDefOf.PangaeaFossils)
-            {
-                return Fossil;
-            }
-            return null;
+            return AllResources.First(r => r.ThingDef.IsWithinCategory(category));
         }
-
-        public PangaeaResource GetResourceOfDef(ThingDef def)
-        {
-            if (def == PangaeaThingDefOf.Pangaea_DNABase)
-            {
-                return DNA;
-            }
-            if (def == PangaeaThingDefOf.Pangaea_FossilBase)
-            {
-                return Fossil;
-            }
-            //TODO embryo
-            return null;
-        }
-
-        public PangaeaResource GetResourceOfType(System.Type type)
-        {
-            if (type == typeof(DNA))
-            {
-                return DNA;
-            }
-            if (type == typeof(Fossil))
-            {
-                return Fossil;
-            }
-            //TODO embryo
-            return null;
-        }
-
-        private static OrganismCategory GetCategory(ThingDef thingDef, AnimalType animalType)
-        {
-            if (thingDef.plant != null)
-            {
-                return new PlantCategory(thingDef);
-            }
-            return new AnimalCategory(thingDef, animalType);
-        }
+        public PangaeaResource GetResourceOfDef(ResourceTypeDef def) => resources.TryGetValue(def);
 
         public override string ToString()
         {

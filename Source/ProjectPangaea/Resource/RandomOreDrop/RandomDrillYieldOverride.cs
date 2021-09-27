@@ -15,9 +15,11 @@ namespace ProjectPangaea
 {
     public static class DrillYieldHelper
     {
-        public static Fossil GetRandomFossil()
+        public static PangaeaResource GetRandomFossil()
         {
-            return PangaeaDatabase.AllEntries.Where(e => e.Fossil != null).RandomElement().Fossil;
+            var fossilDef = ResourceTypeDefOf.Pangaea_Fossil;
+            var randomEntry = PangaeaDatabase.AllEntries.Where(e => e.GetResourceOfDef(fossilDef) != null).RandomElement();
+            return randomEntry?.GetResourceOfDef(ResourceTypeDefOf.Pangaea_Fossil);
         }
     }
 
@@ -27,7 +29,7 @@ namespace ProjectPangaea
     {
         private static MethodInfo makeThingMethodInfo = AccessTools.Method(typeof(ThingMaker), nameof(ThingMaker.MakeThing));
         private static MethodInfo randomFossilMethodInfo = AccessTools.Method(typeof(DrillYieldHelper), nameof(DrillYieldHelper.GetRandomFossil));
-        private static MethodInfo makeFossilThingMethodInfo = AccessTools.Method(typeof(PangaeaThing), nameof(PangaeaThing.MakePangaeaThing));
+        private static MethodInfo makeFossilThingMethodInfo = AccessTools.Method(typeof(PangaeaResource), "MakeThing");
 
         [HarmonyReversePatch(HarmonyReversePatchType.Original)]
 #if LACKSDRILLERPARAM
@@ -49,7 +51,9 @@ namespace ProjectPangaea
                 og.RemoveRange(thingPatchStart, thingPatchEnd - thingPatchStart + 1);
                 og.InsertRange(thingPatchStart, new CodeInstruction[] {
                     new CodeInstruction(OpCodes.Call, randomFossilMethodInfo),
-                    new CodeInstruction(OpCodes.Call, makeFossilThingMethodInfo)
+                    new CodeInstruction(OpCodes.Call, makeFossilThingMethodInfo),
+                    //TODO I added this one idk if i should :))
+                    new CodeInstruction(OpCodes.Castclass, typeof(Thing))
                 });
 
                 return og;

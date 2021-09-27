@@ -6,7 +6,7 @@ namespace ProjectPangaea
     {
         public override bool Matches(Thing t)
         {
-            return t is Corpse corpse && !corpse.InnerPawn.def.HasDNA();
+            return t is Corpse corpse && PangaeaDatabase.GetOrNull(corpse.InnerPawn.def)?.GetResourceOfDef(ResourceTypeDefOf.Pangaea_DNA) != null;
         }
     }
 }

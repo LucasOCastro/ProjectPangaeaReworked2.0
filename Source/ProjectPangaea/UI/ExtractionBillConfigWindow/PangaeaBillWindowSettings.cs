@@ -6,7 +6,7 @@ namespace ProjectPangaea.PangaeaUI
     public class PangaeaBillWindowSettings
     {
         public PangaeaEntrySorter sorter { get; } = new PangaeaEntrySorter();
-        public PangaeaEntryFilter filter { get; } = new PangaeaEntryFilter();
+        public PangaeaBillConfigEntryFilter filter { get; } = new PangaeaBillConfigEntryFilter();
 
         public PangaeaBillConfigWindow Window { get; }
 

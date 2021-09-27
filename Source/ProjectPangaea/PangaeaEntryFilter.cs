@@ -1,64 +1,46 @@
 ﻿using Verse;
-using ProjectPangaea.PangaeaUI;
-using UnityEngine;
-using Enum = System.Enum;
-using ProjectPangaea.Production;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectPangaea
 {
+    [System.Serializable]
     public class PangaeaEntryFilter
     {
-        public string currentTextFilter = "";
+        public string textFilter = "";
 
-        private EnumDictionary<AnimalType, bool> animalTypeFilterDict = new EnumDictionary<AnimalType, bool>(true);//, AnimalType.Default);
-        private EnumDictionary<ExtinctionStatus, bool> extinctionFilterDict = new EnumDictionary<ExtinctionStatus, bool>(true);
-        private EnumDictionary<PangaeaDiet, bool> dietFilterDict = new EnumDictionary<PangaeaDiet, bool>(true);
+        public EnumDictionary<AnimalType, bool> animalTypeFilter = new EnumDictionary<AnimalType, bool>(true);//, AnimalType.Default);
+        public EnumDictionary<ExtinctionStatus, bool> extinctionFilter = new EnumDictionary<ExtinctionStatus, bool>(true);
+        public EnumDictionary<PangaeaDiet, bool> dietFilter = new EnumDictionary<PangaeaDiet, bool>(true);
 
-        private const string animalTypeLabel = "Pangaea_AnimalGroupFilter";
-        private const string extinctionLabel = "Pangaea_ExtinctionStatusFilter";
-        private const string dietLabel = "Pangaea_DietFilter";
-        private const string unavailableLabel = "Pangaea_ShowUnavailableIngredients";
-
-        public bool allowUnavailable = true;
-
-        public PangaeaResourceBill bill;
+        public HashSet<ThingDef> directDefFilter = null;
 
         public bool this[AnimalType type]
         {
-            get => animalTypeFilterDict[type];
-            set => animalTypeFilterDict[type] = value;
+            get => animalTypeFilter[type];
+            set => animalTypeFilter[type] = value;
         }
 
         public bool this[ExtinctionStatus extinction]
         {
-            get => extinctionFilterDict[extinction];
-            set => extinctionFilterDict[extinction] = value;
+            get => extinctionFilter[extinction];
+            set => extinctionFilter[extinction] = value;
         }
 
         public bool this[PangaeaDiet diet]
         {
-            get => dietFilterDict[diet];
-            set => dietFilterDict[diet] = value;
+            get => dietFilter[diet];
+            set => dietFilter[diet] = value;
         }
 
-        public void DrawMissingIngredientsOption(Rect rect) => PangaeaUIGen.CheckMarkLabel(rect, ref allowUnavailable, unavailableLabel.Translate());
-        public void DrawTextFilter(Rect rect) => currentTextFilter = Widgets.TextArea(rect, currentTextFilter);
-        public void DrawAnimalTypeFilter(Rect rect) => DrawFilterButton(rect, animalTypeLabel, animalTypeFilterDict);
-        public void DrawExtinctionStatusFilter(Rect rect) => DrawFilterButton(rect, extinctionLabel, extinctionFilterDict);
-        public void DrawDietFilter(Rect rect) => DrawFilterButton(rect, dietLabel, dietFilterDict);
-
-        private void DrawFilterButton<E>(Rect rect, string translate, EnumDictionary<E, bool> filterDict) where E : Enum
+        public virtual bool Allows(PangaeaThingEntry entry)
         {
-            string label = translate.Translate() + "...";
-            if (Widgets.ButtonText(rect, label, drawBackground: false))
+            if (directDefFilter != null)
             {
-                Find.WindowStack.Add(new FloatMenuWithCheckmarks<E>(filterDict));
+                return directDefFilter.Contains(entry.ThingDef);
             }
-        }
 
-        public bool Allows(PangaeaThingEntry entry)
-        {
-            if (!entry.ThingDef.label.Contains(currentTextFilter.ToLower()))
+            if (!entry.ThingDef.label.Contains(textFilter.ToLower()))
             {
                 return false;
             }
@@ -68,25 +50,27 @@ namespace ProjectPangaea
                 return true;
             }
 
-            if (!allowUnavailable && IsUnavailable(entry))
-            {
-                return false;
-            }
-
-            var category = (AnimalCategory)entry.Category;
-            return animalTypeFilterDict[category.Type] 
-                && extinctionFilterDict[category.ExtinctionStatus] 
-                && dietFilterDict[category.Diet];
+            return Allows(entry.Category);
         }
 
-        private bool IsUnavailable(PangaeaThingEntry entry)
+        //TODO this shall be used for plant category and stuff like that
+        public bool Allows(OrganismCategory category)
         {
-            if (bill == null || bill.Counter == null)
+            if (category is PlantCategory plant)
             {
-                return false;
+                return Allows(plant);
             }
-            var counter = bill.Counter;
-            return counter.Count(bill.Map, entry) < counter.ResourceRequirement;
+            return Allows(category as AnimalCategory);
+        }
+
+        public bool Allows(PlantCategory category)
+        {
+            return this[category.ExtinctionStatus];//&& allowsPlant;
+        }
+
+        public bool Allows(AnimalCategory category)
+        {
+            return this[category.Type] && this[category.ExtinctionStatus] && this[category.Diet];
         }
     }
 
