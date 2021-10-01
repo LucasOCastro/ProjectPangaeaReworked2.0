@@ -3,85 +3,125 @@
 <Defs>
 
 	<!--BASE-->
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" Name="DNAGraph_Base">
+		<graphicData>
+			<resourceType>Pangaea_DNA</resourceType>
+			<shaderType>CutoutComplex</shaderType>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+
 	<!--#CARNIVORE#-->
-	<ProjectPangaea.DNAGraphicTypeDef Abstract="True" Name="DNAGraph_CarnivoreBase">
-		<diet>Carnivore</diet>
-		<lidColor>(255,0,0)</lidColor>
-	</ProjectPangaea.DNAGraphicTypeDef>
-	<ProjectPangaea.DNAGraphicTypeDef Abstract="True" ParentName="DNAGraph_CarnivoreBase" Name="DNAGraph_ExtantCarnivoreBase">
-		<extinctionStatus>Extant</extinctionStatus>
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" Parent="DNAGraph_Base" Name="DNAGraph_CarnivoreBase">
+		<filter>
+			<diets><li>Carnivore</li></diets>
+		</filter>
+		<graphicData>
+			<colorTwo>(255,0,0)</colorTwo>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" ParentName="DNAGraph_CarnivoreBase" Name="DNAGraph_ExtantCarnivoreBase">
+		<filter>
+			<extinctionStatus><li>Extant</li></extinctionStatus>
+		</filter>
 		<graphicData>
 			<texPath>Things/Item/DNA/Extant</texPath>
-			<shaderType>CutoutComplex</shaderType>
-			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
-	</ProjectPangaea.DNAGraphicTypeDef>
-	<ProjectPangaea.DNAGraphicTypeDef Abstract="True" ParentName="DNAGraph_CarnivoreBase" Name="DNAGraph_ExtinctCarnivoreBase">
-		<extinctionStatus>Extinct</extinctionStatus>
+	</ProjectPangaea.ResourceGraphicDef>
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" ParentName="DNAGraph_CarnivoreBase" Name="DNAGraph_ExtinctCarnivoreBase">
+		<filter>
+			<extinctionStatus><li>Extinct</li></extinctionStatus>
+		</filter>
 		<graphicData>
 			<texPath>Things/Item/DNA/Extinct</texPath>
-			<shaderType>CutoutComplex</shaderType>
-			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
-	</ProjectPangaea.DNAGraphicTypeDef>
+	</ProjectPangaea.ResourceGraphicDef>
 
 	<!--#HERBIVORE#-->	
-	<ProjectPangaea.DNAGraphicTypeDef Abstract="True" Name="DNAGraph_HerbivoreBase">
-		<diet>Herbivore</diet>
-		<lidColor>(0,255,0)</lidColor>
-	</ProjectPangaea.DNAGraphicTypeDef>	
-	<ProjectPangaea.DNAGraphicTypeDef Abstract="True" ParentName="DNAGraph_HerbivoreBase" Name="DNAGraph_ExtantHerbivoreBase">
-		<extinctionStatus>Extant</extinctionStatus>
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" Parent="DNAGraph_Base" Name="DNAGraph_HerbivoreBase">
+		<filter>
+			<diets><li>Herbivore</li></diets>
+		</filter>
+		<graphicData>
+			<colorTwo>(0,255,0)</colorTwo>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>	
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" ParentName="DNAGraph_HerbivoreBase" Name="DNAGraph_ExtantHerbivoreBase">
+		<filter>
+			<extinctionStatus><li>Extant</li></extinctionStatus>
+		</filter>
 		<graphicData>
 			<texPath>Things/Item/DNA/Extant</texPath>
-			<shaderType>CutoutComplex</shaderType>
-			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
-	</ProjectPangaea.DNAGraphicTypeDef>
-	<ProjectPangaea.DNAGraphicTypeDef Abstract="True" ParentName="DNAGraph_HerbivoreBase" Name="DNAGraph_ExtinctHerbivoreBase">
-		<extinctionStatus>Extinct</extinctionStatus>
+	</ProjectPangaea.ResourceGraphicDef>
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" ParentName="DNAGraph_HerbivoreBase" Name="DNAGraph_ExtinctHerbivoreBase">
+		<filter>
+			<extinctionStatus><li>Extinct</li></extinctionStatus>
+		</filter>
 		<graphicData>
 			<texPath>Things/Item/DNA/Extinct</texPath>
-			<shaderType>CutoutComplex</shaderType>
-			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
-	</ProjectPangaea.DNAGraphicTypeDef>
+	</ProjectPangaea.ResourceGraphicDef>
 
 	<!--CONTENT-->
 	<!--#Dinosaur#-->
-	<ProjectPangaea.DNAGraphicTypeDef ParentName="DNAGraph_ExtinctCarnivoreBase" Name="DNAGraph_CarnivoreDinosaur">
-		<animalType>Dinosaur</animalType>
+	<ProjectPangaea.ResourceGraphicDef ParentName="DNAGraph_ExtinctCarnivoreBase" Name="DNAGraph_CarnivoreDinosaur">
 		<defName>DNAGraph_CarnivoreDinosaur</defName>
-		<contentColor>(217,141,0)</contentColor>
-	</ProjectPangaea.DNAGraphicTypeDef>
-	<ProjectPangaea.DNAGraphicTypeDef ParentName="DNAGraph_ExtinctHerbivoreBase" Name="DNAGraph_HerbivoreDinosaur">
-		<animalType>Dinosaur</animalType>
+		<filter>
+			<animalTypes><li>Dinosaur</li></animalTypes>
+		</filter>
+		<graphicData>
+			<color>(217,141,0)</color>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+	<ProjectPangaea.ResourceGraphicDef ParentName="DNAGraph_ExtinctHerbivoreBase" Name="DNAGraph_HerbivoreDinosaur">
 		<defName>DNAGraph_HerbivoreDinosaur</defName>
-		<contentColor>(217,141,0)</contentColor>
-	</ProjectPangaea.DNAGraphicTypeDef>
+		<filter>
+			<animalTypes><li>Dinosaur</li></animalTypes>
+		</filter>
+		<graphicData>
+			<color>(217,141,0)</color>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
 
 	<!--#Mammal##-->
 	<!--##EXTINCT##-->
-	<ProjectPangaea.DNAGraphicTypeDef ParentName="DNAGraph_ExtinctCarnivoreBase" Name="DNAGraph_ExtinctCarnivoreMammal">
-		<animalType>Mammal</animalType>
+	<ProjectPangaea.ResourceGraphicDef ParentName="DNAGraph_ExtinctCarnivoreBase" Name="DNAGraph_ExtinctCarnivoreMammal">
 		<defName>DNAGraph_ExtinctCarnivoreMammal</defName>
-		<contentColor>(255,155,145)</contentColor>
-	</ProjectPangaea.DNAGraphicTypeDef>
-	<ProjectPangaea.DNAGraphicTypeDef ParentName="DNAGraph_ExtinctHerbivoreBase" Name="DNAGraph_ExtinctHerbivoreMammal">
-		<animalType>Mammal</animalType>
+		<filter>
+			<animalTypes><li>Mammal</li></animalTypes>
+		</filter>
+		<graphicData>
+			<color>(255,155,145)</color>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+	<ProjectPangaea.ResourceGraphicDef ParentName="DNAGraph_ExtinctHerbivoreBase" Name="DNAGraph_ExtinctHerbivoreMammal">
 		<defName>DNAGraph_ExtinctHerbivoreMammal</defName>
-		<contentColor>(255,155,145)</contentColor>
-	</ProjectPangaea.DNAGraphicTypeDef>
+		<filter>
+			<animalTypes><li>Mammal</li></animalTypes>
+		</filter>
+		<graphicData>
+			<color>(255,155,145)</color>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
 	<!--##EXTANT##-->
-	<ProjectPangaea.DNAGraphicTypeDef ParentName="DNAGraph_ExtantCarnivoreBase" Name="DNAGraph_ExtantCarnivoreMammal">
-		<animalType>Mammal</animalType>
+	<ProjectPangaea.ResourceGraphicDef ParentName="DNAGraph_ExtantCarnivoreBase" Name="DNAGraph_ExtantCarnivoreMammal">
 		<defName>DNAGraph_ExtantCarnivoreMammal</defName>
-		<contentColor>(255,155,145)</contentColor>
-	</ProjectPangaea.DNAGraphicTypeDef>
-	<ProjectPangaea.DNAGraphicTypeDef ParentName="DNAGraph_ExtantHerbivoreBase" Name="DNAGraph_ExtantHerbivoreMammal">
-		<animalType>Mammal</animalType>
+		<filter>
+			<animalTypes><li>Mammal</li></animalTypes>
+		</filter>
+		<graphicData>
+			<color>(255,155,145)</color>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+	<ProjectPangaea.ResourceGraphicDef ParentName="DNAGraph_ExtantHerbivoreBase" Name="DNAGraph_ExtantHerbivoreMammal">
 		<defName>DNAGraph_ExtantHerbivoreMammal</defName>
-		<contentColor>(255,155,145)</contentColor>
-	</ProjectPangaea.DNAGraphicTypeDef>
+		<filter>
+			<animalTypes><li>Mammal</li></animalTypes>
+		</filter>
+		<graphicData>
+			<color>(255,155,145)</color>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
 
 </Defs>

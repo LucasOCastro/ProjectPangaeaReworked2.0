@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 using System.Collections.Generic;
+using ProjectPangaea.Production;
 
 namespace ProjectPangaea
 {
@@ -24,16 +25,6 @@ namespace ProjectPangaea
 		public int GetCount(PangaeaResource resource) => countedAmounts[resource];
 		public int GetCorpseCount(PangaeaThingEntry entry) => GetCorpseCount(entry.ThingDef);
 		public int GetCorpseCount(ThingDef animalThingDef) => countedCorpseAmounts[animalThingDef];
-
-		public int GetCategoryCount(ThingCategoryDef category, PangaeaThingEntry entry)
-        {
-			if (category == ThingCategoryDefOf.Corpses)
-			{
-				return GetCorpseCount(entry);
-			}
-			PangaeaResource resource = entry.GetResourceOfCategory(category);
-			return (resource != null) ? GetCount(resource) : -1;			
-		}
 
 		private void ResetResourceCounts()
 		{

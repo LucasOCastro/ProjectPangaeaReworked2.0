@@ -2,7 +2,6 @@
 using Verse;
 using HarmonyLib;
 using System.Collections.Generic;
-using ProjectPangaea.Production.Splicing;
 
 namespace ProjectPangaea.Production
 {
@@ -11,36 +10,14 @@ namespace ProjectPangaea.Production
     {
         public static bool Prefix(ref Bill __result, RecipeDef recipe)
         {
-            if (TryGetCounterAndEntries(recipe, out List<PangaeaThingEntry> entries, out PangaeaBillCounter counter))
-            {
-                __result = new PangaeaResourceBill(recipe, entries, counter);
-                return false;
-            }
-
             //todo this will be moved to a custom window later
-            DirectRecipeExtension spliceExtension = recipe.GetModExtension<DirectRecipeExtension>();
+            RecipeExtension spliceExtension = recipe.GetModExtension<RecipeExtension>();
             if (spliceExtension != null)
             {
-                __result = new PangaeaDirectBill(recipe, DefDatabase<PangaeaDirectRecipeDef>.AllDefsListForReading[0]);
+                __result = new PangaeaBill(recipe, spliceExtension.recipes.FirstOrFallback());
                 return false;
             }
-
             return true;
-        }
-
-        private static bool TryGetCounterAndEntries(RecipeDef recipe, out List<PangaeaThingEntry> entries, out PangaeaBillCounter counter)
-        {
-            counter = null;
-            entries = null;
-
-            var resourceExtension = recipe.GetModExtension<Pangaea_ResourceRecipeExtension>();
-            if (resourceExtension != null)
-            {
-                counter = resourceExtension.GetBillCounter(recipe);
-                entries = resourceExtension.GetListerEntries(recipe);
-            }
-
-            return entries != null && counter != null;
         }
     }
 }

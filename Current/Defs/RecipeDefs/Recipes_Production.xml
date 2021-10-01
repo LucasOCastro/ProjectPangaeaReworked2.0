@@ -13,28 +13,20 @@
 		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
 		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
-			<li Class="ProjectPangaea.Production.Pangaea_YieldDNARecipeExtension">
-				<!--<baseYieldPerExtraction>8~12</baseYieldPerExtraction>-->
+			<li Class="ProjectPangaea.Production.RecipeExtension">
+				<proceduralRecipeDefs>
+					<baseRecipe>
+						<canBeReversed>false</canBeReversed>
+					</baseRecipe>
+					<ingredients>
+						<Pangaea_Fossil>5</Pangaea_Fossil>
+					</ingredients>
+					<results>
+						<Pangaea_DNA>10</Pangaea_DNA>
+					</results>
+				</proceduralRecipeDefs>
 			</li>
 		</modExtensions>
-		<products>
-			<Pangaea_DNABase>10</Pangaea_DNABase>
-		</products>
-		<ingredients>
-			<li>
-				<filter>
-					<categories>
-						<li>PangaeaFossils</li>
-					</categories>		
-				</filter>
-				<count>5</count>
-			</li>
-		</ingredients>
-		<fixedIngredientFilter>
-			<categories>
-				<li>PangaeaFossils</li>
-			</categories>
-		</fixedIngredientFilter>
 	</RecipeDef>
 
 	<RecipeDef>
@@ -49,106 +41,68 @@
 		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
 		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
-			<li Class="ProjectPangaea.Production.Pangaea_DissectCorpseRecipeExtension">
-				<freshEfficiency>1</freshEfficiency>
-				<rottingEfficiency>0.6</rottingEfficiency>
-				<dessicatedEfficiency>0.3</dessicatedEfficiency>
+			<li Class="ProjectPangaea.Production.RecipeExtension">
+				<proceduralRecipeDefs>
+					<baseRecipe>
+						<canBeReversed>false</canBeReversed>
+					</baseRecipe>
+					<ingredients>
+						<Corpse>1</Corpse>
+					</ingredients>
+					<results>
+						<Pangaea_DNA>10</Pangaea_DNA>
+					</results>
+				</proceduralRecipeDefs>
 			</li>
 		</modExtensions>
 		<products>
 			<Pangaea_DNABase>1</Pangaea_DNABase>
 		</products>
 		<autoStripCorpses>true</autoStripCorpses>
-		<ingredients>
-			<li>
-				<filter>
-					<categories>
-						<li>CorpsesAnimal</li>
-					</categories>
-				</filter>
-				<count>1</count>
-			</li>
-		</ingredients>
-		<fixedIngredientFilter>
-			<categories>
-				<li>CorpsesAnimal</li>
-			</categories>
-			<specialFiltersToAllow>
-				<li>AllowRotten</li>
-				<li>AllowFresh</li>
-			</specialFiltersToAllow>
-			<specialFiltersToDisallow>
-				<li>Pangaea_CorpsesWithoutDNA</li>
-			</specialFiltersToDisallow>
-		</fixedIngredientFilter>
-	</RecipeDef>
-	
-	<RecipeDef>
-		<defName>Pangaea_SplitSplicedDNA</defName>
-		<label>split spliced DNA</label>
-		<description>Split a spliced DNA for its forming genomes.</description>
-		<jobString>Splitting a spliced DNA.</jobString>
-		<workAmount>750</workAmount>
-		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-		<effectWorking>ButcherFlesh</effectWorking>
-		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
-		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
-		<allowMixingIngredients>false</allowMixingIngredients>
-		<modExtensions>
-			<li Class="ProjectPangaea.Production.Splicing.Pangaea_DNASplicingRecipeExtension">
-				<divideDNA>true</divideDNA>
-			</li>
-		</modExtensions>
-		<ingredients>
-			<li>
-				<filter>
-					<categories>
-						<li>PangaeaDNA</li>
-					</categories>
-				</filter>
-				<count>10</count>
-			</li>
-		</ingredients>
-		<fixedIngredientFilter>
-			<categories>
-				<li>PangaeaDNA</li>
-			</categories>
-			<specialFiltersToDisallow>
-				<li>Pangaea_NonSplicedDNA</li>
-			</specialFiltersToDisallow>
-		</fixedIngredientFilter>
 	</RecipeDef>
 	
 	<RecipeDef>
 		<defName>Pangaea_SpliceDNA</defName>
 		<label>splice DNA</label>
-		<description>Join genomes into a hybridized DNA.</description>
-		<jobString>Joining genomes.</jobString>
+		<description>Manipulate hybridized DNA.</description>
+		<jobString>Manipulating genomes.</jobString>
 		<workAmount>750</workAmount>
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>ButcherFlesh</effectWorking>
 		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
 		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
 		<modExtensions>
-			<li Class="ProjectPangaea.Production.Splicing.Pangaea_DNASplicingRecipeExtension">
-				<divideDNA>false</divideDNA>
+			<li Class="ProjectPangaea.Production.RecipeExtension">
+				<recipes>
+					<li>
+						<canBeReversed>true</canBeReversed>
+						<ingredients>
+							<li>
+								<resource>
+									<Pangaea_DNA>Cow</Pangaea_DNA>
+								</resource>
+								<count>5</count>
+							</li>
+							<li>
+								<resource>
+									<Pangaea_DNA>Thrumbo</Pangaea_DNA>
+								</resource>
+								<count>5</count>
+							</li>
+						</ingredients>
+						<results>
+							<li>
+								<resource>
+									<Pangaea_DNA>Boomalope</Pangaea_DNA>
+								</resource>
+								<count>5</count>
+
+							</li>
+						</results>
+					</li>
+				</recipes>
 			</li>
 		</modExtensions>
-		<ingredients>
-			<li>
-				<filter>
-					<categories>
-						<li>PangaeaDNA</li>
-					</categories>
-				</filter>
-				<count>10</count>
-			</li>
-		</ingredients>
-		<fixedIngredientFilter>
-			<categories>
-				<li>PangaeaDNA</li>
-			</categories>
-		</fixedIngredientFilter>
 	</RecipeDef>
 
 </Defs>

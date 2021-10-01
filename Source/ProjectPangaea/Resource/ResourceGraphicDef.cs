@@ -1,18 +1,14 @@
 ﻿using Verse;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace ProjectPangaea
 {
     [Serializable]
     public class ResourceGraphicDef : Def
     {
-        public ResourceTypeDef resourceType;
-
         public PangaeaEntryFilter filter;
-
+        public ResourceTypeDef resourceType;
         public GraphicData graphicData;
-
-        public Graphic Graphic => graphicData.Graphic;
     }
 }

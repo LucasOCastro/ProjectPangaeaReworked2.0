@@ -6,11 +6,11 @@ using System.Collections.Generic;
 namespace ProjectPangaea.Production.Splicing
 {
     [HarmonyPatch(typeof(WorkGiver_DoBill), "TryFindBestBillIngredientsInSet_NoMix")]
-    public static class FindIngredientForSplicingBillOverride
+    public static class FindIngredientForPangaeaBillOverride
     {
         private static bool Prefix(ref bool __result, List<Thing> availableThings, Bill bill, List<ThingCount> chosen, IntVec3 rootCell, bool alreadySorted)
         {
-            if (bill is PangaeaDirectBill)
+            if (bill is PangaeaBill)
             {
                 __result = ResourceSelectionForBillReversePatch(availableThings, bill, chosen, rootCell, alreadySorted);
                 return false;

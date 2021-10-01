@@ -11,9 +11,9 @@
 	<ProjectPangaea.PangaeaEntryDef>
 		<defName>ExtinctDescriptionChangeDNAOverride</defName>
 		<applyFilter>
-			<extinctionFilter>
-				<extinct>true</extinct>
-			</extinctionFilter>
+			<extinctionStatus>
+				<li>Extinct</li>
+			</extinctionStatus>
 		</applyFilter>
 		
 		<resourceOverrides>

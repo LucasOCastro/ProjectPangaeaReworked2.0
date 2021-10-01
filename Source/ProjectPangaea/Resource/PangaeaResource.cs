@@ -1,14 +1,13 @@
 ﻿using Verse;
 
-namespace ProjectPangaea.Production
+namespace ProjectPangaea
 {
     [System.Serializable]
     //TODO i dont like this :(
     public class PangaeaResourceReference
     {
-        private ThingDef owner;
-        public bool 
-        private ResourceTypeDef def;
+        private ThingDef owner = null;
+        private ResourceTypeDef def = null;
 
         private PangaeaResource value = null;
         public PangaeaResource Value
@@ -23,22 +22,39 @@ namespace ProjectPangaea.Production
             }
         }
 
-        public PangaeaThingFilter GetFilter()
+        public static implicit operator PangaeaResourceReference(PangaeaResource resource)
         {
-            PangaeaThingFilter filter = new PangaeaThingFilter()
+            if (resource == null)
+            {
+                return null;
+            }
+            return new PangaeaResourceReference() { value = resource };
+        }
+
+        public void LoadDataFromXmlCustom(System.Xml.XmlNode xmlRoot)
+        {
+            var node = xmlRoot.FirstChild;
+            if (node != null)
+            {
+                string typeStr = node.Name;
+                ResourceTypeDef type = DefDatabase<ResourceTypeDef>.GetNamed(typeStr);
+
+                string ownerStr = node.Value;
+                ThingDef owner = DefDatabase<ThingDef>.GetNamed(ownerStr);
+
+                this.owner = owner;
+                this.def = type;
+            }
         }
     }
 
     public class PangaeaResource
     {
-        public const string ownerNodeName = "owner";
-        public const string defNodeName = "def";
-
         public ResourceTypeDef ResourceDef { get; }
 
         public PangaeaThingEntry Entry { get; }
 
-        public ThingDef ThingDef => Entry.ThingDef;
+        public ThingDef ParentThingDef => Entry.ThingDef;
 
         public PangaeaResource(ResourceTypeDef resourceDef, PangaeaThingEntry entry)
         {
@@ -53,7 +69,7 @@ namespace ProjectPangaea.Production
             {
                 if (graphic == null)
                 {
-                    graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef).Graphic;
+                    graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef).graphicData.Graphic;
                 }
                 return graphic;
             }

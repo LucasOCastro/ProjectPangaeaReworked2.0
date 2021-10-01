@@ -18,17 +18,19 @@ namespace ProjectPangaea
         public IEnumerable<PangaeaResource> AllResources => resources.Values;
 
 
-        private static List<ResourceTypeDef> generalResourceCache = DefDatabase<ResourceTypeDef>.AllDefs.Where(r=>r.addToAny).ToList();
         public PangaeaThingEntry(ThingDef thingDef)
         {
+
             ThingDef = thingDef;
             ExtinctExtension = thingDef.GetModExtension<ModExt_Extinct>();
             Category = OrganismCategory.For(thingDef, ExtinctExtension);
 
-            foreach (var generalResourceType in generalResourceCache)
+            foreach (var generalResourceType in ResourceTypeDefOf.GeneralResources)
             {
                 AddResourceOfType(generalResourceType);
             }
+
+            Production.PangaeaRecipeGen.GenAndRegisterRecipesFor(this);
         }
 
         public void AddResourceOfType(ResourceTypeDef resourceType)
@@ -39,10 +41,6 @@ namespace ProjectPangaea
             }
         }
 
-        public PangaeaResource GetResourceOfCategory(ThingCategoryDef category)
-        {
-            return AllResources.First(r => r.ThingDef.IsWithinCategory(category));
-        }
         public PangaeaResource GetResourceOfDef(ResourceTypeDef def) => resources.TryGetValue(def);
 
         public override string ToString()

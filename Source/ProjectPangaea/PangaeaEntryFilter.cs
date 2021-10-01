@@ -1,4 +1,5 @@
 ﻿using Verse;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,28 +10,41 @@ namespace ProjectPangaea
     {
         public string textFilter = "";
 
-        public EnumDictionary<AnimalType, bool> animalTypeFilter = new EnumDictionary<AnimalType, bool>(true);//, AnimalType.Default);
-        public EnumDictionary<ExtinctionStatus, bool> extinctionFilter = new EnumDictionary<ExtinctionStatus, bool>(true);
-        public EnumDictionary<PangaeaDiet, bool> dietFilter = new EnumDictionary<PangaeaDiet, bool>(true);
+
+        private List<AnimalType> animalTypes = new List<AnimalType>();
+        private List<ExtinctionStatus> extinctionStatus = new List<ExtinctionStatus>();
+        private List<PangaeaDiet> diets = new List<PangaeaDiet>();
 
         public HashSet<ThingDef> directDefFilter = null;
 
         public bool this[AnimalType type]
         {
-            get => animalTypeFilter[type];
-            set => animalTypeFilter[type] = value;
+            get => animalTypes.Contains(type);
+            set 
+            {
+                if (value == true) animalTypes.Add(type);
+                else animalTypes.Remove(type);
+            }
         }
 
         public bool this[ExtinctionStatus extinction]
         {
-            get => extinctionFilter[extinction];
-            set => extinctionFilter[extinction] = value;
+            get => extinctionStatus.Contains(extinction);
+            set
+            {
+                if (value == true) extinctionStatus.Add(extinction);
+                else extinctionStatus.Remove(extinction);
+            }
         }
 
         public bool this[PangaeaDiet diet]
         {
-            get => dietFilter[diet];
-            set => dietFilter[diet] = value;
+            get => diets.Contains(diet);
+            set
+            {
+                if (value == true) diets.Add(diet);
+                else diets.Remove(diet);
+            }
         }
 
         public virtual bool Allows(PangaeaThingEntry entry)
@@ -72,6 +86,8 @@ namespace ProjectPangaea
         {
             return this[category.Type] && this[category.ExtinctionStatus] && this[category.Diet];
         }
+
+        
     }
 
 }

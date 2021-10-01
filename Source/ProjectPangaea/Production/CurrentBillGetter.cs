@@ -5,14 +5,13 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Linq;
 using Verse.AI;
-using RimWorld;
 
-namespace ProjectPangaea.Production.Splicing
+namespace ProjectPangaea.Production
 {
     [HarmonyPatch]
-    public class SplicingProductsOverride
+    public class CurrentBillGetter
     {
-        public static PangaeaDirectBill CurrentBill { get; private set; }
+        public static PangaeaBill CurrentBill { get; private set; }
 
         private static MethodBase TargetMethod()
         {
@@ -25,7 +24,7 @@ namespace ProjectPangaea.Production.Splicing
 
         private static bool Prefix(Toil ___toil)
         {
-            if (___toil.actor.jobs.curJob.bill is PangaeaDirectBill splicingBill)
+            if (___toil.actor.jobs.curJob.bill is PangaeaBill splicingBill)
             {
                 CurrentBill = splicingBill;
             }

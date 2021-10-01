@@ -19,33 +19,33 @@ namespace ProjectPangaea
 
             public ResourceGraphicDef GetFor(PangaeaThingEntry entry)
             {
-                if (specificDict.TryGetValue(entry.ThingDef, out var graphicDef))
+                if (specificDict.TryGetValue(entry.ThingDef, out var graphic))
                 {
-                    return graphicDef;
+                    return graphic;
                 }
                 for (int i = 0; i < nonSpecificList.Count; i++)
                 {
                     if (nonSpecificList[i].filter.Allows(entry))
                     {
-                        graphicDef = nonSpecificList[i];
+                        graphic = nonSpecificList[i];
                     }
                 }
-                return graphicDef;
+                return graphic;
             }
 
-            public void Register(ResourceGraphicDef graphicDef)
+            public void Register(ResourceGraphicDef graphic)
             {
-                if (graphicDef.resourceType != ResourceType) return;
+                if (graphic.resourceType != ResourceType) return;
 
-                if (graphicDef.filter.directDefFilter != null)
+                if (!graphic.filter.directDefFilter.EnumerableNullOrEmpty())
                 {
-                    foreach (var thing in graphicDef.filter.directDefFilter)
+                    foreach (var thing in graphic.filter.directDefFilter)
                     {
-                        specificDict.SetOrAdd(thing, graphicDef);
+                        specificDict.SetOrAdd(thing, graphic);
                     }
                     return;
                 }
-                nonSpecificList.Add(graphicDef);
+                nonSpecificList.Add(graphic);
             }
         }
 
@@ -73,51 +73,4 @@ namespace ProjectPangaea
             return GetGraphicEntry(resourceType).GetFor(entry);
         }
     }
-
-
-    /*public static class ResourceGraphicLister
-    {
-        private static Dictionary<Tuple<PangaeaDiet, AnimalType, ExtinctionStatus>, ResourceGraphicDef> dict = new Dictionary<Tuple<PangaeaDiet, AnimalType, ExtinctionStatus>, ResourceGraphicDef>();
-
-        private static ResourceGraphicDef plantDNAGraph;
-
-        private static Tuple<PangaeaDiet, AnimalType, ExtinctionStatus> Tuple(PangaeaDiet diet, AnimalType type, ExtinctionStatus extinction)
-            => System.Tuple.Create(diet, type, extinction);
-
-
-        public static ResourceGraphicDef GetDNAGraphicType(OrganismCategory category)
-        {
-            if (category is AnimalCategory animalCategory)
-            {
-                return GetDNAGraphicType(animalCategory);
-            }
-            return plantDNAGraph;
-        }
-
-        public static ResourceGraphicDef GetDNAGraphicType(AnimalCategory category)
-        {
-            var tuple = Tuple(category.Diet, category.Type, category.ExtinctionStatus);
-            dict.TryGetValue(tuple, out ResourceGraphicDef result);
-            return result;
-        }
-
-        public static void Init()
-        {
-            foreach (var dnaGraphic in DefDatabase<ResourceGraphicDef>.AllDefs)
-            {
-                if (dnaGraphic.isPlant)
-                {
-                    plantDNAGraph = dnaGraphic;
-                    continue;
-                }
-
-                var tuple = Tuple(dnaGraphic.diet, dnaGraphic.animalType, dnaGraphic.extinctionStatus);
-                if (!dict.ContainsKey(tuple))
-                {
-                    dict.Add(tuple, dnaGraphic);
-                }
-                else dict[tuple] = dnaGraphic;
-            }
-        }
-    }*/
 }

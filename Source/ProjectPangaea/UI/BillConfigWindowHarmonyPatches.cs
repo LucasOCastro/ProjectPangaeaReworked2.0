@@ -13,7 +13,8 @@ namespace ProjectPangaea.PangaeaUI
     [HarmonyPatch(typeof(Bill_Production), "DoConfigInterface")]
     public static class BillConfigWindowHarmonyPatches
     {
-        [HarmonyReversePatch]
+        //TODO ADD THE WINDOWS
+        /*[HarmonyReversePatch]
         public static void Extraction_ChangeBillDetailButton(Bill_Production __instance, Rect baseRect, Color baseColor)
         {
             IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -39,6 +40,6 @@ namespace ProjectPangaea.PangaeaUI
                 return false;
             }
             return true;
-        }
+        }*/
     }
 }

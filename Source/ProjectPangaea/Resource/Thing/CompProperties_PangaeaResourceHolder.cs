@@ -17,10 +17,33 @@ namespace ProjectPangaea
         public bool IsOfType(ResourceTypeDef type) => resourceType == type;
         public bool AllowsTypeOfResource(PangaeaResource resource) => IsOfType(resource.ResourceDef);
 
-        //TODO cache the ienumerables into lists as to avoid too much linq
-        public PangaeaResource GetRandomResource() => GetAllPossibleEntries().RandomElement().GetResourceOfDef(resourceType);
-        public IEnumerable<PangaeaResource> GetAllPossibleResources() => GetAllPossibleEntries().Select(e => e.GetResourceOfDef(resourceType));
-        public IEnumerable<PangaeaThingEntry> GetAllPossibleEntries() => PangaeaDatabase.AllEntries.Where(e => e.GetResourceOfDef(resourceType) != null);
+        public PangaeaResource GetRandomResource() => AllPossibleResources.RandomElement();
+        
+        private List<PangaeaResource> allPossibleResources;
+        public List<PangaeaResource> AllPossibleResources
+        {
+            get
+            {
+                if (allPossibleResources == null)
+                {
+                    allPossibleResources = AllPossibleEntries.Select(e => e.GetResourceOfDef(resourceType)).ToList();
+                }
+                return allPossibleResources;
+            }
+        }
+
+        private List<PangaeaThingEntry> allPossibleEntries;
+        public List<PangaeaThingEntry> AllPossibleEntries
+        {
+            get
+            {
+                if (allPossibleEntries == null)
+                {
+                    allPossibleEntries = PangaeaDatabase.AllEntries.Where(e => e.GetResourceOfDef(resourceType) != null).ToList();
+                }
+                return allPossibleEntries;
+            }
+        }
 
         public override IEnumerable<string> ConfigErrors(ThingDef parentDef)
         {

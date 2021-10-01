@@ -9,29 +9,17 @@ namespace ProjectPangaea.Production
     [HarmonyPatch(typeof(WorkGiver_DoBill), "MakeIngredientsListInProcessingOrder")]
     public class MakeBillIngredientsOverride
     {
-        public static void Postfix(List<IngredientCount> ingredientsOrdered, Bill bill)
+        public static bool Prefix(List<IngredientCount> ingredientsOrdered, Bill bill)
         {
-            if (bill is PangaeaResourceBill pangBill)
+            if (bill is PangaeaBill pangaeaBill)
             {
-                for (int i = 0; i < ingredientsOrdered.Count; i++)
-                {
-                    PangaeaThingFilter filter = new PangaeaThingFilter();
-                    filter.CopyAllowancesFrom(ingredientsOrdered[i].filter);
-                    filter.SyncAllowedEntries(pangBill.ResourceFilter);
-                    ingredientsOrdered[i].filter = filter;
-                }
-                return;
-            }
-
-            if (bill is PangaeaDirectBill splicingBill)
-            {
-                ingredientsOrdered.Clear();
-                foreach (var ing in splicingBill.MakeIngredients())
+                foreach (var ing in pangaeaBill.MakeIngredients())
                 {
                     ingredientsOrdered.Add(ing);
                 }
-                return;
+                return false;
             }
+            return true;
         }
     }
 }

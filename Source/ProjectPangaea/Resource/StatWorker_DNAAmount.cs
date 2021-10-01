@@ -6,7 +6,7 @@ namespace ProjectPangaea
     {
         public override bool ShouldShowFor(StatRequest req)
         {
-            return req.Thing?.def?.HasDNA() ?? false;
+            return PangaeaDatabase.TryGetEntry(req.Thing?.def, out _);
         }
     }
 }
