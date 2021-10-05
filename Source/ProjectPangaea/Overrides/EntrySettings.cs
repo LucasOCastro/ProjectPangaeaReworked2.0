@@ -24,7 +24,7 @@ namespace ProjectPangaea
 
             foreach (var overrideKeyValue in resourceOverrides)
             {
-                var resource = entry.GetResourceOfDef(overrideKeyValue.Key);
+                var resource = entry.GetResource(overrideKeyValue.Key);
                 if (resource != null)
                 {
                     overrideKeyValue.Value.Override(resource);

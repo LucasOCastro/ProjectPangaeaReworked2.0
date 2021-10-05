@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+	<ProjectPangaea.ResourceGraphicDef>
+		<defName>TyranosaurusFossilGraphic</defName>
+		<resourceType>Pangaea_Fossil</resourceType>
+		<filter>
+			<directDefFilter><li>PangaeaTyrannosaurus</li></directDefFilter>
+		</filter>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Item/Fossils/Tyrannosaurid</texPath>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+
+	<ThingDef ParentName="EggFertBase">
+		<defName>EggPangaeaTyrannosaurusFertilized</defName>
+		<label>tyrannosaurus egg (fert.)</label>
+		<description>A fertilized Tyrannosaurus egg. If all goes well, it should hatch into a baby Tyrannosaurus. It can be eaten raw, but it's much better cooked.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AnimalProductRaw/EggOval</texPath>
+			<color>(245,245,245)</color>
+		</graphicData>
+		<statBases>
+			<MarketValue>100.0</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Hatcher">
+				<hatcherDaystoHatch>10</hatcherDaystoHatch>
+				<hatcherPawn>PangaeaTyrannosaurus</hatcherPawn>
+			</li>
+		</comps>
+	</ThingDef>
+
+
 	<ThingDef ParentName="BigBirdThingBase">
 		<defName>PangaeaTyrannosaurus</defName>
 		<label>tyrannosaurus</label>
@@ -50,13 +82,6 @@
 		</comps>
 		<modExtensions>
 			<li Class="ProjectPangaea.ModExt_Extinct">
-				<genus>tyrannosaurus</genus>
-				<species>rex</species>
-				<animalType>Dinosaur</animalType>
-				<fossilGraphicData>
-						<texPath>Things/Item/Fossils/Tyrannosaurid</texPath>
-						<graphicClass>Graphic_StackCount</graphicClass>
-				</fossilGraphicData>
 			</li>
 		</modExtensions>
 		<tools>

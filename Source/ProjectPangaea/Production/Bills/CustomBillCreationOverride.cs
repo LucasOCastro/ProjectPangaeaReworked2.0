@@ -11,10 +11,10 @@ namespace ProjectPangaea.Production
         public static bool Prefix(ref Bill __result, RecipeDef recipe)
         {
             //todo this will be moved to a custom window later
-            RecipeExtension spliceExtension = recipe.GetModExtension<RecipeExtension>();
-            if (spliceExtension != null)
+            RecipeExtension recipeExtension = recipe.GetModExtension<RecipeExtension>();
+            if (recipeExtension != null)
             {
-                __result = new PangaeaBill(recipe, spliceExtension.recipes.FirstOrFallback());
+                __result = new PangaeaBill(recipe, recipeExtension.recipes.FirstOrFallback());
                 return false;
             }
             return true;

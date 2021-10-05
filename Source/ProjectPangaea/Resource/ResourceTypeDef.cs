@@ -19,6 +19,12 @@ namespace ProjectPangaea
             foreach (string error in base.ConfigErrors())
                 yield return error;
 
+            if (thingDef == null)
+            {
+                yield return "null " + nameof(thingDef) + "in " + this;
+                yield break;
+            }
+
             var compProp = thingDef.GetCompProperties<CompProperties_PangaeaResourceHolder>();
             if (compProp == null || !compProp.IsOfType(this))
                 yield return thingDef + " can't support resource of def " + this;

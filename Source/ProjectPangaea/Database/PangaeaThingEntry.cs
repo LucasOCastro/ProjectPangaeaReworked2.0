@@ -7,7 +7,7 @@ namespace ProjectPangaea
     public class PangaeaThingEntry
     {
         public ThingDef ThingDef { get; }
-        public string Label => ExtinctExtension?.ScientificName ?? ThingDef.LabelCap;
+        public string Label => ThingDef.LabelCap;
 
         public ModExt_Extinct ExtinctExtension { get; }
         public bool IsExtinct => ExtinctExtension != null;
@@ -29,8 +29,6 @@ namespace ProjectPangaea
             {
                 AddResourceOfType(generalResourceType);
             }
-
-            Production.PangaeaRecipeGen.GenAndRegisterRecipesFor(this);
         }
 
         public void AddResourceOfType(ResourceTypeDef resourceType)
@@ -41,7 +39,9 @@ namespace ProjectPangaea
             }
         }
 
-        public PangaeaResource GetResourceOfDef(ResourceTypeDef def) => resources.TryGetValue(def);
+        public PangaeaResource GetResource(ResourceTypeDef def) => resources.TryGetValue(def);
+
+        public bool TryGetResource(ResourceTypeDef def, out PangaeaResource resource) => resources.TryGetValue(def, out resource);
 
         public override string ToString()
         {

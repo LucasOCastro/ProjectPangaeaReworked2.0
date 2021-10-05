@@ -26,7 +26,7 @@ namespace ProjectPangaea
             {
                 if (allPossibleResources == null)
                 {
-                    allPossibleResources = AllPossibleEntries.Select(e => e.GetResourceOfDef(resourceType)).ToList();
+                    allPossibleResources = AllPossibleEntries.Select(e => e.GetResource(resourceType)).ToList();
                 }
                 return allPossibleResources;
             }
@@ -39,7 +39,7 @@ namespace ProjectPangaea
             {
                 if (allPossibleEntries == null)
                 {
-                    allPossibleEntries = PangaeaDatabase.AllEntries.Where(e => e.GetResourceOfDef(resourceType) != null).ToList();
+                    allPossibleEntries = PangaeaDatabase.AllEntries.Where(e => e.GetResource(resourceType) != null).ToList();
                 }
                 return allPossibleEntries;
             }

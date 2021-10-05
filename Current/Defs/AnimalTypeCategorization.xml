@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ProjectPangaea.PangaeaEntryDef>
+		<defName>SetMammalAnimalType</defName>
+		<settings>
+			<applyFilter>
+				<directDefFilter>
+					<li>Cow</li>
+					<li>Thrumbo</li>
+					<li>Boomalope</li>
+				</directDefFilter>
+			</applyFilter>
+			<animalType>Mammal</animalType>
+		</settings>
+	</ProjectPangaea.PangaeaEntryDef>
+	
+	<ProjectPangaea.PangaeaEntryDef>
+		<defName>SetDinosaurAnimalType</defName>
+		<settings>
+			<applyFilter>
+				<directDefFilter>
+					<li>PangaeaDilophosaurus</li>
+					<li>PangaeaTyrannosaurus</li>
+				</directDefFilter>
+			</applyFilter>
+			<animalType>Dinosaur</animalType>
+		</settings>
+	</ProjectPangaea.PangaeaEntryDef>
+
+</Defs>

@@ -1,4 +1,5 @@
 ﻿using Verse;
+using HarmonyLib;
 
 namespace ProjectPangaea
 {
@@ -16,7 +17,7 @@ namespace ProjectPangaea
             {
                 if (value == null)
                 {
-                    value = PangaeaDatabase.GetOrNull(owner)?.GetResourceOfDef(def);
+                    value = PangaeaDatabase.GetOrNull(owner)?.GetResource(def);
                 }
                 return value;
             }
@@ -36,14 +37,12 @@ namespace ProjectPangaea
             var node = xmlRoot.FirstChild;
             if (node != null)
             {
+                System.Type thisType = typeof(PangaeaResourceReference);
+
                 string typeStr = node.Name;
-                ResourceTypeDef type = DefDatabase<ResourceTypeDef>.GetNamed(typeStr);
-
-                string ownerStr = node.Value;
-                ThingDef owner = DefDatabase<ThingDef>.GetNamed(ownerStr);
-
-                this.owner = owner;
-                this.def = type;
+                DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, AccessTools.Field(thisType, nameof(def)), typeStr, assumeFieldType: typeof(ResourceTypeDef));
+                string ownerStr = node?.FirstChild?.Value;
+                DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, AccessTools.Field(thisType, nameof(owner)), ownerStr, assumeFieldType: typeof(ThingDef));
             }
         }
     }
@@ -69,7 +68,7 @@ namespace ProjectPangaea
             {
                 if (graphic == null)
                 {
-                    graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef).graphicData.Graphic;
+                    graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef)?.graphicData.Graphic ?? BaseContent.BadGraphic;
                 }
                 return graphic;
             }

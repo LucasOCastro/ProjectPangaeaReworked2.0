@@ -5,7 +5,8 @@ namespace ProjectPangaea.Production
 {
     public class PangaeaThingFilter : ThingFilter
     {
-        public HashSet<PangaeaResource> AllowedResources { get; private set; } = new HashSet<PangaeaResource>();
+        private HashSet<PangaeaResource> allowedResources = new HashSet<PangaeaResource>();
+        public HashSet<PangaeaResource> AllowedResources => allowedResources;
 
         public PangaeaThingFilter(params PangaeaResource[] allowedResources)
         {
@@ -13,7 +14,7 @@ namespace ProjectPangaea.Production
             {
                 for (int i = 0; i < allowedResources.Length; i++)
                 {
-                    Allow(allowedResources[i]);
+                    SetAllow(allowedResources[i], true);
                 }
             }
         }
@@ -21,13 +22,8 @@ namespace ProjectPangaea.Production
         {
             foreach (var resource in allowedResources)
             {
-                Allow(resource);
+                SetAllow(resource, true);
             }
-        }
-
-        public void SyncAllowedEntries(PangaeaThingFilter other)
-        {
-            this.AllowedResources = other?.AllowedResources ?? new HashSet<PangaeaResource>(AllowedResources);
         }
 
         public override bool Allows(Thing t)
@@ -43,28 +39,30 @@ namespace ProjectPangaea.Production
 
         public bool Allows(PangaeaResource resource) => AllowedResources.Contains(resource);
 
-        public void Toggle(PangaeaResource resource)
+        public void SetAllow(PangaeaResource resource, bool allow)
         {
-            if (AllowedResources.Contains(resource))
+            if (allow)
             {
-                Disallow(resource);
+                AllowedResources.Add(resource);
+                SetAllow(resource.ResourceDef.thingDef, true);
             }
             else
             {
-                Allow(resource);
+                AllowedResources.Remove(resource);
+                DisallowIfNotNeeded(resource.ResourceDef.thingDef);
             }
         }
 
-        public void Allow(PangaeaResource resource)
+        private void DisallowIfNotNeeded(ThingDef thingDef)
         {
-            AllowedResources.Add(resource);
-            SetAllow(resource.ResourceDef.thingDef, true);
-        }
-
-        public void Disallow(PangaeaResource resource)
-        {
-            AllowedResources.Remove(resource);
-            SetAllow(resource.ResourceDef.thingDef, false);
+            foreach (var resource in AllowedResources)
+            {
+                if (resource.ResourceDef.thingDef == thingDef)
+                {
+                    return;
+                }
+            }
+            SetAllow(thingDef, false);
         }
 
         public override void CopyAllowancesFrom(ThingFilter other)
@@ -75,9 +73,16 @@ namespace ProjectPangaea.Production
                 AllowedResources.Clear();
                 foreach (var resource in ptf.AllowedResources)
                 {
-                    Allow(resource);
+                    SetAllow(resource, true);
                 }
             }
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            //TODO expos
+            //Scribe_Collections.Look(ref allowedResources, "")
         }
     }
 }

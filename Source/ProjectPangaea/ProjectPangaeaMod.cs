@@ -23,7 +23,7 @@ namespace ProjectPangaea
 
         private bool ShouldAddToDB(ThingDef thingDef)
         {
-            if (thingDef.plant == null && !thingDef.race.Animal)
+            if (thingDef.plant == null && thingDef.race != null && !thingDef.race.Animal)
             {
                 return false;
             }
@@ -63,9 +63,25 @@ namespace ProjectPangaea
                     extinctEntry.AddResourceOfType(extinctResourceTypes[i]);
                 }
             }
-
             HasInitiatedDatabase = true;
+
+            Production.PangaeaRecipeLister.Init();
+            foreach (var entry in PangaeaDatabase.AllEntries)
+            {
+                Production.PangaeaRecipeGen.GenAndRegisterRecipesFor(entry);
+            }
+            
+
+            
             PangaeaSettings.UpdateSettings(Settings);
+        }
+
+        public static void AssertDatabaseInit(string before = "")
+        {
+            if (!HasInitiatedDatabase)
+            {
+                throw new System.Exception("Should initiate database" + (before.NullOrEmpty() ? "!" : (" before " + before + "!")));
+            }
         }
     }
 

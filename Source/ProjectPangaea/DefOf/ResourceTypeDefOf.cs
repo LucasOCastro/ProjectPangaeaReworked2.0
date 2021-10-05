@@ -27,7 +27,7 @@ namespace ProjectPangaea
 
         static ResourceTypeDefOf()
         {
-            DefOfHelper.EnsureInitializedInCtor(typeof(ResourceTypeDef));
+            DefOfHelper.EnsureInitializedInCtor(typeof(ResourceTypeDefOf));
         }
     }
 }

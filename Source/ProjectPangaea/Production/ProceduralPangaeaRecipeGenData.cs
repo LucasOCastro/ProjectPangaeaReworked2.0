@@ -15,12 +15,12 @@ namespace ProjectPangaea.Production
             var recipe = new PangaeaRecipeSettings();
             if (baseRecipe != null)
             {
-                recipe.ingredients = new List<PangaeaRecipeSettings.PortionData>(baseRecipe.ingredients);
-                recipe.results = new List<PangaeaRecipeSettings.PortionData>(baseRecipe.results);
+                recipe.ingredients = new List<PortionData>(baseRecipe.ingredients);
+                recipe.results = new List<PortionData>(baseRecipe.results);
                 recipe.canBeReversed = baseRecipe.canBeReversed;
             }
 
-            bool genFromList(List<ProceduralResourceData> genFrom, List<PangaeaRecipeSettings.PortionData> target)
+            bool genFromList(List<ProceduralResourceData> genFrom, List<PortionData> target)
             {
                 foreach (var item in genFrom)
                 {
@@ -39,23 +39,37 @@ namespace ProjectPangaea.Production
             return recipe;
         }
 
+
         [System.Serializable]
         public class ProceduralResourceData
         {
-            public ResourceTypeDef resourceType;
+            public ResourceTypeDef ResourceType
+            {
+                get
+                {
+                    return DefDatabase<ResourceTypeDef>.GetNamedSilentFail(taggedThingDef);
+                }
+            }
+            //TODO ill change this for a special like EntryThingGetter class or whatever
+            //For example: get egg from entry, get corpse, etc etc
             public string taggedThingDef;
             public int count;
 
-            public PangaeaRecipeSettings.PortionData GenFor(PangaeaThingEntry entry)
+            public PortionData GenFor(PangaeaThingEntry entry)
             {
-                if (resourceType != null)
+                var resourceType = ResourceType;
+                if (resourceType != null && entry.TryGetResource(resourceType, out PangaeaResource resource))
                 {
-                    return new PangaeaRecipeSettings.PortionData(entry.GetResourceOfDef(resourceType), count);
+                    return new PortionData(resource, count);
                 }
                 if (!taggedThingDef.NullOrEmpty())
                 {
                     string name = taggedThingDef + "_" + entry.ThingDef.defName;
-                    return new PangaeaRecipeSettings.PortionData(DefDatabase<ThingDef>.GetNamed(name), count);
+                    ThingDef def = DefDatabase<ThingDef>.GetNamedSilentFail(name);
+                    if (def != null)
+                    {
+                        return new PortionData(def, count);
+                    }
                 }
                 return null;
             }
@@ -66,27 +80,35 @@ namespace ProjectPangaea.Production
         {
             public void LoadDataFromXmlCustom(System.Xml.XmlNode xmlRoot)
             {
-                for (int i = 0; i < xmlRoot.ChildNodes.Count; i++)
+                System.Xml.XmlNode node = xmlRoot.FirstChild;
+                while (node != null)
+                {
+                    string resourceTypeStr = node.Name;
+                    string countStr = node.FirstChild.Value;
+
+                    var result = new ProceduralResourceData
+                    {
+                        count = ParseHelper.FromString<int>(countStr),
+                        taggedThingDef = resourceTypeStr
+                    };
+                    Add(result);
+
+                    node = node.NextSibling?.NextSibling;
+                }
+
+                /*for (int i = 0; i < xmlRoot.ChildNodes.Count; i++)
                 {
                     var child = xmlRoot.ChildNodes[i];
 
                     string resourceTypeStr = child.Name;
-                    ResourceTypeDef resourceType = DefDatabase<ResourceTypeDef>.GetNamed(resourceTypeStr);
-
                     string countStr = child.Value;
-                    int count = ParseHelper.FromString<int>(countStr);
-
-                    if ((resourceType != null || !resourceTypeStr.NullOrEmpty()) && count > 0)
+                    var result = new ProceduralResourceData
                     {
-                        var result = new ProceduralResourceData()
-                        {
-                            resourceType = resourceType,
-                            taggedThingDef = resourceTypeStr,
-                            count = count,
-                        };
-                        Add(result);
-                    }
-                }
+                        count = ParseHelper.FromString<int>(countStr),
+                        taggedThingDef = resourceTypeStr
+                    };
+                    Add(result);
+                }*/
             }
         }
     }    

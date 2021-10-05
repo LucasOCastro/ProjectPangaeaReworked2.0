@@ -10,20 +10,23 @@
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Smelt</effectWorking>
 		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
-		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_PangaeaBill</workerCounterClass>
 		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.RecipeExtension">
 				<proceduralRecipeDefs>
-					<baseRecipe>
-						<canBeReversed>false</canBeReversed>
-					</baseRecipe>
-					<ingredients>
-						<Pangaea_Fossil>5</Pangaea_Fossil>
-					</ingredients>
-					<results>
-						<Pangaea_DNA>10</Pangaea_DNA>
-					</results>
+					<li>
+						<baseRecipe>
+							<canBeReversed>false</canBeReversed>
+						</baseRecipe>
+						<ingredients>
+							<Pangaea_Fossil>5</Pangaea_Fossil>
+						</ingredients>
+						<results>
+							<Pangaea_DNA>10</Pangaea_DNA>
+						</results>
+					</li>
+					
 				</proceduralRecipeDefs>
 			</li>
 		</modExtensions>
@@ -38,26 +41,25 @@
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>ButcherFlesh</effectWorking>
 		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
-		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_PangaeaBill</workerCounterClass>
 		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.RecipeExtension">
 				<proceduralRecipeDefs>
-					<baseRecipe>
-						<canBeReversed>false</canBeReversed>
-					</baseRecipe>
-					<ingredients>
-						<Corpse>1</Corpse>
-					</ingredients>
-					<results>
-						<Pangaea_DNA>10</Pangaea_DNA>
-					</results>
+					<li>
+						<baseRecipe>
+							<canBeReversed>false</canBeReversed>
+						</baseRecipe>
+						<ingredients>
+							<Corpse>1</Corpse>
+						</ingredients>
+						<results>
+							<Pangaea_DNA>10</Pangaea_DNA>
+						</results>
+					</li>
 				</proceduralRecipeDefs>
 			</li>
 		</modExtensions>
-		<products>
-			<Pangaea_DNABase>1</Pangaea_DNABase>
-		</products>
 		<autoStripCorpses>true</autoStripCorpses>
 	</RecipeDef>
 	
@@ -70,10 +72,11 @@
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>ButcherFlesh</effectWorking>
 		<soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
-		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_ExtractDNA</workerCounterClass>
+		<workerCounterClass>ProjectPangaea.Production.RecipeWorkerCounter_PangaeaBill</workerCounterClass>
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.RecipeExtension">
 				<recipes>
+				<!--Boomaloope = Cow + Thrumbo?(placeholder)-->
 					<li>
 						<canBeReversed>true</canBeReversed>
 						<ingredients>

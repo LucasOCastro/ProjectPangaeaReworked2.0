@@ -21,7 +21,7 @@
 		</thingCategories>
 		<comps>
 			<li Class="ProjectPangaea.CompProperties_PangaeaResourceHolder">
-				<resourceType>ProjectPangaea.DNA</resourceType>
+				<resourceType>Pangaea_DNA</resourceType>
 			</li>
 		</comps>
 	</ThingDef>

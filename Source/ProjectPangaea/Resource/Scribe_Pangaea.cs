@@ -39,7 +39,7 @@ namespace ProjectPangaea
                 PangaeaThingEntry entry = null;
                 Scribe_Pangaea.Look(ref entry, label + resouceEntrySuffix);
 
-                resource = entry?.GetResourceOfDef(def);
+                resource = entry?.GetResource(def);
             }
         }
 

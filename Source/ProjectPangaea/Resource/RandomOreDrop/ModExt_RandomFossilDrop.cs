@@ -18,7 +18,7 @@ namespace ProjectPangaea
                 {
                     if (fossil == null)
                     {
-                        fossil = PangaeaDatabase.GetOrNull(fossilParent)?.GetResourceOfDef(ResourceTypeDefOf.Pangaea_Fossil);
+                        fossil = PangaeaDatabase.GetOrNull(fossilParent)?.GetResource(ResourceTypeDefOf.Pangaea_Fossil);
                     }
 
                     if (fossil == null)

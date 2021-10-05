@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using RimWorld;
+using System.Linq;
 using Verse;
 
 namespace ProjectPangaea
@@ -9,9 +9,10 @@ namespace ProjectPangaea
     [Serializable]
     public class EnumDictionary<E, T> : Dictionary<E, T> where E : Enum
     {
-        public EnumDictionary(T defaultValue = default, params E[] exceptions) : base()
+        private static E[] enumVals = (E[])Enum.GetValues(typeof(E));
+        private static Dictionary<string, E> stringToEnumDict = enumVals.ToDictionary(e => e.ToString().ToLower());
+        public EnumDictionary(T defaultValue, params E[] exceptions) : base()
         {
-            E[] enumVals = (E[])Enum.GetValues(typeof(E));
             for (int i = 0; i < enumVals.Length; i++)
             {
                 bool isException = false;
@@ -31,6 +32,10 @@ namespace ProjectPangaea
             }
         }
 
+        public EnumDictionary() :this(default)
+        {
+        }
+
         //For custom deserialization
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
@@ -39,10 +44,9 @@ namespace ProjectPangaea
                 var node = xmlRoot.ChildNodes[i];
 
                 string keyString = node.Name;
-                E key = ParseHelper.FromString<E>(keyString);
+                E key = stringToEnumDict[keyString.ToLower()];
 
-                string valueString = node.FirstChild.Value;
-                T value = ParseHelper.FromString<T>(valueString);
+                T value = DirectXmlToObject.ObjectFromXml<T>(node, true);
 
                 if (key != null && value != null)
                 {

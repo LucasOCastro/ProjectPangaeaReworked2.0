@@ -32,7 +32,7 @@
 		</fixedIngredientFilter>
 	</RecipeDef>-->
 
-	<RecipeDef Name="Pangaea_CreateEggsFromDNA">
+	<!--<RecipeDef Name="Pangaea_CreateEggsFromDNA">
 		<defName>Pangaea_CreateEggsFromDNA</defName>
 		<label>Create eggs directly from prehistoric DNA</label>
 		<description>Use advanced scientific techniques to recreate eggs of prehistoric animals using straps of their DNA.</description>
@@ -43,37 +43,22 @@
 		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
 		<allowMixingIngredients>false</allowMixingIngredients>
 		<modExtensions>
-			<li Class="ProjectPangaea.Production.Pangaea_CreateLifeRecipeExtension">
+			<li Class="ProjectPangaea.Production.RecipeExtension">
+				<proceduralRecipeDefs>
+					<baseRecipe>
+						<canBeReversed>false</canBeReversed>
+					</baseRecipe>
+					<ingredients>
+						<Pangaea_DNA>25</Pangaea_DNA>
+						ANY EGG UNHE
+					</ingredients>
+					<results>
+						<Pangaea_DNA>10</Pangaea_DNA>
+					</results>
+				</proceduralRecipeDefs>
 			</li>
 		</modExtensions>
-		<products>
-			<EggChickenFertilized>1</EggChickenFertilized>
-		</products>
-		<ingredients>
-			<li>
-				<filter>
-					<categories>
-						<li>PangaeaDNA</li>
-					</categories>
-				</filter>
-				<count>50</count>
-			</li>
-			<li>
-				<filter>
-					<categories>
-						<li>EggsUnfertilized</li>
-					</categories>
-				</filter>
-				<count>1</count>
-			</li>
-		</ingredients>
-		<fixedIngredientFilter>
-			<categories>
-				<li>PangaeaDNA</li>
-				<li>EggsUnfertilized</li>
-			</categories>
-		</fixedIngredientFilter>
-	</RecipeDef>
+	</RecipeDef>-->
 
 	
 

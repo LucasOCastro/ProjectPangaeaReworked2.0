@@ -87,6 +87,7 @@
     <Compile Include="Production\PangaeaRecipeSettings.cs" />
     <Compile Include="Production\PangaeaBill.cs" />
     <Compile Include="Production\FindIngredientForPangaeaBillOverride.cs" />
+    <Compile Include="Production\PortionData.cs" />
     <Compile Include="Production\ProceduralPangaeaRecipeGenData.cs" />
     <Compile Include="Production\RecipeExtension.cs" />
     <Compile Include="Production\CurrentBillGetter.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="UI\PangaeaRectUtility.cs" />
     <Compile Include="PangaeaResourceCounter.cs" />
     <Compile Include="PangaeaSpecialThingFilterWorker_CorpsesWithoutDNA.cs" />
-    <Compile Include="DefOf\PangaeaSpecialThingFilterDefOf.cs" />
     <Compile Include="Stats\PangaeaStatCategoryDefOf.cs" />
     <Compile Include="Stats\PangaeaStatDefOf.cs" />
     <Compile Include="DebugActions.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="Production\Bills\CustomBillCreationOverride.cs" />
     <Compile Include="Production\RecipeProductsOverride.cs" />
     <Compile Include="DefOf\PangaeaRecipeDefOf.cs" />
-    <Compile Include="Production\DNAExtraction\RecipeWorkerCounter_PangaeaBill.cs" />
+    <Compile Include="Production\RecipeWorkerCounter_PangaeaBill.cs" />
     <Compile Include="Resource\PangaeaResource.cs" />
     <Compile Include="Resource\StatWorker_DNAAmount.cs" />
     <Compile Include="Categorization\PlantCategory.cs" />

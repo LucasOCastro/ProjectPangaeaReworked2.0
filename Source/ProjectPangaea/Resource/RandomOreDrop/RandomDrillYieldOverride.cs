@@ -18,8 +18,8 @@ namespace ProjectPangaea
         public static PangaeaResource GetRandomFossil()
         {
             var fossilDef = ResourceTypeDefOf.Pangaea_Fossil;
-            var randomEntry = PangaeaDatabase.AllEntries.Where(e => e.GetResourceOfDef(fossilDef) != null).RandomElement();
-            return randomEntry?.GetResourceOfDef(ResourceTypeDefOf.Pangaea_Fossil);
+            var randomEntry = PangaeaDatabase.AllEntries.Where(e => e.GetResource(fossilDef) != null).RandomElement();
+            return randomEntry?.GetResource(ResourceTypeDefOf.Pangaea_Fossil);
         }
     }
 

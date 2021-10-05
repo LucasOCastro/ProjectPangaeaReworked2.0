@@ -17,7 +17,7 @@ namespace ProjectPangaea.Production
      * 
      * 1-The game creates a "sorted" IngredientCount list to use when finding the best Things to use as
      * ingredients. The problem is, whenever this sorted list is iterated, its contents are never 
-     * actually accessed, and only the IngredientCounts from the RecipeDef are taken into consideration.
+     * actually accessed, and only the default IngredientCounts from the RecipeDef are considered.
      * This basically makes the sorted list useless, and seems like an oversight by Ludeon.
      * Because I had overriden the 'MakeIngredientsListInProcessingOrder' method to change the ingredients
      * based on the bill, this would throw a index out of bounds exception. I've changed the code to use this

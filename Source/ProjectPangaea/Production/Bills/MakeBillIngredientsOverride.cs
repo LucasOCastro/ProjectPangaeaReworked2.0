@@ -11,8 +11,9 @@ namespace ProjectPangaea.Production
     {
         public static bool Prefix(List<IngredientCount> ingredientsOrdered, Bill bill)
         {
-            if (bill is PangaeaBill pangaeaBill)
+            if (bill is PangaeaBill pangaeaBill) 
             {
+                ingredientsOrdered.Clear();
                 foreach (var ing in pangaeaBill.MakeIngredients())
                 {
                     ingredientsOrdered.Add(ing);

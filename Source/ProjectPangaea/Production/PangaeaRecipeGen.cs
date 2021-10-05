@@ -14,11 +14,6 @@ namespace ProjectPangaea.Production
             {
                 foreach (var procedural in recipeDef.proceduralRecipeDefs)
                 {
-                    var recipe = procedural.GenRecipe(entry);
-                    if (recipe != null)
-                    {
-                        recipeDef.recipes.Add(recipe);
-                    }
                 }
             }
         }

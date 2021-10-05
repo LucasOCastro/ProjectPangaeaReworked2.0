@@ -1,6 +1,7 @@
 ﻿using Verse;
 using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectPangaea.Production
 {
@@ -26,17 +27,19 @@ namespace ProjectPangaea.Production
         {
             if (RecipeExtension == null)
             {
-                Log.Error(nameof(PangaeaBill) + " was made with recipe of def " + recipe.defName + " which has no " + nameof(Production.RecipeExtension));
-                return;
+                throw new System.Exception(nameof(PangaeaBill) + " was made with recipe of def " + recipe.defName + " which has no " + nameof(Production.RecipeExtension));
             }
 
             if (!RecipeExtension.recipes.Contains(recipeSettings))
             {
-                Log.Error(nameof(PangaeaBill) + " was made with recipe its def does not contain!");
-                return;
+                throw new System.Exception(nameof(PangaeaBill) + " was made with recipe its def does not contain!");
             }
 
             this.recipeSettings = recipeSettings;
+
+            PangaeaThingFilter pangaeaFilter = RecipeSettings.GenerateThingFilter();
+            pangaeaFilter.CopyAllowancesFrom(ingredientFilter);
+            ingredientFilter = pangaeaFilter;
         }
 
         public PangaeaBill() : base()

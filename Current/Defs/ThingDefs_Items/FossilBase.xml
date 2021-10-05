@@ -31,7 +31,7 @@
 		</thingCategories>
 		<comps>
 			<li Class="ProjectPangaea.CompProperties_PangaeaResourceHolder">
-				<resourceType>ProjectPangaea.Fossil</resourceType>
+				<resourceType>Pangaea_Fossil</resourceType>
 			</li>
 		</comps>
 	</ThingDef>

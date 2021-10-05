@@ -8,43 +8,28 @@ namespace ProjectPangaea
     [System.Serializable]
     public class PangaeaEntryFilter
     {
-        public string textFilter = "";
+        private EnumDictionary<AnimalType, bool> animalTypes = new EnumDictionary<AnimalType, bool>(true);
+        private EnumDictionary<ExtinctionStatus, bool> extinctionStatus = new EnumDictionary<ExtinctionStatus, bool>(true);
+        private EnumDictionary<PangaeaDiet, bool> diets = new EnumDictionary<PangaeaDiet, bool>(true);
 
-
-        private List<AnimalType> animalTypes = new List<AnimalType>();
-        private List<ExtinctionStatus> extinctionStatus = new List<ExtinctionStatus>();
-        private List<PangaeaDiet> diets = new List<PangaeaDiet>();
-
-        public HashSet<ThingDef> directDefFilter = null;
+        public List<ThingDef> directDefFilter = null;
 
         public bool this[AnimalType type]
         {
-            get => animalTypes.Contains(type);
-            set 
-            {
-                if (value == true) animalTypes.Add(type);
-                else animalTypes.Remove(type);
-            }
+            get => animalTypes[type];
+            set => animalTypes[type] = value;
         }
 
         public bool this[ExtinctionStatus extinction]
         {
-            get => extinctionStatus.Contains(extinction);
-            set
-            {
-                if (value == true) extinctionStatus.Add(extinction);
-                else extinctionStatus.Remove(extinction);
-            }
+            get => extinctionStatus[extinction];
+            set => extinctionStatus[extinction] = value;
         }
 
         public bool this[PangaeaDiet diet]
         {
-            get => diets.Contains(diet);
-            set
-            {
-                if (value == true) diets.Add(diet);
-                else diets.Remove(diet);
-            }
+            get => diets[diet];
+            set => diets[diet] = value;
         }
 
         public virtual bool Allows(PangaeaThingEntry entry)
@@ -52,11 +37,6 @@ namespace ProjectPangaea
             if (directDefFilter != null)
             {
                 return directDefFilter.Contains(entry.ThingDef);
-            }
-
-            if (!entry.ThingDef.label.Contains(textFilter.ToLower()))
-            {
-                return false;
             }
 
             if (entry.ThingDef.plant != null || entry.Category == null)
@@ -86,8 +66,5 @@ namespace ProjectPangaea
         {
             return this[category.Type] && this[category.ExtinctionStatus] && this[category.Diet];
         }
-
-        
     }
-
 }

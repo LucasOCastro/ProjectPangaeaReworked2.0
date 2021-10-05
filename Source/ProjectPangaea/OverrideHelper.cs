@@ -5,19 +5,20 @@ namespace ProjectPangaea
 {
     public static class OverrideHelper
     {
-        private static HashSet<EntrySettings> entrySettingsList = new HashSet<EntrySettings>();
+        private static List<EntrySettings> entrySettingsList = new List<EntrySettings>();
 
         public static void Init()
         {
             foreach (var entryDef in DefDatabase<PangaeaEntryDef>.AllDefs)
             {
-                entrySettingsList.Add(entryDef.settings);
+                EntrySettings settings = entryDef.settings;
+                entrySettingsList.Add(settings);
             }
         }
 
         public static void DoOverrides()
         {
-            HashSet<EntrySettings> remainingOverrides = new HashSet<EntrySettings>(entrySettingsList);
+            List<EntrySettings> remainingOverrides = new List<EntrySettings>(entrySettingsList);
 
             foreach (var entrySetting in entrySettingsList)
             {

@@ -14,8 +14,8 @@ namespace ProjectPangaea
 
             public ResourceTypeGraphicEntry(ResourceTypeDef resourceType) => ResourceType = resourceType;
 
-            private static Dictionary<ThingDef, ResourceGraphicDef> specificDict = new Dictionary<ThingDef, ResourceGraphicDef>();
-            private static List<ResourceGraphicDef> nonSpecificList = new List<ResourceGraphicDef>();
+            private Dictionary<ThingDef, ResourceGraphicDef> specificDict = new Dictionary<ThingDef, ResourceGraphicDef>();
+            public List<ResourceGraphicDef> nonSpecific = new List<ResourceGraphicDef>();
 
             public ResourceGraphicDef GetFor(PangaeaThingEntry entry)
             {
@@ -23,11 +23,12 @@ namespace ProjectPangaea
                 {
                     return graphic;
                 }
-                for (int i = 0; i < nonSpecificList.Count; i++)
+                for (int i = nonSpecific.Count - 1; i >= 0; i--)
                 {
-                    if (nonSpecificList[i].filter.Allows(entry))
+                    if (nonSpecific[i].filter.Allows(entry))
                     {
-                        graphic = nonSpecificList[i];
+                        graphic = nonSpecific[i];
+                        break;
                     }
                 }
                 return graphic;
@@ -35,7 +36,10 @@ namespace ProjectPangaea
 
             public void Register(ResourceGraphicDef graphic)
             {
-                if (graphic.resourceType != ResourceType) return;
+                if (graphic.resourceType != ResourceType)
+                {
+                    throw new Exception("Tried registering " + graphic + " with resourceType different than " + ResourceType);
+                }
 
                 if (!graphic.filter.directDefFilter.EnumerableNullOrEmpty())
                 {
@@ -45,7 +49,7 @@ namespace ProjectPangaea
                     }
                     return;
                 }
-                nonSpecificList.Add(graphic);
+                nonSpecific.Add(graphic);
             }
         }
 
