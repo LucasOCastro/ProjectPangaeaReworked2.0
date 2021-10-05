@@ -38,7 +38,6 @@ namespace ProjectPangaea.Production
             this.recipeSettings = recipeSettings;
 
             PangaeaThingFilter pangaeaFilter = RecipeSettings.GenerateThingFilter();
-            //pangaeaFilter.CopyAllowancesFrom(ingredientFilter);
             ingredientFilter = pangaeaFilter;
         }
 

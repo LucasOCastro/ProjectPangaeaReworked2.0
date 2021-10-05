@@ -28,6 +28,25 @@
 		</settings>
 	</ProjectPangaea.PangaeaEntryDef>
 	
+	<ProjectPangaea.PangaeaEntryDef>
+		<defName>ThrumboDNADescriptionOverride</defName>
+		<settings>
+			<applyFilter>
+				<directDefFilter>
+					<li>Thrumbo</li>
+				</directDefFilter>
+			</applyFilter>
+			<resourceOverrides>
+				<li>
+					<key>Pangaea_DNA</key>
+					<value>
+						<description>Genetic material of the rare and majestic Thrumbo, ocasionally found roaming the rim.</description>
+					</value>
+				</li>
+			</resourceOverrides>
+		</settings>
+	</ProjectPangaea.PangaeaEntryDef>
+	
 	<ProjectPangaea.ResourceTypeDef>
 		<defName>Pangaea_Fossil</defName>
 		<label>{0} fossil</label>
