@@ -111,9 +111,7 @@
 								<count>5</count>
 							</li>
 							<li>
-								<resource>
-									<Pangaea_DNA>Thrumbo</Pangaea_DNA>
-								</resource>
+								<thing>Pangaea_Boomgenes</thing>
 								<count>5</count>
 							</li>
 						</ingredients>

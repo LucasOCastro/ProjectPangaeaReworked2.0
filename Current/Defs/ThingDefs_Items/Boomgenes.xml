@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+	
+	<ThingDef ParentName="ResourceBase">
+		<defName>Pangaea_Boomgenes</defName>
+		<label>boomgenes</label>
+		<description>Genomes responsible for giving creatures storages of explosive chemfuel.</description>
+		<statBases>
+			<Mass>0.1</Mass>
+			<MarketValue>5</MarketValue>
+			<StuffPower_Insulation_Heat>24</StuffPower_Insulation_Heat>
+		</statBases>
+		<thingCategories>
+			<li>PangaeaDNA</li>
+		</thingCategories>
+		<graphicData>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<texPath>Things/Item/Genomes/Boomgenes</texPath>
+		</graphicData>
+	</ThingDef>
+
+</Defs>
