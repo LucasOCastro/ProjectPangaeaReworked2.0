@@ -24,9 +24,9 @@ namespace ProjectPangaea.Production
                     continue;
                 }
 
-                foreach (ProceduralPangaeaRecipeGenData procedural in extension.proceduralRecipeDefs)
+                foreach (var procedural in extension.proceduralRecipeDefs)
                 {
-                    foreach (PangaeaThingEntry entry in PangaeaDatabase.AllEntries)
+                    foreach (var entry in PangaeaDatabase.AllEntries)
                     {
                         var generated = procedural.GenRecipe(entry);
                         if (generated != null)

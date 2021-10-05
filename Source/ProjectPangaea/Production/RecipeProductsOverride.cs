@@ -21,7 +21,7 @@ namespace ProjectPangaea.Production
             var recipeExtension = recipeDef.GetModExtension<RecipeExtension>();
             if (recipeExtension != null)
             {
-                foreach (var result in CurrentBillGetter.CurrentBill.MakeResults())
+                foreach (var result in CurrentBillGetter.CurrentBill.MakeResults(ingredients))
                     yield return result;
                 yield break;
             }

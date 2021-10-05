@@ -6,8 +6,8 @@ namespace ProjectPangaea.Production
     [System.Serializable]
     public partial class PangaeaRecipeSettings
     {
-        private PangaeaRecipeSettings reverse;
-        public PangaeaRecipeSettings Reverse
+        private PangaeaRecipeSettings reversed;
+        public PangaeaRecipeSettings Reversed
         {
             get
             {
@@ -16,24 +16,35 @@ namespace ProjectPangaea.Production
                     return null;
                 }
 
-                if (reverse == null)
+                if (reversed == null)
                 {
-                    reverse = new PangaeaRecipeSettings
+                    reversed = new PangaeaRecipeSettings
                     {
                         ingredients = this.results,
                         results = this.ingredients,
                         canBeReversed = true,
-                        reverse = this
+                        reversed = this
                     };
                 }
-                return reverse;
+                return reversed;
             }
         }
 
         public List<PortionData> ingredients = new List<PortionData>();
         public List<PortionData> results = new List<PortionData>();
 
+        public List<StackCountProcessor> stackCountProcessors = new List<StackCountProcessor>();
+
         public bool canBeReversed = true;
+
+        public string Summary
+        {
+            get
+            {
+                //TODO placeholder
+                return ingredients.ToStringSafeEnumerable() + "\nTO:\n" + results.ToStringSafeEnumerable();
+            }
+        }
 
         public IEnumerable<IngredientCount> MakeIngredients()
         {
@@ -45,14 +56,26 @@ namespace ProjectPangaea.Production
             }
         }
 
-        public IEnumerable<Thing> MakeResults()
+        public IEnumerable<Thing> MakeResults(List<Thing> ingredients)
         {
             for (int i = 0; i < results.Count; i++)
             {
                 Thing result = results[i].MakeThing();
                 if (result != null)
+                {
+                    result.stackCount = GetStackCount(result.stackCount, ingredients);
                     yield return result;
+                }
             }
+        }
+
+        private int GetStackCount(int baseCount, List<Thing> ingredients)
+        {
+            foreach (var processor in stackCountProcessors)
+            {
+                baseCount = processor.Process(baseCount, ingredients);
+            }
+            return baseCount;
         }
 
         public PangaeaThingFilter GenerateThingFilter()

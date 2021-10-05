@@ -18,12 +18,17 @@ namespace ProjectPangaea.Production
                 }
             }
         }
+
         public PangaeaThingFilter(IEnumerable<PangaeaResource> allowedResources)
         {
             foreach (var resource in allowedResources)
             {
                 SetAllow(resource, true);
             }
+        }
+
+        public PangaeaThingFilter()
+        {
         }
 
         public override bool Allows(Thing t)

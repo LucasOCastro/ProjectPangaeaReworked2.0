@@ -20,10 +20,16 @@
 							<canBeReversed>false</canBeReversed>
 						</baseRecipe>
 						<ingredients>
-							<Pangaea_Fossil>5</Pangaea_Fossil>
+							<li Class="ProjectPangaea.Production.PortionDataGenerator_Resource">
+								<resourceType>Pangaea_Fossil</resourceType>
+								<count>5</count>
+							</li>
 						</ingredients>
 						<results>
-							<Pangaea_DNA>10</Pangaea_DNA>
+							<li Class="ProjectPangaea.Production.PortionDataGenerator_Resource">
+								<resourceType>Pangaea_DNA</resourceType>
+								<count>10</count>
+							</li>
 						</results>
 					</li>
 					
@@ -49,12 +55,30 @@
 					<li>
 						<baseRecipe>
 							<canBeReversed>false</canBeReversed>
+							<stackCountProcessors>
+								<li Class="ProjectPangaea.Production.StackCountProcessor_PawnStat">
+									<stat>Pangaea_DNAAmount</stat>
+									<statWeight>1</statWeight>
+								</li>
+								<li Class="ProjectPangaea.Production.StackCountProcessor_RotStage">
+									<rotWeights>
+										<Fresh>1</Fresh>
+										<Rotting>0.6</Rotting>
+										<Dessicated>0.2</Dessicated>
+									</rotWeights>
+								</li>
+							</stackCountProcessors>
 						</baseRecipe>
 						<ingredients>
-							<Corpse>1</Corpse>
+							<li Class="ProjectPangaea.Production.PortionDataGenerator_Corpse">
+								<count>1</count>
+							</li>
 						</ingredients>
 						<results>
-							<Pangaea_DNA>10</Pangaea_DNA>
+							<li Class="ProjectPangaea.Production.PortionDataGenerator_Resource">
+								<resourceType>Pangaea_DNA</resourceType>
+								<count>1</count>
+							</li>
 						</results>
 					</li>
 				</proceduralRecipeDefs>
@@ -76,7 +100,7 @@
 		<modExtensions>
 			<li Class="ProjectPangaea.Production.RecipeExtension">
 				<recipes>
-				<!--Boomaloope = Cow + Thrumbo?(placeholder)-->
+				<!--Boomaloope = Cow + Thrumbo(placeholder until boomgenes are added)-->
 					<li>
 						<canBeReversed>true</canBeReversed>
 						<ingredients>

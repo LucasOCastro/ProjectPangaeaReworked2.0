@@ -14,13 +14,6 @@
 	<PangaeaSetting_UIConsiderStockpiledName>Bill UI considers only stockpiled</PangaeaSetting_UIConsiderStockpiledName>
 	<PangaeaSetting_UIConsiderStockpiledDescription>The UI for bill configuration only accounts for resources in stockpiles, just like the UI for vanilla recipes. Disabling this makes the UI count the items in the entire map, which may lead to lower performance.</PangaeaSetting_UIConsiderStockpiledDescription>
 	
-	<!--RESOURCES-->
-	<Pangaea_FossilLabel>{0} fossil</Pangaea_FossilLabel>
-	<Pangaea_FossilDescription>Remains of {0}.</Pangaea_FossilDescription>
-	<Pangaea_DNALabel>{0} DNA</Pangaea_DNALabel>
-	<Pangaea_ExtinctDNADescription>Genetic material of an extinct {0}.</Pangaea_ExtinctDNADescription>
-	<Pangaea_ExtantDNADescription>Genetic material of a common {0} found in the Rim.</Pangaea_ExtantDNADescription>
-	
 	<!--ERRORS-->
 	<Pangaea_MissingResourceLabel>PangaeaMissingResource</Pangaea_MissingResourceLabel>
 	<Pangaea_MissingResourceDescription>The pawn this resource belonged to was probably removed from your game. Sorry D:</Pangaea_MissingResourceDescription>

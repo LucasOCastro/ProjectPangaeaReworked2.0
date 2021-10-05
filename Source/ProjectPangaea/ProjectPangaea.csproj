@@ -88,9 +88,17 @@
     <Compile Include="Production\PangaeaBill.cs" />
     <Compile Include="Production\FindIngredientForPangaeaBillOverride.cs" />
     <Compile Include="Production\PortionData.cs" />
+    <Compile Include="Production\PortionDataGenerator\PortionDataGenerator.cs" />
+    <Compile Include="Production\PortionDataGenerator\PortionDataGenerator_Corpse.cs" />
+    <Compile Include="Production\PortionDataGenerator\PortionDataGenerator_Egg.cs" />
+    <Compile Include="Production\PortionDataGenerator\PortionDataGenerator_Resource.cs" />
     <Compile Include="Production\ProceduralPangaeaRecipeGenData.cs" />
     <Compile Include="Production\RecipeExtension.cs" />
     <Compile Include="Production\CurrentBillGetter.cs" />
+    <Compile Include="Production\StackCountProcessor\StackCountProcessor.cs" />
+    <Compile Include="Production\StackCountProcessor\StackCountProcessor_PawnStat.cs" />
+    <Compile Include="Production\StackCountProcessor\StackCountProcessor_RotStage.cs" />
+    <Compile Include="Production\StackCountProcessor\WeightStackCountProcessor.cs" />
     <Compile Include="Resource\ResourceGraphicLister.cs" />
     <Compile Include="Resource\ResourceGraphicDef.cs" />
     <Compile Include="Resource\ResourceTypeDef.cs" />

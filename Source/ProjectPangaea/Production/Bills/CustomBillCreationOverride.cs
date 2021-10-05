@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using Verse;
 using HarmonyLib;
-using System.Collections.Generic;
 
 namespace ProjectPangaea.Production
 {
@@ -14,7 +13,8 @@ namespace ProjectPangaea.Production
             RecipeExtension recipeExtension = recipe.GetModExtension<RecipeExtension>();
             if (recipeExtension != null)
             {
-                __result = new PangaeaBill(recipe, recipeExtension.recipes.FirstOrFallback());
+                PangaeaRecipeSettings recipeSet = recipeExtension.recipes.FirstOrFallback();
+                __result = new PangaeaBill(recipe, recipeSet);
                 return false;
             }
             return true;

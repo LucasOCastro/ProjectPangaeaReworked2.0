@@ -9,6 +9,21 @@ namespace ProjectPangaea.Production
         public ThingDef thing;
         public int count;
 
+        private PangaeaThingFilter thingFilter;
+        public PangaeaThingFilter ThingFilter
+        {
+            get
+            {
+                if (thingFilter == null)
+                {
+                    thingFilter = new PangaeaThingFilter();
+                    if (thing != null) thingFilter.SetAllow(thing, true);
+                    else if (resource != null) thingFilter.SetAllow(resource?.Value, true);
+                }
+                return thingFilter;
+            }
+        }
+
         public PortionData()
         {
         }
@@ -56,26 +71,20 @@ namespace ProjectPangaea.Production
 
         public IngredientCount MakeIngredient()
         {
-            ThingFilter filter = null;
-            if (thing != null)
-            {
-                filter = new ThingFilter();
-                filter.SetAllow(thing, true);
-            }
-            else if (resource?.Value != null)
-            {
-                PangaeaThingFilter pangFilter = new PangaeaThingFilter(resource.Value);
-                filter = pangFilter;
-            }
-
-            if (filter == null)
+            if (ThingFilter.AllowedDefCount == 0)
             {
                 return null;
             }
 
-            IngredientCount ing = new IngredientCount() { filter = filter };
+            IngredientCount ing = new IngredientCount() { filter = ThingFilter };
             ing.SetBaseCount(count);
             return ing;
+        }
+
+        public override string ToString()
+        {
+            string label = resource?.Value?.Label ?? ThingFilter.Summary;
+            return label + " x" + count;
         }
     }
 }

@@ -9,7 +9,6 @@ namespace ProjectPangaea.Production
         public List<PangaeaRecipeSettings> recipes = new List<PangaeaRecipeSettings>();
         public List<ProceduralPangaeaRecipeGenData> proceduralRecipeDefs = new List<ProceduralPangaeaRecipeGenData>();
 
-
         public PangaeaThingFilter GenerateGeneralThingFilter()
         {
             PangaeaThingFilter filter = new PangaeaThingFilter();
