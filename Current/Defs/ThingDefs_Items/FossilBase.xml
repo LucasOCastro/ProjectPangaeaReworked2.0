@@ -28,6 +28,7 @@
 		<deepLumpSizeRange>1~5</deepLumpSizeRange>
 		<thingCategories>
 			<li>PangaeaFossils</li>
+			<li>ResourcesRaw</li>
 		</thingCategories>
 		<comps>
 			<li Class="ProjectPangaea.CompProperties_PangaeaResourceHolder">

@@ -9,43 +9,13 @@
 		<thingDef>Pangaea_DNABase</thingDef>
 	</ProjectPangaea.ResourceTypeDef>
 	
-	<ProjectPangaea.PangaeaEntryDef>
-		<defName>ExtinctDescriptionChangeDNAOverride</defName>
-		<settings>
-			<applyFilter>
-				<extinctionStatus>
-					<Extinct>true</Extinct>
-				</extinctionStatus>
-			</applyFilter>
-			<resourceOverrides>
-				<li>
-					<key>Pangaea_DNA</key>
-					<value>
-						<description>Genetic material of an extinct {0}.</description>
-					</value>
-				</li>
-			</resourceOverrides>
-		</settings>
-	</ProjectPangaea.PangaeaEntryDef>
-	
-	<ProjectPangaea.PangaeaEntryDef>
-		<defName>ThrumboDNADescriptionOverride</defName>
-		<settings>
-			<applyFilter>
-				<directDefFilter>
-					<li>Thrumbo</li>
-				</directDefFilter>
-			</applyFilter>
-			<resourceOverrides>
-				<li>
-					<key>Pangaea_DNA</key>
-					<value>
-						<description>Genetic material of the rare and majestic Thrumbo, ocasionally found roaming the rim.</description>
-					</value>
-				</li>
-			</resourceOverrides>
-		</settings>
-	</ProjectPangaea.PangaeaEntryDef>
+	<ProjectPangaea.ResourceTypeDef>
+		<defName>Pangaea_Embryo</defName>
+		<label>{0} embryo</label>
+		<description>Embryo of {0}.</description>
+		<addToAny>true</addToAny>
+		<thingDef>Pangaea_EmbryoBase</thingDef>
+	</ProjectPangaea.ResourceTypeDef>
 	
 	<ProjectPangaea.ResourceTypeDef>
 		<defName>Pangaea_Fossil</defName>

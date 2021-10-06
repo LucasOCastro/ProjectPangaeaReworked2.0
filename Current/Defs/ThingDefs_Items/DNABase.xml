@@ -14,10 +14,10 @@
 		</graphicData>
 		<statBases>
 			<Mass>1</Mass>
-			<SharpDamageMultiplier>0.5</SharpDamageMultiplier>
 		</statBases>
 		<thingCategories>
 			<li>PangaeaDNA</li>
+			<li>Manufactured</li>
 		</thingCategories>
 		<comps>
 			<li Class="ProjectPangaea.CompProperties_PangaeaResourceHolder">

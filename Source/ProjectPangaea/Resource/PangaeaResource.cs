@@ -2,7 +2,6 @@
 
 namespace ProjectPangaea
 {
-
     public class PangaeaResource
     {
         public ResourceTypeDef ResourceDef { get; }
@@ -24,7 +23,7 @@ namespace ProjectPangaea
             {
                 if (graphic == null)
                 {
-                    graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef)?.graphicData.Graphic ?? BaseContent.BadGraphic;
+                    graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef)?.graphicData?.Graphic;
                 }
                 return graphic;
             }

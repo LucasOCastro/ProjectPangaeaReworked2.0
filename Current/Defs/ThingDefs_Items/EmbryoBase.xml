@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<ShaderTypeDef>
+		<defName>PangaeaEmbryoShader</defName>
+		<shaderPath>Embryos/EmbryoFlask</shaderPath>
+	</ShaderTypeDef>
+	
+	<ProjectPangaea.ResourceGraphicDef Abstract="True" Name="EmbryoGraphicBase">
+		<defName>EmbryoGraphicBase</defName>
+		<resourceType>Pangaea_Embryo</resourceType>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>PangaeaEmbryoShader</shaderType>
+			<shaderParameters>
+				<_EmbryoOffset>(0,0)</_EmbryoOffset>
+				<_FlaskTop>/Things/Item/Embryos/Flask/EmbryoFlaskTop</_FlaskTop>
+				<_FlaskBase>/Things/Item/Embryos/Flask/EmbryoFlaskBot</_FlaskBase>
+			</shaderParameters>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+	
+	<ProjectPangaea.ResourceGraphicDef ParentName="EmbryoGraphicBase">
+		<defName>EmbryoGraphic_CarnivoreDinosaur</defName>
+		<filter>
+			<diets><Carnivore>true</Carnivore></diets>
+			<animalTypes><Dinosaur>true</Dinosaur></animalTypes>
+		</filter>
+		<graphicData>
+			<texPath>Things/Item/Embryos/CarnivoreDinoEmbryo</texPath>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+
+	<ThingDef ParentName="ResourceBase" Name="Pangaea_EmbryoBase">
+		<thingClass>ProjectPangaea.PangaeaThing</thingClass>
+		<defName>Pangaea_EmbryoBase</defName>
+		<label>Embryo</label>
+		<description>Embryo of an animal.</description>
+		<graphicData>
+			<texPath>Things/Item/Embryos/MammalEmbryo</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>0.55</Mass>
+		</statBases>
+		<thingCategories>
+			<li>PangaeaDNA</li>
+			<li>BodyPartsNatural</li>
+		</thingCategories>
+		<comps>
+			<li Class="ProjectPangaea.CompProperties_PangaeaResourceHolder">
+				<resourceType>Pangaea_Embryo</resourceType>
+			</li>
+		</comps>
+	</ThingDef>
+	
+</Defs>

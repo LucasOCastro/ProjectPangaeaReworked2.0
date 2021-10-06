@@ -4,7 +4,7 @@
 	<ThingCategoryDef>
 		<defName>PangaeaRoot</defName>
 		<label>Project Pangaea</label>
-		<parent>Root</parent>
+		<parent>Items</parent>
 	</ThingCategoryDef>
 
 	<ThingCategoryDef>

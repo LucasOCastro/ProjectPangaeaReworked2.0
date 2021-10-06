@@ -5,6 +5,7 @@ namespace ProjectPangaea
 {
     public class ModExt_RandomFossilDrop : DefModExtension
     {
+        //TODO Change this stuff to ResourceReference instead, get rid of ResourceTypeDefOf
         public class RandomOreDropEntry
         {
             public ThingDef fossilParent;
