@@ -2,7 +2,6 @@
 
 namespace ProjectPangaea
 {
-
     public class PangaeaResource
     {
         public ResourceTypeDef ResourceDef { get; }
@@ -37,7 +36,7 @@ namespace ProjectPangaea
 
         public PangaeaThing MakeThing()
         {
-            PangaeaThing thing = ResourceDef.MakeThing();
+            PangaeaThing thing = ResourceDef.MakeEmptyThing();
             thing.Resource = this;
             return thing;
         }

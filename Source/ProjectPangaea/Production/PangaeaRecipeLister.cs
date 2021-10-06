@@ -14,7 +14,7 @@ namespace ProjectPangaea.Production
 
         public static void Init()
         {
-            ProjectPangaeaMod.AssertDatabaseInit(nameof(PangaeaRecipeLister));
+            PangaeaDatabase.AssertInitiated(nameof(PangaeaRecipeLister));
 
             foreach (RecipeDef recipe in DefDatabase<RecipeDef>.AllDefs)
             {
@@ -44,7 +44,6 @@ namespace ProjectPangaea.Production
         }
 
         //If there's no ingredient in the normal recipeDef, itll not even try looking for them
-        //Could also be fixed with a harmony patch somewhere
         private static void AddDummyIngredientIfNeeded(RecipeDef recipe, RecipeExtension extension)
         {
             if (!recipe.ingredients.NullOrEmpty())

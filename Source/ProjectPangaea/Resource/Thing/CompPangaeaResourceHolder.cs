@@ -13,7 +13,7 @@ namespace ProjectPangaea
         {
             get
             {
-                if (resource == null && PangaeaSettings.AssignRandomPawnToNullResource)
+                if (resource == null && ProjectPangaeaMod.Settings.assignRandomOwnerToNullResource)
                 {
                     resource = Props.GetRandomResource();
                 }

@@ -25,9 +25,12 @@ namespace ProjectPangaea
             ExtinctExtension = thingDef.GetModExtension<ModExt_Extinct>();
             Category = OrganismCategory.For(thingDef, ExtinctExtension);
 
-            foreach (var generalResourceType in ResourceTypeDefOf.GeneralResources)
+            foreach (ResourceTypeDef resourceType in DefDatabase<ResourceTypeDef>.AllDefs)
             {
-                AddResourceOfType(generalResourceType);
+                if (resourceType.addToAny || (resourceType.addToExtinct && IsExtinct))
+                {
+                    AddResourceOfType(resourceType);
+                }
             }
         }
 
