@@ -12,7 +12,7 @@ namespace ProjectPangaea
 
         public bool addToAny;
 
-        public PangaeaThing MakeThing() => ThingMaker.MakeThing(thingDef) as PangaeaThing;
+        public PangaeaThing MakeEmptyThing() => ThingMaker.MakeThing(thingDef) as PangaeaThing;
 
         public override IEnumerable<string> ConfigErrors()
         {

@@ -1,6 +1,4 @@
-﻿#if RWV13
-
-using Verse;
+﻿using Verse;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,5 +32,3 @@ namespace ProjectPangaea
         }
     }
 }
-
-#endif

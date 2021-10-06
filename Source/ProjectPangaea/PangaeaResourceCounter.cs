@@ -47,7 +47,7 @@ namespace ProjectPangaea
 		public void UpdateResourceCounts()
 		{
 			ResetResourceCounts();
-			foreach (Thing thing in GetResources())
+			foreach (Thing thing in map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEver))
             {
 				if (thing is PangaeaThing pangaeaThing && pangaeaThing.Resource != null)
 				{
@@ -56,27 +56,6 @@ namespace ProjectPangaea
 				else if (thing is Corpse corpse && PangaeaDatabase.GetOrNull(corpse.InnerPawn.def) != null)
 				{
 					countedCorpseAmounts[corpse.InnerPawn.def]++;
-				}
-			}
-		}
-
-		private IEnumerable<Thing> GetResources()
-        {
-			if (PangaeaSettings.BillUIOnlyConsidersStockpiled)
-            {
-				return GetStockpiledResources();
-            }
-			return map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEver);
-		}
-
-		private IEnumerable<Thing> GetStockpiledResources()
-		{
-			List<SlotGroup> allGroupsListForReading = map.haulDestinationManager.AllGroupsListForReading;
-			for (int i = 0; i < allGroupsListForReading.Count; i++)
-			{
-				foreach (Thing heldThing in allGroupsListForReading[i].HeldThings)
-				{
-					yield return heldThing;
 				}
 			}
 		}

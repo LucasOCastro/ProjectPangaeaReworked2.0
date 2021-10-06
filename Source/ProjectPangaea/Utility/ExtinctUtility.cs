@@ -13,7 +13,7 @@ namespace ProjectPangaea
 
         public static ModExt_Extinct GetExtinctExtension(this ThingDef def)
         {
-            if (ProjectPangaeaMod.HasInitiatedDatabase)
+            if (PangaeaDatabase.Initiated)
             {
                 return PangaeaDatabase.GetOrNull(def)?.ExtinctExtension;
             }
@@ -29,12 +29,12 @@ namespace ProjectPangaea
         {
             if (def.race != null && def.IsExtinct())
             {
-                return PangaeaSettings.SpawnExtinctAnimals;
+                return ProjectPangaeaMod.Settings.spawnExtinctAnimals;
             }
-            if (def.plant != null && def.IsExtinct())
+            /*if (def.plant != null && def.IsExtinct())
             {
-                return PangaeaSettings.SpawnExtinctPlants;
-            }
+                return ProjectPangaeaMod.Settings.spawnExtinctPlants;
+            }*/
             return true;
         }
     }

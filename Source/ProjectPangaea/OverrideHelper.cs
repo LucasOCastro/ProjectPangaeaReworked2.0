@@ -7,7 +7,7 @@ namespace ProjectPangaea
     {
         private static List<EntrySettings> entrySettingsList = new List<EntrySettings>();
 
-        public static void Init()
+        private static void Init()
         {
             foreach (var entryDef in DefDatabase<PangaeaEntryDef>.AllDefs)
             {
@@ -18,6 +18,8 @@ namespace ProjectPangaea
 
         public static void DoOverrides()
         {
+            Init();
+
             List<EntrySettings> remainingOverrides = new List<EntrySettings>(entrySettingsList);
 
             foreach (var entrySetting in entrySettingsList)

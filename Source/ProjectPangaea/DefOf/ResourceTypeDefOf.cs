@@ -12,20 +12,6 @@ namespace ProjectPangaea
         public static ResourceTypeDef Pangaea_DNA;
         public static ResourceTypeDef Pangaea_Embryo;
 
-        //TODO change this as to get rid of DefOf
-        private static List<ResourceTypeDef> generalResources;
-        public static List<ResourceTypeDef> GeneralResources
-        {
-            get
-            {
-                if (generalResources == null)
-                {
-                    generalResources = DefDatabase<ResourceTypeDef>.AllDefs.Where(d => d.addToAny).ToList();
-                }
-                return generalResources;
-            }
-        }
-
         static ResourceTypeDefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(ResourceTypeDefOf));
