@@ -48,7 +48,9 @@ namespace ProjectPangaea
         {
             if (DebugSettings.godMode)
             {
-                yield return DebugActions.GenAction(this);
+                string label = "Debug: Set pangaea resource";
+                var actions = DebugActions.GenResourceMenuOptions(Props.resourceType, r => Resource = r);
+                yield return DebugActions.GenMenuListerAction(label, actions);
             }
         }
 

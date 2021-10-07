@@ -1,33 +1,26 @@
 ﻿using Verse;
 using System.Collections.Generic;
-using System.Linq;
+using System;
 
 namespace ProjectPangaea
 {
     public static class DebugActions
     {
-        public static Command_Action GenAction(CompPangaeaResourceHolder resourceHolder)
+        public static Command_Action GenMenuListerAction(string label, IEnumerable<DebugMenuOption> actions)
         {
-            Command_Action action = new Command_Action
+            return new Command_Action()
             {
-                defaultLabel = "Debug: Set Pangaea resource",
-                action = () => Find.WindowStack.Add(new Dialog_DebugOptionListLister(GenMenuOptions(resourceHolder)))
+                defaultLabel = label,
+                action = () => Find.WindowStack.Add(new Dialog_DebugOptionListLister(actions))
             };
-            return action;
         }
-
-        private static IEnumerable<DebugMenuOption> GenMenuOptions(CompPangaeaResourceHolder resourceHolder)
+        
+        public static IEnumerable<DebugMenuOption> GenResourceMenuOptions(ResourceTypeDef resourceType, Action<PangaeaResource> action)
         {
-            HashSet<PangaeaResource> closedSet = new HashSet<PangaeaResource>();
-            foreach (PangaeaResource resource in resourceHolder.Props.AllPossibleResources)
+            foreach (PangaeaResource resource in PangaeaDatabase.AllResourcesOfDef(resourceType))
             {
-                if (closedSet.Contains(resource))
-                {
-                    continue;
-                }
-                var option = new DebugMenuOption(resource.Label, DebugMenuOptionMode.Action, () => resourceHolder.Resource = resource);
+                var option = new DebugMenuOption(resource.Label, DebugMenuOptionMode.Action, () => action(resource));
                 yield return option;
-                closedSet.Add(resource);
             }
         }
     }

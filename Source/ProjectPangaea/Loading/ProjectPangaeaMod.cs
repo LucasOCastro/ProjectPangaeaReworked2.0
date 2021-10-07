@@ -27,12 +27,14 @@ namespace ProjectPangaea
             Mod = this;
 
             LoadBundles();
+            Log.Message(1f / 78548f + " and " + Mathf.Pow(78548, -1));
 
             LongEventHandler.ExecuteWhenFinished(BundleShaderTypeDef.OverrideAllShaders);
 
             LongEventHandler.ExecuteWhenFinished(ResourceGraphicLister.Init);
             LongEventHandler.ExecuteWhenFinished(PangaeaDatabase.Init);
             LongEventHandler.ExecuteWhenFinished(Production.PangaeaRecipeLister.Init);
+
         }
 
         private const string shaderBundlePath = @"Common\Materials\pangaeashaderbundle";

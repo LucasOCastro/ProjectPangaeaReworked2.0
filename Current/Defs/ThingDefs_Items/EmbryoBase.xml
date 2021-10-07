@@ -31,6 +31,27 @@
 			<texPath>Things/Item/Embryos/CarnivoreDinoEmbryo</texPath>
 		</graphicData>
 	</ProjectPangaea.ResourceGraphicDef>
+	
+	<ProjectPangaea.ResourceGraphicDef ParentName="EmbryoGraphicBase">
+		<defName>EmbryoGraphic_HerbivoreDinosaur</defName>
+		<filter>
+			<diets><Herbivore>true</Herbivore></diets>
+			<animalTypes><Dinosaur>true</Dinosaur></animalTypes>
+		</filter>
+		<graphicData>
+			<texPath>Things/Item/Embryos/HerbivoreDinoEmbryo</texPath>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
+	
+	<ProjectPangaea.ResourceGraphicDef ParentName="EmbryoGraphicBase">
+		<defName>EmbryoGraphic_Mammal</defName>
+		<filter>
+			<animalTypes><Mammal>true</Mammal></animalTypes>
+		</filter>
+		<graphicData>
+			<texPath>Things/Item/Embryos/MammalEmbryo</texPath>
+		</graphicData>
+	</ProjectPangaea.ResourceGraphicDef>
 
 	<ThingDef ParentName="ResourceBase" Name="Pangaea_EmbryoBase">
 		<thingClass>ProjectPangaea.PangaeaThing</thingClass>

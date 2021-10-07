@@ -103,6 +103,7 @@
     <Compile Include="Production\StackCountProcessor\StackCountProcessor_PawnStat.cs" />
     <Compile Include="Production\StackCountProcessor\StackCountProcessor_RotStage.cs" />
     <Compile Include="Production\StackCountProcessor\WeightStackCountProcessor.cs" />
+    <Compile Include="Production\Vat\Building_EmbryoVat.cs" />
     <Compile Include="Resource\PangaeaResourceReference.cs" />
     <Compile Include="Resource\ResourceGraphicLister.cs" />
     <Compile Include="Resource\ResourceGraphicDef.cs" />
@@ -110,6 +111,8 @@
     <Compile Include="Resource\Scribe_Pangaea.cs" />
     <Compile Include="Resource\Thing\CompPangaeaResourceHolder.cs" />
     <Compile Include="Resource\Thing\CompProperties_PangaeaResourceHolder.cs" />
+    <Compile Include="Utility\MathUtility.cs" />
+    <Compile Include="Utility\VatUtility.cs" />
     <Compile Include="Utility\PangaeaEnumExtension.cs" />
     <Compile Include="Utility\ExtinctUtility.cs" />
     <Compile Include="ExtinctSpawningOverride.cs" />

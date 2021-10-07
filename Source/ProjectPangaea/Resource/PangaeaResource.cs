@@ -43,5 +43,13 @@ namespace ProjectPangaea
 
         private string GetLabel() => ResourceDef.label.Formatted(Entry.Label);
         private string GetDescription() => ResourceDef.description.Formatted(Entry.Label);
+
+        public static void AssertType(PangaeaResource resource, ResourceTypeDef type, string forS = null)
+        {
+            if (resource.ResourceDef != type)
+            {
+                throw new System.Exception(resource + " should be of type " + type.defName + (forS.NullOrEmpty() ? "" : ("for " + forS)));
+            }
+        }
     }
 }
