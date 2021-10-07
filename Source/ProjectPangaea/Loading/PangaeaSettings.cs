@@ -21,11 +21,13 @@ namespace ProjectPangaea
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(inRect);
 
-            listing.Label("PangaeaSetting_RandomResourceToNullName".Translate(),
+            listing.CheckboxLabeled("PangaeaSetting_RandomResourceToNullName".Translate(),
+                ref assignRandomOwnerToNullResource,
                 tooltip: "PangaeaSetting_RandomResourceToNullDescription".Translate()
                 );
 
-            listing.Label("PangaeaSetting_WildAnimalsName".Translate(),
+            listing.CheckboxLabeled("PangaeaSetting_WildAnimalsName".Translate(),
+                ref spawnExtinctAnimals,
                 tooltip: "PangaeaSetting_WildAnimalsDescription".Translate()
                 );
         }

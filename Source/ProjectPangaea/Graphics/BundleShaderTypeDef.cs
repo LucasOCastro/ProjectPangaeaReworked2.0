@@ -2,18 +2,32 @@
 using Verse;
 using UnityEngine;
 using System.IO;
+using System.Reflection;
+using HarmonyLib;
 
 namespace ProjectPangaea
 {
     public class BundleShaderTypeDef : ShaderTypeDef
     {
-        /*public const string shaderBundlePath = "Materials\pangaeashaderbundle";
-        public string 
-        public override void PostLoad()
+        public string shaderName = "";
+
+        private static FieldInfo shaderCacheInfo = AccessTools.Field(typeof(ShaderTypeDef), "shaderInt");
+        public void OverrideShader()
         {
-            base.PostLoad();
-            
-            AssetBundle.LoadFromFile(Path.Combine(Content))
-        }*/
+            Shader shader = ProjectPangaeaMod.ShaderBundle.LoadAsset<Shader>(shaderName);
+            if (shader == null)
+            {
+                throw new System.Exception(nameof(BundleShaderTypeDef) + " named " + defName + " with invalid shader name!");
+            }
+            shaderCacheInfo.SetValue(this, shader);
+        }
+
+        public static void OverrideAllShaders()
+        {
+            foreach (var def in DefDatabase<BundleShaderTypeDef>.AllDefs)
+            {
+                def.OverrideShader();
+            }
+        }
     }
 }

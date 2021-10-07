@@ -2,10 +2,10 @@
 
 <Defs>
 
-	<ShaderTypeDef>
+	<ProjectPangaea.BundleShaderTypeDef>
 		<defName>PangaeaEmbryoShader</defName>
-		<shaderPath>Embryos/EmbryoFlask</shaderPath>
-	</ShaderTypeDef>
+		<shaderName>EmbryoFlask</shaderName>
+	</ProjectPangaea.BundleShaderTypeDef>
 	
 	<ProjectPangaea.ResourceGraphicDef Abstract="True" Name="EmbryoGraphicBase">
 		<defName>EmbryoGraphicBase</defName>
@@ -42,8 +42,9 @@
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<statBases>
-			<Mass>0.55</Mass>
+			<Mass>0.9</Mass>
 		</statBases>
+		<stackLimit>1</stackLimit>
 		<thingCategories>
 			<li>PangaeaDNA</li>
 			<li>BodyPartsNatural</li>
