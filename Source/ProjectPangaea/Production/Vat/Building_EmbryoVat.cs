@@ -3,6 +3,7 @@ using RimWorld;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
+using Verse.Sound;
 
 namespace ProjectPangaea.Production
 {
@@ -32,15 +33,25 @@ namespace ProjectPangaea.Production
         public bool Completed => Progress >= 1;
         public bool Empty => CurrentCultivatedEntry == null;
 
+        public bool allowPawnRelease = true;
+
         public int ExpectedDurationInTicks => CurrentCultivatedEntry?.ThingDef.VatGestationTicks() ?? -1;
         private int TicksLeft => Mathf.RoundToInt(ExpectedDurationInTicks * (1 - Progress));
         private float ProgressPerTick => Mathf.Pow(ExpectedDurationInTicks, -1);
         public override void TickRare()
         {
             base.TickRare();
+
+            if (generatedPawn != null && ProjectPangaeaMod.Settings.instantReleaseFromVat && allowPawnRelease)
+            {
+                SpawnCreature();
+                return;
+            }
+
             if (!Empty)
             {
                 Progress += GenTicks.TickRareInterval * ProgressPerTick;
+                //todo make pawn age
             }
         }
 
@@ -61,17 +72,25 @@ namespace ProjectPangaea.Production
             var pawnKind = CurrentCultivatedEntry.ThingDef.race.AnyPawnKind;
             var request = new PawnGenerationRequest(pawnKind, Faction.OfPlayer, newborn: true);
             generatedPawn = PawnGenerator.GeneratePawn(request);
+
+            Message message = new Message("Pangaea_FinishedGrowingMessage".Translate(generatedPawn.LabelCap), MessageTypeDefOf.PositiveEvent, this);
+            if (ProjectPangaeaMod.Settings.instantReleaseFromVat && allowPawnRelease)
+            {
+                message.lookTargets = SpawnCreature();
+            }
+            Messages.Message(message);
         }
 
-        public void SpawnCreature()
+        public Thing SpawnCreature()
         {
             if (!Completed)
             {
                 Log.Warning("Tried to spawn vat creature but it's not yet complete.");
-                return;
+                return null;
             }
-            GenSpawn.Spawn(generatedPawn, InteractionCell, Map, WipeMode.VanishOrMoveAside);
+            Thing spawnedPawn = GenSpawn.Spawn(generatedPawn, InteractionCell, Map, WipeMode.VanishOrMoveAside);
             Clear();
+            return spawnedPawn;
         }
 
         public void Abort()
@@ -156,37 +175,51 @@ namespace ProjectPangaea.Production
             foreach (Gizmo gizmo in base.GetGizmos())
                 yield return gizmo;
 
+            yield return new Command_Toggle()
+            {
+                defaultLabel = "Pangaea_AllowAutoRelease".Translate(),
+                icon = ContentFinder<Texture2D>.Get("UI/Commands/PodEject"),
+                isActive = () => allowPawnRelease,
+                toggleAction = () => allowPawnRelease = !allowPawnRelease
+            };
+
             if (DebugSettings.godMode)
             {
-                yield return DebugActions.GenMenuListerAction("DEBUG: Insert embryo",
-                    DebugActions.GenResourceMenuOptions(ResourceTypeDefOf.Pangaea_Embryo, InsertEmbryo)
-                    );
-                if (!Empty)
+                foreach (Gizmo gizmo in GetDebugGizmos())
+                    yield return gizmo;
+            }
+        }
+
+        private IEnumerable<Gizmo> GetDebugGizmos()
+        {
+            yield return DebugActions.GenMenuListerAction("DEBUG: Insert embryo",
+                    DebugActions.GenResourceMenuOptions(ResourceTypeDefOf.Pangaea_Embryo, InsertEmbryo));
+
+            if (!Empty)
+            {
+                yield return new Command_Action()
                 {
-                    yield return new Command_Action()
-                    {
-                        defaultLabel = "DEBUG: Abort",
-                        action = Abort
-                    };
-                    yield return new Command_Action()
-                    {
-                        defaultLabel = "DEBUG: +0.1 progress",
-                        action = () => Progress += 0.1f
-                    };
-                    yield return new Command_Action()
-                    {
-                        defaultLabel = "DEBUG: Max progress",
-                        action = () => Progress = 1
-                    };
-                }
-                if (Completed)
+                    defaultLabel = "DEBUG: Abort",
+                    action = Abort
+                };
+                yield return new Command_Action()
                 {
-                    yield return new Command_Action()
-                    {
-                        defaultLabel = "DEBUG: Spawn",
-                        action = SpawnCreature
-                    };
-                }
+                    defaultLabel = "DEBUG: +0.1 progress",
+                    action = () => Progress += 0.1f
+                };
+                yield return new Command_Action()
+                {
+                    defaultLabel = "DEBUG: Max progress",
+                    action = () => Progress = 1
+                };
+            }
+            if (Completed)
+            {
+                yield return new Command_Action()
+                {
+                    defaultLabel = "DEBUG: Spawn",
+                    action = () => SpawnCreature()
+                };
             }
         }
     }
