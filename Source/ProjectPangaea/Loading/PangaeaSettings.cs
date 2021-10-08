@@ -94,7 +94,8 @@ namespace ProjectPangaea
                 embryoVatTimeMultiplier = embryoVatTimeDefault;
             }
 
-            Rect sliderRect = new Rect(rect) { xMin = labelRect.xMax, xMax = resetRect.xMin };
+            float sliderPadding = 1f;
+            Rect sliderRect = new Rect(rect) { xMin = labelRect.xMax + sliderPadding, xMax = resetRect.xMin + sliderPadding };
             embryoVatTimeMultiplier = Widgets.HorizontalSlider(sliderRect,
                 embryoVatTimeMultiplier, embryoVatTimeMin, embryoVatTimeMax,
                 label: embryoVatTimeMultiplier.ToString(),

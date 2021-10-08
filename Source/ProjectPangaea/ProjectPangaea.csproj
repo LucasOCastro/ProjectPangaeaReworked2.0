@@ -79,6 +79,7 @@
     <Compile Include="Categorization\Animal\AnimalType.cs" />
     <Compile Include="Categorization\ExtinctionStatus.cs" />
     <Compile Include="Database\PangaeaThingEntry.cs" />
+    <Compile Include="DefOf\PangaeaJobDefOf.cs" />
     <Compile Include="DefOf\ResourceTypeDefOf.cs" />
     <Compile Include="Graphics\BundleShaderTypeDef.cs" />
     <Compile Include="Loading\PangaeaSettings.cs" />
@@ -104,6 +105,10 @@
     <Compile Include="Production\StackCountProcessor\StackCountProcessor_RotStage.cs" />
     <Compile Include="Production\StackCountProcessor\WeightStackCountProcessor.cs" />
     <Compile Include="Production\Vat\Building_EmbryoVat.cs" />
+    <Compile Include="Production\Vat\JobDriver_FillVat.cs" />
+    <Compile Include="Production\Vat\JobDriver_ReleasePawnFromVat.cs" />
+    <Compile Include="Production\Vat\WorkGiver_FillVat.cs" />
+    <Compile Include="Production\Vat\WorkGiver_ReleasePawnFromVat.cs" />
     <Compile Include="Resource\PangaeaResourceReference.cs" />
     <Compile Include="Resource\ResourceGraphicLister.cs" />
     <Compile Include="Resource\ResourceGraphicDef.cs" />

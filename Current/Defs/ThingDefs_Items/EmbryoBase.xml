@@ -2,57 +2,6 @@
 
 <Defs>
 
-	<ProjectPangaea.BundleShaderTypeDef>
-		<defName>PangaeaEmbryoShader</defName>
-		<shaderName>EmbryoFlask</shaderName>
-	</ProjectPangaea.BundleShaderTypeDef>
-	
-	<ProjectPangaea.ResourceGraphicDef Abstract="True" Name="EmbryoGraphicBase">
-		<defName>EmbryoGraphicBase</defName>
-		<resourceType>Pangaea_Embryo</resourceType>
-		<graphicData>
-			<graphicClass>Graphic_Single</graphicClass>
-			<shaderType>PangaeaEmbryoShader</shaderType>
-			<shaderParameters>
-				<_EmbryoOffset>(0,0)</_EmbryoOffset>
-				<_FlaskTop>/Things/Item/Embryos/Flask/EmbryoFlaskTop</_FlaskTop>
-				<_FlaskBase>/Things/Item/Embryos/Flask/EmbryoFlaskBot</_FlaskBase>
-			</shaderParameters>
-		</graphicData>
-	</ProjectPangaea.ResourceGraphicDef>
-	
-	<ProjectPangaea.ResourceGraphicDef ParentName="EmbryoGraphicBase">
-		<defName>EmbryoGraphic_CarnivoreDinosaur</defName>
-		<filter>
-			<diets><Carnivore>true</Carnivore></diets>
-			<animalTypes><Dinosaur>true</Dinosaur></animalTypes>
-		</filter>
-		<graphicData>
-			<texPath>Things/Item/Embryos/CarnivoreDinoEmbryo</texPath>
-		</graphicData>
-	</ProjectPangaea.ResourceGraphicDef>
-	
-	<ProjectPangaea.ResourceGraphicDef ParentName="EmbryoGraphicBase">
-		<defName>EmbryoGraphic_HerbivoreDinosaur</defName>
-		<filter>
-			<diets><Herbivore>true</Herbivore></diets>
-			<animalTypes><Dinosaur>true</Dinosaur></animalTypes>
-		</filter>
-		<graphicData>
-			<texPath>Things/Item/Embryos/HerbivoreDinoEmbryo</texPath>
-		</graphicData>
-	</ProjectPangaea.ResourceGraphicDef>
-	
-	<ProjectPangaea.ResourceGraphicDef ParentName="EmbryoGraphicBase">
-		<defName>EmbryoGraphic_Mammal</defName>
-		<filter>
-			<animalTypes><Mammal>true</Mammal></animalTypes>
-		</filter>
-		<graphicData>
-			<texPath>Things/Item/Embryos/MammalEmbryo</texPath>
-		</graphicData>
-	</ProjectPangaea.ResourceGraphicDef>
-
 	<ThingDef ParentName="ResourceBase" Name="Pangaea_EmbryoBase">
 		<thingClass>ProjectPangaea.PangaeaThing</thingClass>
 		<defName>Pangaea_EmbryoBase</defName>

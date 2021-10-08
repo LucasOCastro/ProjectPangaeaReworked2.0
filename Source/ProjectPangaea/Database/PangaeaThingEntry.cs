@@ -48,7 +48,7 @@ namespace ProjectPangaea
 
         public override string ToString()
         {
-            return base.ToString() + " " + ThingDef;
+            return base.ToString() + " " + ThingDef.defName;
         }
     }
 }

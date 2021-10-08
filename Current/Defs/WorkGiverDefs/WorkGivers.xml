@@ -51,5 +51,31 @@
 		</requiredCapacities>
 		<prioritizeSustains>true</prioritizeSustains>
 	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>Pangaea_ReleasePawnFromVat</defName>
+		<label>release a creature from a cloning vat</label>
+		<giverClass>ProjectPangaea.Production.WorkGiver_ReleasePawnFromVat</giverClass>
+		<workType>BasicWorker</workType>
+		<verb>release</verb>
+		<gerund>releasing</gerund>
+		<priorityInType>300</priorityInType>
+		<requiredCapacities>
+		  <li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+  
+	<WorkGiverDef>
+		<defName>Pangaea_FillVat</defName>
+		<label>fill an embryo into a cloning vat</label>
+		<giverClass>ProjectPangaea.Production.WorkGiver_FillVat</giverClass>
+		<workType>Hauling</workType>
+		<verb>fill</verb>
+		<gerund>filling</gerund>
+		<priorityInType>130</priorityInType>
+		<requiredCapacities>
+		  <li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
 
 </Defs>

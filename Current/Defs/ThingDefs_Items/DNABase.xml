@@ -8,7 +8,7 @@
 		<label>DNA</label>
 		<description>Genetic material of an animal or plant.</description>
 		<graphicData>
-			<texPath>Things/Item/DNA/Default</texPath>
+			<texPath>Things/Item/DNA/Extant</texPath>
 			<shaderType>CutoutComplex</shaderType>
 			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<JobDef>
+		<defName>Pangaea_ReleasePawnFromVat</defName>
+		<driverClass>ProjectPangaea.Production.JobDriver_ReleasePawnFromVat</driverClass>
+		<reportString>releasing TargetB from TargetA.</reportString>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<waitAfterArriving>200</waitAfterArriving>
+	</JobDef>
+	
+	<JobDef>
+		<defName>Pangaea_FillVat</defName>
+		<driverClass>ProjectPangaea.Production.JobDriver_FillVat</driverClass>
+		<reportString>filling TargetB into TargetA.</reportString>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<waitAfterArriving>200</waitAfterArriving>
+	</JobDef>
+
+</Defs>

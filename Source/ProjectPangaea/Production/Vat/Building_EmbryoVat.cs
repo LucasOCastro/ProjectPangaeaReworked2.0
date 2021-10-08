@@ -13,6 +13,7 @@ namespace ProjectPangaea.Production
         public PangaeaThingEntry CurrentCultivatedEntry => currentCultivatedEntry;
 
         private Pawn generatedPawn;
+        public Pawn GeneratedPawn => generatedPawn;
 
         private CompPowerTrader powerComp;
 
@@ -34,6 +35,7 @@ namespace ProjectPangaea.Production
         public bool Empty => CurrentCultivatedEntry == null;
 
         public bool allowPawnRelease = true;
+        public PangaeaThingEntry requestedEntry = null;
 
         public int ExpectedDurationInTicks => CurrentCultivatedEntry?.ThingDef.VatGestationTicks() ?? -1;
         private int TicksLeft => Mathf.RoundToInt(ExpectedDurationInTicks * (1 - Progress));
@@ -81,7 +83,7 @@ namespace ProjectPangaea.Production
             Messages.Message(message);
         }
 
-        public Thing SpawnCreature()
+        public Pawn SpawnCreature()
         {
             if (!Completed)
             {
@@ -90,7 +92,7 @@ namespace ProjectPangaea.Production
             }
             Thing spawnedPawn = GenSpawn.Spawn(generatedPawn, InteractionCell, Map, WipeMode.VanishOrMoveAside);
             Clear();
-            return spawnedPawn;
+            return spawnedPawn as Pawn;
         }
 
         public void Abort()
@@ -141,6 +143,10 @@ namespace ProjectPangaea.Production
             base.SpawnSetup(map, respawningAfterLoad);
             powerComp = GetComp<CompPowerTrader>();
             powerComp.powerStoppedAction += Abort;
+
+            //TODO THIS IS JUST DEBUG
+            requestedEntry = PangaeaDatabase.RandomEntry;
+            Log.Message("Requested: " + requestedEntry);
         }
 
         public override string GetInspectString()
