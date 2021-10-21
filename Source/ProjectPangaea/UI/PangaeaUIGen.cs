@@ -20,7 +20,7 @@ namespace ProjectPangaea
 
             GUI.color = new Color(color.r * 2, color.g * 2, color.b * 2, color.a * 2);
             GenUI.DrawTextureWithMaterial(rect, tex, mat, texCoords);
-            
+
             GUI.color = ogColor;
         }
 

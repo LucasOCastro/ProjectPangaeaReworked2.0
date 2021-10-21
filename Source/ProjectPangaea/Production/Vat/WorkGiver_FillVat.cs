@@ -13,7 +13,7 @@ namespace ProjectPangaea.Production
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (!(t is Building_EmbryoVat vat) || vat.requestedEntry == null)
+            if (!(t is Building_EmbryoVat vat) || !vat.AllowAutomaticFilling || !vat.Empty)
             {
                 return false;
             }
@@ -25,11 +25,11 @@ namespace ProjectPangaea.Production
             {
                 return false;
             }
-            if (FindEmbryo(pawn, vat) == null)
+            if (t.IsBurning())
             {
                 return false;
             }
-            if (t.IsBurning())
+            if (FindEmbryo(pawn) == null)
             {
                 return false;
             }
@@ -39,15 +39,15 @@ namespace ProjectPangaea.Production
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             Building_EmbryoVat vat = t as Building_EmbryoVat;
-            Thing embryo = FindEmbryo(pawn, vat);
+            Thing embryo = FindEmbryo(pawn);
             Job job = JobMaker.MakeJob(PangaeaJobDefOf.Pangaea_FillVat, vat, embryo);
             job.count = 1;
             return job;
         }
 
-        private Thing FindEmbryo(Pawn pawn, Building_EmbryoVat vat)
+        private Thing FindEmbryo(Pawn pawn)
         {
-            bool validator(Thing t) => !t.IsForbidden(pawn) && pawn.CanReserve(t) && t is PangaeaThing pt && pt.Resource.Entry == vat.requestedEntry;
+            bool validator(Thing t) => !t.IsForbidden(pawn) && pawn.CanReserve(t) && t is PangaeaThing pt && pt.Resource != null;
             return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(PangaeaThingDefOf.Pangaea_EmbryoBase), PathEndMode.ClosestTouch, TraverseParms.For(pawn), validator: validator);
         }
     }

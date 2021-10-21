@@ -110,6 +110,7 @@
     <Compile Include="Production\Vat\JobDriver_FillVat.cs" />
     <Compile Include="Production\Vat\JobDriver_ReleasePawnFromVat.cs" />
     <Compile Include="Production\Vat\WorkGiver_FillVat.cs" />
+    <Compile Include="Production\Vat\WorkGiver_ForceFillEmbryoIntoVat.cs" />
     <Compile Include="Production\Vat\WorkGiver_ReleasePawnFromVat.cs" />
     <Compile Include="Resource\PangaeaResourceReference.cs" />
     <Compile Include="Resource\ResourceGraphicLister.cs" />

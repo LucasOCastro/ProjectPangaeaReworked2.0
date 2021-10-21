@@ -65,7 +65,7 @@
 		</requiredCapacities>
 	</WorkGiverDef>
   
-	<WorkGiverDef>
+	<WorkGiverDef Name="Pangaea_FillVat">
 		<defName>Pangaea_FillVat</defName>
 		<label>fill an embryo into a cloning vat</label>
 		<giverClass>ProjectPangaea.Production.WorkGiver_FillVat</giverClass>
@@ -76,6 +76,11 @@
 		<requiredCapacities>
 		  <li>Manipulation</li>
 		</requiredCapacities>
+	</WorkGiverDef>
+	
+	<WorkGiverDef ParentName="Pangaea_FillVat">
+		<defName>ForceFillEmbryoIntoVat</defName>
+		<giverClass>ProjectPangaea.Production.WorkGiver_ForceFillEmbryoIntoVat</giverClass>
 	</WorkGiverDef>
 
 </Defs>

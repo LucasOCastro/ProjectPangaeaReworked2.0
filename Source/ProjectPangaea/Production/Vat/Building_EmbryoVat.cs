@@ -3,7 +3,6 @@ using RimWorld;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
-using Verse.Sound;
 
 namespace ProjectPangaea.Production
 {
@@ -34,8 +33,11 @@ namespace ProjectPangaea.Production
         public bool Completed => Progress >= 1;
         public bool Empty => CurrentCultivatedEntry == null;
 
-        public bool allowPawnRelease = true;
-        public PangaeaThingEntry requestedEntry = null;
+        private bool allowPawnRelease = true;
+        public bool AllowPawnRelease => allowPawnRelease;
+
+        private bool allowAutomaticFilling = true;
+        public bool AllowAutomaticFilling => allowAutomaticFilling;
 
         public int ExpectedDurationInTicks => CurrentCultivatedEntry?.ThingDef.VatGestationTicks() ?? -1;
         private int TicksLeft => Mathf.RoundToInt(ExpectedDurationInTicks * (1 - Progress));
@@ -44,7 +46,7 @@ namespace ProjectPangaea.Production
         {
             base.TickRare();
 
-            if (generatedPawn != null && ProjectPangaeaMod.Settings.instantReleaseFromVat && allowPawnRelease)
+            if (generatedPawn != null && ProjectPangaeaMod.Settings.instantReleaseFromVat && AllowPawnRelease)
             {
                 SpawnCreature();
                 return;
@@ -76,7 +78,7 @@ namespace ProjectPangaea.Production
             generatedPawn = PawnGenerator.GeneratePawn(request);
 
             Message message = new Message("Pangaea_FinishedGrowingMessage".Translate(generatedPawn.LabelCap), MessageTypeDefOf.PositiveEvent, this);
-            if (ProjectPangaeaMod.Settings.instantReleaseFromVat && allowPawnRelease)
+            if (ProjectPangaeaMod.Settings.instantReleaseFromVat && AllowPawnRelease)
             {
                 message.lookTargets = SpawnCreature();
             }
@@ -143,10 +145,6 @@ namespace ProjectPangaea.Production
             base.SpawnSetup(map, respawningAfterLoad);
             powerComp = GetComp<CompPowerTrader>();
             powerComp.powerStoppedAction += Abort;
-
-            //TODO THIS IS JUST DEBUG
-            requestedEntry = PangaeaDatabase.RandomEntry;
-            Log.Message("Requested: " + requestedEntry);
         }
 
         public override string GetInspectString()
@@ -174,6 +172,8 @@ namespace ProjectPangaea.Production
             Scribe_Pangaea.Look(ref currentCultivatedEntry, nameof(currentCultivatedEntry));
             Scribe_References.Look(ref generatedPawn, nameof(generatedPawn));
             Scribe_Values.Look(ref progress, nameof(progress));
+            Scribe_Values.Look(ref allowAutomaticFilling, nameof(allowAutomaticFilling), defaultValue: true);
+            Scribe_Values.Look(ref allowPawnRelease, nameof(allowPawnRelease), defaultValue: true);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -183,9 +183,17 @@ namespace ProjectPangaea.Production
 
             yield return new Command_Toggle()
             {
+                defaultLabel = "Pangaea_AllowAutoFilling".Translate(),
+                icon = ContentFinder<Texture2D>.Get("UI/Commands/LoadTransporter"),
+                isActive = () => AllowAutomaticFilling,
+                toggleAction = () => allowAutomaticFilling = !allowAutomaticFilling
+            };
+
+            yield return new Command_Toggle()
+            {
                 defaultLabel = "Pangaea_AllowAutoRelease".Translate(),
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/PodEject"),
-                isActive = () => allowPawnRelease,
+                isActive = () => AllowPawnRelease,
                 toggleAction = () => allowPawnRelease = !allowPawnRelease
             };
 
