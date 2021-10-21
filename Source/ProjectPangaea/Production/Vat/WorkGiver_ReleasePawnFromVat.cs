@@ -13,7 +13,11 @@ namespace ProjectPangaea.Production
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (!(t is Building_EmbryoVat vat) || !vat.AllowPawnRelease) 
+            if (!(t is Building_EmbryoVat vat)) 
+            {
+                return false;
+            }
+            if (!forced && !vat.AllowPawnRelease)
             {
                 return false;
             }

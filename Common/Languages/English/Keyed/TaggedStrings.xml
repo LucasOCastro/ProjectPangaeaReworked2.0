@@ -39,6 +39,9 @@
 	<Pangaea_EstimatedTimeLeft>Remaining time: {0}</Pangaea_EstimatedTimeLeft>
 	<Pangaea_GrownEmbryo>Contains a {0}. Age: {1}.</Pangaea_GrownEmbryo>
 	<Pangaea_AllowAutoRelease>Allow releasing</Pangaea_AllowAutoRelease>
+	<Pangaea_AllowAutoReleaseDescription>Allows pawn to automatically release the pawn within once completed.</Pangaea_AllowAutoReleaseDescription>
+	<Pangaea_AllowAutoFilling>Allow filling</Pangaea_AllowAutoFilling>
+	<Pangaea_AllowAutoFillingDescription>Allows pawn to automatically fill this vat with embryos.</Pangaea_AllowAutoFillingDescription>
 	<Pangaea_FinishedGrowingMessage>{0} has finished growing in the embryo vat!</Pangaea_FinishedGrowingMessage>
 	
 	<!--AnimalType-->

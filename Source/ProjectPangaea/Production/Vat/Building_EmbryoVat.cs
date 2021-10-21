@@ -184,6 +184,7 @@ namespace ProjectPangaea.Production
             yield return new Command_Toggle()
             {
                 defaultLabel = "Pangaea_AllowAutoFilling".Translate(),
+                defaultDesc = "Pangaea_AllowAutoFillingDescription".Translate(),
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/LoadTransporter"),
                 isActive = () => AllowAutomaticFilling,
                 toggleAction = () => allowAutomaticFilling = !allowAutomaticFilling
@@ -192,6 +193,7 @@ namespace ProjectPangaea.Production
             yield return new Command_Toggle()
             {
                 defaultLabel = "Pangaea_AllowAutoRelease".Translate(),
+                defaultDesc = "Pangaea_AllowAutoReleaseDescription".Translate(),
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/PodEject"),
                 isActive = () => AllowPawnRelease,
                 toggleAction = () => allowPawnRelease = !allowPawnRelease
