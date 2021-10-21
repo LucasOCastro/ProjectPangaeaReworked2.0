@@ -249,6 +249,7 @@
 				<basePowerConsumption>800</basePowerConsumption>
 				<shortCircuitInRain>true</shortCircuitInRain>
 			</li>
+			<li Class="CompProperties_Forbiddable"/>
 		</comps>
 		<tickerType>Rare</tickerType>
 		<rotatable>true</rotatable>
