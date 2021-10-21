@@ -27,11 +27,10 @@ namespace ProjectPangaea
                 {
                     if (nonSpecific[i].filter.Allows(entry))
                     {
-                        graphic = nonSpecific[i];
-                        break;
+                        return nonSpecific[i];
                     }
                 }
-                return graphic;
+                return null;
             }
 
             public void Register(ResourceGraphicDef graphic)

@@ -15,7 +15,6 @@ namespace ProjectPangaea.Production
         public static void Init()
         {
             PangaeaDatabase.AssertInitiated(nameof(PangaeaRecipeLister));
-
             foreach (RecipeDef recipe in DefDatabase<RecipeDef>.AllDefs)
             {
                 RecipeExtension extension = recipe.GetModExtension<RecipeExtension>();
@@ -24,17 +23,8 @@ namespace ProjectPangaea.Production
                     continue;
                 }
 
-                foreach (var procedural in extension.proceduralRecipeDefs)
-                {
-                    foreach (var entry in PangaeaDatabase.AllEntries)
-                    {
-                        var generated = procedural.GenRecipe(entry);
-                        if (generated != null)
-                        {
-                            extension.recipes.Add(generated);
-                        }
-                    }
-                }
+                extension.GenProceduralRecipes();
+                extension.ResolveReferences();
 
                 recipes.Add(recipe);
                 recipeExtensions.Add(recipe, extension);

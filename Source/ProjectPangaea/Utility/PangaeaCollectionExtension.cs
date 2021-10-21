@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Verse;
 using System.Collections.Generic;
 using ProjectPangaea.Production;
 
@@ -21,9 +22,13 @@ namespace ProjectPangaea
                 {
                     filter.SetAllow(ing.thing, true);
                 }
-                else if (ing.resource ?.Value != null)
+                if (ing.resource?.Value != null)
                 {
                     filter.SetAllow(ing.resource.Value, true);
+                }
+                foreach (var allowed in ing.ThingFilter.AllowedThingDefs)
+                {
+                    filter.SetAllow(allowed, true);
                 }
             }
         }

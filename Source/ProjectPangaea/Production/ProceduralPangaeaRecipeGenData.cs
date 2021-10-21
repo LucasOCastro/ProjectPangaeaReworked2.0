@@ -19,6 +19,7 @@ namespace ProjectPangaea.Production
                 recipe.results = new List<PortionData>(baseRecipe.results);
                 recipe.canBeReversed = baseRecipe.canBeReversed;
                 recipe.stackCountProcessors = new List<StackCountProcessor>(baseRecipe.stackCountProcessors);
+                recipe.label = baseRecipe.label.Formatted(entry.ThingDef.label);
             }
 
             bool genFromList(List<PortionDataGenerator> genFrom, List<PortionData> target)

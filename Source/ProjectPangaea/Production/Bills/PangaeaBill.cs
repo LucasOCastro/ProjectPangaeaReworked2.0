@@ -30,7 +30,7 @@ namespace ProjectPangaea.Production
                 throw new System.Exception(nameof(PangaeaBill) + " was made with recipe of def " + recipe.defName + " which has no " + nameof(Production.RecipeExtension));
             }
 
-            if (!RecipeExtension.recipes.Contains(recipeSettings))
+            if (!RecipeExtension.Contains(recipeSettings))
             {
                 throw new System.Exception(nameof(PangaeaBill) + " was made with recipe its def does not contain!");
             }
@@ -48,6 +48,8 @@ namespace ProjectPangaea.Production
         public IEnumerable<Thing> MakeResults(List<Thing> ingredients) => RecipeSettings.MakeResults(ingredients);
 
         public IEnumerable<IngredientCount> MakeIngredients() => RecipeSettings.MakeIngredients();
+
+        public override string Label => !RecipeSettings.label.NullOrEmpty() ? RecipeSettings.label : base.Label;
 
         public override void ExposeData()
         {

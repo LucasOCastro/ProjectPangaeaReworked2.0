@@ -27,7 +27,6 @@ namespace ProjectPangaea
             Mod = this;
 
             LoadBundles();
-            Log.Message(1f / 78548f + " and " + Mathf.Pow(78548, -1));
 
             LongEventHandler.ExecuteWhenFinished(BundleShaderTypeDef.OverrideAllShaders);
 
@@ -43,7 +42,6 @@ namespace ProjectPangaea
             AssetBundle loadBundle(string subPath)
             {
                 string path = Path.Combine(Content.RootDir, subPath);
-                Log.Message(path);
                 AssetBundle bundle = AssetBundle.LoadFromFile(path);
                 if (bundle == null)
                 {

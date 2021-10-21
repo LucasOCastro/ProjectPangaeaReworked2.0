@@ -51,6 +51,7 @@
 		</recipes>
 		<inspectorTabs>
 			<li>ITab_Bills</li>
+			<li>ProjectPangaea.Production.ITab_Pangaea</li>
 		</inspectorTabs>
 		<building>
 			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
@@ -120,6 +121,7 @@
 		</recipes>
 		<inspectorTabs>
 			<li>ITab_Bills</li>
+			<li>ProjectPangaea.Production.ITab_Pangaea</li>
 		</inspectorTabs>
 		<building>
 			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
@@ -184,6 +186,7 @@
 		</recipes>
 		<inspectorTabs>
 			<li>ITab_Bills</li>
+			<li>ProjectPangaea.Production.ITab_Pangaea</li>
 		</inspectorTabs>
 		<building>
 			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>

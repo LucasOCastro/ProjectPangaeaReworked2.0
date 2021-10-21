@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using Verse;
-using System.Collections.Generic;
-using System;
+using RimWorld;
 
-namespace ProjectPangaea.PangaeaUI
+namespace ProjectPangaea
 {
     [StaticConstructorOnStartup]
     public static class PangaeaUIGen
@@ -11,65 +10,57 @@ namespace ProjectPangaea.PangaeaUI
         public static Texture2D ArrowUp = ContentFinder<Texture2D>.Get("UI/Widgets/ArrowUp");
         public static Texture2D ArrowDown = ContentFinder<Texture2D>.Get("UI/Widgets/ArrowDown");
 
-        public const float lineHeight = 24;
-        public const float lineSpacing = 3;
-
-        public const float checkmarkSpacing = 0.3f;
-        public static bool ButtonWithPrefixLabel(Rect rect, string prefixLabel, string buttonLabel, float spacing = 0, float minButtonWidth = 0)
+        /// <summary>
+        /// GenUI.DrawTextureWithMaterial halves GUI.Color when calling Graphics.DrawTexture.
+        /// This works around it.
+        /// </summary>
+        public static void DrawTextureWithMaterialAccurateColor(Rect rect, Texture tex, Material mat, Color color, Rect texCoords = default)
         {
-            float prefixWidth = Verse.Text.CalcSize(prefixLabel).x;
+            Color ogColor = GUI.color;
 
-            if (rect.width - prefixWidth < minButtonWidth)
+            GUI.color = new Color(color.r * 2, color.g * 2, color.b * 2, color.a * 2);
+            GenUI.DrawTextureWithMaterial(rect, tex, mat, texCoords);
+            
+            GUI.color = ogColor;
+        }
+
+        public static void DrawTexWithMaterialClipped(Rect rect, Rect clipRect, Texture tex, Material mat) => DrawTexWithMaterialClipped(rect, clipRect, tex, mat, Color.white);
+        public static void DrawTexWithMaterialClipped(Rect rect, Rect clipRect, Texture tex, Material mat, Color color)
+        {
+            Rect clipped = rect.Intersection(clipRect);
+            Vector2 sizePct = new Vector2(clipped.width / rect.width, clipped.height / rect.height);
+
+            Vector2 texCoordPos = (rect.position.y > clipRect.center.y) ? Vector2.one - sizePct : Vector2.zero;
+            Rect texCoords = new Rect(texCoordPos, sizePct);
+
+            DrawTextureWithMaterialAccurateColor(clipped, tex, mat, color, texCoords);
+        }
+
+        public static Texture2D GetIcon(this ThingDef thingDef)
+        {
+            if (thingDef == null)
             {
-                prefixWidth = rect.width - minButtonWidth;
+                return null;
             }
-
-            Rect prefixRect = new Rect(rect) { width = prefixWidth };
-            Widgets.Label(prefixRect, prefixLabel);
-
-            Rect buttonRect = new Rect(rect) { xMin = prefixRect.xMax + spacing };
-            return Widgets.ButtonText(buttonRect, buttonLabel);
-        }
-
-        public static List<FloatMenuOption> GenEnumFloatMenuOptions<T>(Action<T> action) where T: Enum
-        {
-            T[] enumVals = (T[])Enum.GetValues(typeof(T));
-            List<FloatMenuOption> options = new List<FloatMenuOption>(enumVals.Length);            
-            for (int i = 0; i < enumVals.Length; i++)
+            if (thingDef.IsCorpse)
             {
-                T t = enumVals[i];
-                FloatMenuOption option = new FloatMenuOption(t.ToString(), () => action(t));
-                options.Add(option);
+                ThingDef corpseOwner = CorpseOwner(thingDef);
+                return GetIcon(corpseOwner);
             }
-
-            return options;
+            return thingDef.GetUIIconForDefaultStuff();
         }
 
-        public static void CheckMarkLabel(Rect rect, ref bool value, string label, float spacing = checkmarkSpacing)
+        public static Texture2D GetUIIconForDefaultStuff(this ThingDef thingDef)
         {
-            float checkSize = rect.height;
-            Widgets.Checkbox(rect.position, ref value, size: checkSize);
-
-            Rect labelRect = new Rect(rect) { xMin = rect.x + checkSize + spacing };
-            Widgets.Label(labelRect, "Pangaea_ShowUnavailableIngredients".Translate());
+            ThingDef stuff = GenStuff.DefaultStuffFor(thingDef);
+            return thingDef.GetUIIconForStuff(stuff);
         }
 
-        public static bool CheckMarkButton(Rect rect, bool isChecked)
+        private static ThingDef CorpseOwner(ThingDef corpseDef)
         {
-            Texture2D checkTexture = isChecked ? Widgets.CheckboxOnTex : Widgets.CheckboxOffTex;
-            return Widgets.ButtonImageFitted(rect, checkTexture);
-        }
-
-
-        public static Vector2 CalcRequiredAmountLabelSize(int count, int required)
-        {
-            return Verse.Text.CalcSize($"{count}/{required}");
-        }
-        public static void RequiredAmountLabel(Rect rect, int count, int required)
-        {
-            GUI.color = (count < required) ? Color.red : Color.green;
-            Widgets.Label(rect, $"{count}/{required}");
-            GUI.color = Color.white;
+            /*string defName = corpseDef.defName.Replace("Corpse_", "");
+            return DefDatabase<ThingDef>.GetNamedSilentFail(defName);*/
+            return corpseDef.ingestible.sourceDef;
         }
     }
 }

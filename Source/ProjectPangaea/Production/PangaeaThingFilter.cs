@@ -1,12 +1,15 @@
 ﻿using Verse;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ProjectPangaea.Production
 {
     public class PangaeaThingFilter : ThingFilter
     {
-        private HashSet<PangaeaResource> allowedResources = new HashSet<PangaeaResource>();
-        public HashSet<PangaeaResource> AllowedResources => allowedResources;
+        private HashSet<PangaeaResource> allowedResourcesHashset = new HashSet<PangaeaResource>();
+        private List<PangaeaResource> allowedResourcesList = new List<PangaeaResource>();
+        public IEnumerable<PangaeaResource> AllAllowedResources => allowedResourcesList;
+        public PangaeaResource AnyAllowedResource => AllAllowedResources.FirstOrFallback();
 
         public PangaeaThingFilter(params PangaeaResource[] allowedResources)
         {
@@ -31,6 +34,29 @@ namespace ProjectPangaea.Production
         {
         }
 
+        private Texture2D icon;
+        public Texture2D Icon
+        {
+            get
+            {
+                if (icon == null)
+                {
+                    ResolveIcon();
+                }
+                return icon;
+            }
+        }
+
+        private void ResolveIcon()
+        {
+            icon = AnyAllowedResource?.Icon;
+            if (icon.NullOrBad())
+            {
+                ThingDef def = AnyAllowedDef;
+                icon = def?.GetUIIconForStuff(RimWorld.GenStuff.DefaultStuffFor(def)) ?? BaseContent.BadTex;
+            }
+        }
+
         public override bool Allows(Thing t)
         {
             if (!base.Allows(t))
@@ -42,25 +68,39 @@ namespace ProjectPangaea.Production
             return resourceHolder == null || Allows(resourceHolder.Resource);
         }
 
-        public bool Allows(PangaeaResource resource) => AllowedResources.Contains(resource);
+        public bool Allows(PangaeaResource resource) => allowedResourcesHashset.Contains(resource);
+
+        public bool AllowsResourceOfType(ResourceTypeDef type)
+        {
+            for (int i = 0; i < allowedResourcesList.Count; i++)
+            {
+                if (allowedResourcesList[i].ResourceDef == type)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public void SetAllow(PangaeaResource resource, bool allow)
         {
             if (allow)
             {
-                AllowedResources.Add(resource);
+                allowedResourcesHashset.Add(resource);
+                allowedResourcesList.Add(resource);
                 SetAllow(resource.ResourceDef.thingDef, true);
             }
             else
             {
-                AllowedResources.Remove(resource);
+                allowedResourcesHashset.Remove(resource);
+                allowedResourcesList.Remove(resource);
                 DisallowIfNotNeeded(resource.ResourceDef.thingDef);
             }
         }
 
         private void DisallowIfNotNeeded(ThingDef thingDef)
         {
-            foreach (var resource in AllowedResources)
+            foreach (var resource in AllAllowedResources)
             {
                 if (resource.ResourceDef.thingDef == thingDef)
                 {
@@ -75,8 +115,9 @@ namespace ProjectPangaea.Production
             base.CopyAllowancesFrom(other);
             if (other is PangaeaThingFilter ptf)
             {
-                AllowedResources.Clear();
-                foreach (var resource in ptf.AllowedResources)
+                allowedResourcesHashset.Clear();
+                allowedResourcesList.Clear();
+                foreach (var resource in ptf.AllAllowedResources)
                 {
                     SetAllow(resource, true);
                 }

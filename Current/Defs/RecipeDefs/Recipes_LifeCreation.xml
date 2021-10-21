@@ -47,6 +47,7 @@
 				<proceduralRecipeDefs>
 					<li>
 						<baseRecipe>
+							<label>create {0} egg</label>
 							<canBeReversed>false</canBeReversed>
 							<ingredients>
 								<li>

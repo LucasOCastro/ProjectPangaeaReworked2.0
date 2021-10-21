@@ -17,6 +17,7 @@
 				<proceduralRecipeDefs>
 					<li>
 						<baseRecipe>
+							<label>extract {0} DNA</label>
 							<canBeReversed>false</canBeReversed>
 						</baseRecipe>
 						<ingredients>
@@ -54,6 +55,7 @@
 				<proceduralRecipeDefs>
 					<li>
 						<baseRecipe>
+							<label>dissect {0} corpse</label>
 							<canBeReversed>false</canBeReversed>
 							<stackCountProcessors>
 								<li Class="ProjectPangaea.Production.StackCountProcessor_PawnStat">
@@ -102,6 +104,7 @@
 				<recipes>
 				<!--Boomaloope = Cow + Thrumbo(placeholder until boomgenes are added)-->
 					<li>
+						<label>splice Boomalope DNA</label>
 						<canBeReversed>true</canBeReversed>
 						<ingredients>
 							<li>

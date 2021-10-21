@@ -23,12 +23,16 @@ namespace ProjectPangaea.Production
                         ingredients = this.results,
                         results = this.ingredients,
                         canBeReversed = true,
-                        reversed = this
+                        reversed = this,
+                        label = this.label
                     };
                 }
                 return reversed;
             }
         }
+
+        public string label = "";
+        public string LabelCap => label.CapitalizeFirst();
 
         public List<PortionData> ingredients = new List<PortionData>();
         public List<PortionData> results = new List<PortionData>();
@@ -42,7 +46,7 @@ namespace ProjectPangaea.Production
             get
             {
                 //TODO placeholder
-                return ingredients.ToStringSafeEnumerable() + "\nTO:\n" + results.ToStringSafeEnumerable();
+                return ingredients.ToStringSafeEnumerable() + " to " + results.ToStringSafeEnumerable();
             }
         }
 

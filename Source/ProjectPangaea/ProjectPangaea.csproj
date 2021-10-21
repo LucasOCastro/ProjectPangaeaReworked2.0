@@ -87,11 +87,13 @@
     <Compile Include="Overrides\EntrySettings.cs" />
     <Compile Include="Overrides\PangaeaOverride.cs" />
     <Compile Include="PangaeaEntryFilter.cs" />
+    <Compile Include="Production\Bills\ITab_Pangaea.cs" />
+    <Compile Include="Production\PangaeaRecipeAvailability.cs" />
     <Compile Include="Production\Bills\VanillaFindIngredientsFix.cs" />
     <Compile Include="Production\PangaeaRecipeLister.cs" />
     <Compile Include="Production\PangaeaRecipeSettings.cs" />
-    <Compile Include="Production\PangaeaBill.cs" />
-    <Compile Include="Production\FindIngredientForPangaeaBillOverride.cs" />
+    <Compile Include="Production\Bills\PangaeaBill.cs" />
+    <Compile Include="Production\Bills\FindIngredientForPangaeaBillOverride.cs" />
     <Compile Include="Production\PortionData.cs" />
     <Compile Include="Production\PortionDataGenerator\PortionDataGenerator.cs" />
     <Compile Include="Production\PortionDataGenerator\PortionDataGenerator_Corpse.cs" />
@@ -99,7 +101,7 @@
     <Compile Include="Production\PortionDataGenerator\PortionDataGenerator_Resource.cs" />
     <Compile Include="Production\ProceduralPangaeaRecipeGenData.cs" />
     <Compile Include="Production\RecipeExtension.cs" />
-    <Compile Include="Production\CurrentBillGetter.cs" />
+    <Compile Include="Production\Bills\CurrentBillGetter.cs" />
     <Compile Include="Production\StackCountProcessor\StackCountProcessor.cs" />
     <Compile Include="Production\StackCountProcessor\StackCountProcessor_PawnStat.cs" />
     <Compile Include="Production\StackCountProcessor\StackCountProcessor_RotStage.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Resource\Scribe_Pangaea.cs" />
     <Compile Include="Resource\Thing\CompPangaeaResourceHolder.cs" />
     <Compile Include="Resource\Thing\CompProperties_PangaeaResourceHolder.cs" />
+    <Compile Include="Resource\Thing\PangaeaThingHyperlinksPatch.cs" />
     <Compile Include="Utility\MathUtility.cs" />
     <Compile Include="Utility\VatUtility.cs" />
     <Compile Include="Utility\PangaeaEnumExtension.cs" />

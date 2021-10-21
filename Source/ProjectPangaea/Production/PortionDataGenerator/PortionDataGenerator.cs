@@ -1,7 +1,6 @@
 ﻿
 namespace ProjectPangaea.Production
 {
-
     [System.Serializable]
     public abstract class PortionDataGenerator
     {

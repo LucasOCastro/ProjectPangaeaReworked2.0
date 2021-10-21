@@ -11,6 +11,8 @@ namespace ProjectPangaea
         //TODO more complex configurable spawning settings
         public bool spawnExtinctAnimals = false;
 
+        public bool counterIncludeNonStocked = false;
+
         #region VATSETTINGS
 
         public bool ageInVat = true;
@@ -28,6 +30,7 @@ namespace ProjectPangaea
             base.ExposeData();
             Scribe_Values.Look(ref assignRandomOwnerToNullResource, nameof(assignRandomOwnerToNullResource));
             Scribe_Values.Look(ref spawnExtinctAnimals, nameof(spawnExtinctAnimals));
+            Scribe_Values.Look(ref counterIncludeNonStocked, nameof(counterIncludeNonStocked));
             Scribe_Values.Look(ref embryoVatTimeMultiplier, nameof(embryoVatTimeMultiplier), defaultValue: embryoVatTimeDefault);
             Scribe_Values.Look(ref ageInVat, nameof(ageInVat), defaultValue: true);
             Scribe_Values.Look(ref instantReleaseFromVat, nameof(instantReleaseFromVat), defaultValue: false);
@@ -48,6 +51,11 @@ namespace ProjectPangaea
                 ref spawnExtinctAnimals,
                 tooltip: "PangaeaSetting_WildAnimalsDescription".Translate()
                 );
+            listing.Gap();
+
+            listing.CheckboxLabeled("PangaeaSetting_CounterIncludesNonStockedName".Translate(),
+                ref counterIncludeNonStocked,
+                tooltip: "PangaeaSetting_CounterIncludesNonStockedDescription".Translate());
             listing.Gap();
 
             listing.Gap();

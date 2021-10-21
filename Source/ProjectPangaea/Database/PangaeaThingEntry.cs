@@ -20,7 +20,6 @@ namespace ProjectPangaea
 
         public PangaeaThingEntry(ThingDef thingDef)
         {
-
             ThingDef = thingDef;
             ExtinctExtension = thingDef.GetModExtension<ModExt_Extinct>();
             Category = OrganismCategory.For(thingDef, ExtinctExtension);

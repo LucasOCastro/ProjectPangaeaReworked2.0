@@ -17,7 +17,8 @@ namespace ProjectPangaea
             Shader shader = ProjectPangaeaMod.ShaderBundle.LoadAsset<Shader>(shaderName);
             if (shader == null)
             {
-                throw new System.Exception(nameof(BundleShaderTypeDef) + " named " + defName + " with invalid shader name!");
+                Log.Error(nameof(BundleShaderTypeDef) + " named " + defName + " with invalid shader name!");
+                return;
             }
             shaderCacheInfo.SetValue(this, shader);
         }

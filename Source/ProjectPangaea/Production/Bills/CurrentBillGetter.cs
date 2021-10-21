@@ -13,6 +13,7 @@ namespace ProjectPangaea.Production
     {
         public static PangaeaBill CurrentBill { get; private set; }
 
+        //'<FinishRecipeAndStartStoringProduct>b__0'
         private static MethodBase TargetMethod()
         {
             var method = AccessTools.FindIncludingInnerTypes(typeof(Toils_Recipe),

@@ -1,4 +1,5 @@
 ﻿using Verse;
+using UnityEngine;
 
 namespace ProjectPangaea
 {
@@ -26,6 +27,19 @@ namespace ProjectPangaea
                     graphic = ResourceGraphicLister.GetFor(Entry, ResourceDef)?.graphicData?.Graphic;
                 }
                 return graphic;
+            }
+        }
+
+        private Texture2D icon;
+        public Texture2D Icon
+        {
+            get
+            {
+                if (icon == null)
+                {
+                    icon = Graphic?.MatSingle?.mainTexture as Texture2D;
+                }
+                return icon;
             }
         }
 

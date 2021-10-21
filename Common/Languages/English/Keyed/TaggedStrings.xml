@@ -10,6 +10,9 @@
 	<!--RandomToNull-->
 	<PangaeaSetting_RandomResourceToNullName>Assign random to null resources</PangaeaSetting_RandomResourceToNullName>
 	<PangaeaSetting_RandomResourceToNullDescription>If a fossil or DNA has nothing assigned to it (for example, a mod was removed mid-game), assign a random one. This will avoid missing textures and useless resources, but means you may get resources you never had before.</PangaeaSetting_RandomResourceToNullDescription>
+	<!--CounterIncludesNonStocked-->
+	<PangaeaSetting_CounterIncludesNonStockedName>Count non stocked resources</PangaeaSetting_CounterIncludesNonStockedName>
+	<PangaeaSetting_CounterIncludesNonStockedDescription>Allow counting non stocked resources in the mod's UI. Enabling this might reduce performance when the UI is open.</PangaeaSetting_CounterIncludesNonStockedDescription>
 	<!--Embryo Title-->
 	<PangaeaSetting_EmbryoVatTitle>Embryo Vat</PangaeaSetting_EmbryoVatTitle>
 	<!--EmbryoGrowingTime-->
@@ -28,7 +31,11 @@
 	<!--ERRORS-->
 	<Pangaea_MissingResourceLabel>PangaeaMissingResource</Pangaea_MissingResourceLabel>
 	<Pangaea_MissingResourceDescription>The pawn this resource belonged to was probably removed from your game. Sorry D:</Pangaea_MissingResourceDescription>
-
+	
+	<!--UI-->
+	<Pangaea_PangaeaTab>Pangaea</Pangaea_PangaeaTab>
+	<Pangaea_RecipeAlreadyAdded>This recipe was already added.</Pangaea_RecipeAlreadyAdded>
+	
 	<!--CLONING VAT-->
 	<Pangaea_GrowingEmbryo>Growing the embryo of a {0}. Progress: {1}</Pangaea_GrowingEmbryo>
 	<Pangaea_EstimatedTimeLeft>Remaining time: {0}</Pangaea_EstimatedTimeLeft>
