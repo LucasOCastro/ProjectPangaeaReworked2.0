@@ -18,7 +18,8 @@ namespace ProjectPangaea
                 case DietCategory.Herbivorous:
                     return PangaeaDiet.Herbivore;
                 default:
-                    throw new System.Exception("Tried to convert diet from NeverEats to pangaea diet.");
+                    Log.Error("Tried to convert diet from NeverEats to pangaea diet. Returning omnivorous.");
+                    return ToPangaeaDiet(DietCategory.Omnivorous);
             }
         }
     }

@@ -14,7 +14,12 @@ namespace ProjectPangaea.Production
 
         public static void Init()
         {
-            PangaeaDatabase.AssertInitiated(nameof(PangaeaRecipeLister));
+            if (!PangaeaDatabase.Initiated)
+            {
+                Log.Error("PangaeaDatabase should be initialized before " + nameof(PangaeaRecipeLister));
+                return;
+            }
+
             foreach (RecipeDef recipe in DefDatabase<RecipeDef>.AllDefs)
             {
                 RecipeExtension extension = recipe.GetModExtension<RecipeExtension>();

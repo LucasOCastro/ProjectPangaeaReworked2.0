@@ -45,7 +45,7 @@ namespace ProjectPangaea
                 AssetBundle bundle = AssetBundle.LoadFromFile(path);
                 if (bundle == null)
                 {
-                    throw new Exception("Null AssetBundle for subpath: " + subPath);
+                    Log.Error("Null AssetBundle for subpath: " + subPath);
                 }
                 return bundle;
             }

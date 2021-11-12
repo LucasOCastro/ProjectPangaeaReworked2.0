@@ -99,13 +99,5 @@ namespace ProjectPangaea
             }
             return list;
         }
-
-        public static void AssertInitiated(string before = "")
-        {
-            if (!Initiated)
-            {
-                throw new System.Exception("Should initiate database" + (before.NullOrEmpty() ? "!" : (" before " + before + "!")));
-            }
-        }
     }
 }

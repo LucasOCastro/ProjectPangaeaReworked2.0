@@ -37,7 +37,8 @@ namespace ProjectPangaea
             {
                 if (graphic.resourceType != ResourceType)
                 {
-                    throw new Exception("Tried registering " + graphic + " with resourceType different than " + ResourceType);
+                    Log.Error("Tried registering " + graphic + " with resourceType different than " + ResourceType);
+                    return;
                 }
 
                 if (!graphic.filter.directDefFilter.EnumerableNullOrEmpty())

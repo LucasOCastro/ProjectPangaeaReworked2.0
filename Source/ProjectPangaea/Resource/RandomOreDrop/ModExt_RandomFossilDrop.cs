@@ -24,7 +24,7 @@ namespace ProjectPangaea
 
                     if (fossil == null)
                     {
-                        throw new System.Exception(this + " with null fossil!");
+                        Log.Error(this + " with null fossil!");
                     }
                     return fossil;
                 }

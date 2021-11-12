@@ -27,12 +27,14 @@ namespace ProjectPangaea.Production
         {
             if (RecipeExtension == null)
             {
-                throw new System.Exception(nameof(PangaeaBill) + " was made with recipe of def " + recipe.defName + " which has no " + nameof(Production.RecipeExtension));
+                Log.Error(nameof(PangaeaBill) + " was made with recipe of def " + recipe.defName + " which has no " + nameof(Production.RecipeExtension));
+                return;
             }
 
             if (!RecipeExtension.Contains(recipeSettings))
             {
-                throw new System.Exception(nameof(PangaeaBill) + " was made with recipe its def does not contain!");
+                Log.Error(nameof(PangaeaBill) + " was made with recipe its def does not contain!");
+                return;
             }
 
             this.recipeSettings = recipeSettings;

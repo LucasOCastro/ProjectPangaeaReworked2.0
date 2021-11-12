@@ -124,7 +124,10 @@ namespace ProjectPangaea.Production
 
         public void InsertEmbryo(PangaeaResource embryo)
         {
-            PangaeaResource.AssertType(embryo, ResourceTypeDefOf.Pangaea_Embryo, nameof(Building_EmbryoVat));
+            if (embryo.ResourceDef != ResourceTypeDefOf.Pangaea_Embryo)
+            {
+                Log.Error(embryo + " should be of type " + ResourceTypeDefOf.Pangaea_Embryo.defName + "for " + this);
+            }
 
             if (!powerComp.PowerOn)
             {
