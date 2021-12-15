@@ -5,10 +5,10 @@ G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\Project Pangaea Evolved 2.0\1.1\Ass
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\Project Pangaea Evolved 2.0\Source\ProjectPangaea\obj\Release\ProjectPangaea.csprojAssemblyReference.cache
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\Project Pangaea Evolved 2.0\Source\ProjectPangaea\obj\Release\ProjectPangaea.csproj.CoreCompileInputs.cache
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\Common\Assemblies\ProjectPangaeaReworked.dll
-G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\Source\ProjectPangaea\obj\Release\ProjectPangaea.csprojAssemblyReference.cache
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\Source\ProjectPangaea\obj\Release\ProjectPangaea.csproj.CoreCompileInputs.cache
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\Source\ProjectPangaea\obj\Release\ProjectPangaeaReworked.dll
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\1.2\Assemblies\ProjectPangaeaReworked.dll
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\1.1\Assemblies\ProjectPangaeaReworked.dll
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\1.3\Assemblies\ProjectPangaeaReworked.dll
 G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\Current\Assemblies\ProjectPangaeaReworked.dll
+G:\Organizando\Lucas\RimWorld.v1.3.3087\Mods\ProjectPangaeaEvolved2.0\Source\ProjectPangaea\obj\Release\ProjectPangaea.csproj.AssemblyReference.cache

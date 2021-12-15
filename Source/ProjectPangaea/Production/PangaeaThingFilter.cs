@@ -124,11 +124,23 @@ namespace ProjectPangaea.Production
             }
         }
 
+        private const string listExposeName = nameof(allowedResourcesList);
         public override void ExposeData()
         {
             base.ExposeData();
-            //TODO expos
-            //Scribe_Collections.Look(ref allowedResources, "")
+            if (Scribe.mode == LoadSaveMode.Saving) 
+            {
+                Scribe_PangaeaCollection.Look(ref allowedResourcesList, listExposeName);
+            }
+            else if (Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                List<PangaeaResource> resourceList = null;
+                Scribe_PangaeaCollection.Look(ref resourceList, listExposeName);
+                for (int i  = 0; i < resourceList.Count; i++)
+                {
+                    SetAllow(resourceList[i], true);
+                }
+            }
         }
     }
 }
