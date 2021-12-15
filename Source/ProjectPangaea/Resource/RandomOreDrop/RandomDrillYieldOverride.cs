@@ -15,11 +15,15 @@ namespace ProjectPangaea
 {
     public static class DrillYieldHelper
     {
+        private static IEnumerable<PangaeaResource> allFossils;
         public static PangaeaResource GetRandomFossil()
         {
             var fossilDef = ResourceTypeDefOf.Pangaea_Fossil;
-            var randomEntry = PangaeaDatabase.AllEntries.Where(e => e.GetResource(fossilDef) != null).RandomElement();
-            return randomEntry?.GetResource(ResourceTypeDefOf.Pangaea_Fossil);
+            if (allFossils == null)
+            {
+                allFossils = PangaeaDatabase.AllEntries.Select(e => e.GetResource(fossilDef)).Where(f => f != null);
+            }
+            return allFossils.RandomElement();
         }
     }
 
