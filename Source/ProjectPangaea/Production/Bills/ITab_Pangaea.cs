@@ -165,6 +165,8 @@ namespace ProjectPangaea.Production
 
         protected override void FillTab()
         {
+            Log.Message("Test2A: " + RimWorld.PawnKindDefOf.Boomalope.race.GetIcon().NullOrBad().ToStringSafe());
+            Log.Message("Test2B: " + (RimWorld.PawnKindDefOf.Boomalope.race.graphic.MatSingle.name));
             if (SelectedRecipe == null)
             {
                 CloseTab();
@@ -294,7 +296,7 @@ namespace ProjectPangaea.Production
         {
             Rect adjustedScrollRect = new Rect(clippingParentRect);
             if (UsingScrollbar) adjustedScrollRect.position += entriesScrollPos;
-            PangaeaUIGen.DrawTexWithMaterialClipped(rect, adjustedScrollRect, portion.Icon, portion.Graphic.MatSingle);
+            portion.DrawIcon(rect, adjustedScrollRect);
             TooltipHandler.TipRegion(rect, portion.ToString());
 
             Text.Font = GameFont.Tiny;

@@ -28,12 +28,18 @@ namespace ProjectPangaea
 
             LoadBundles();
 
-            LongEventHandler.ExecuteWhenFinished(BundleShaderTypeDef.OverrideAllShaders);
+            LongEventHandler.ExecuteWhenFinished(InitAll);
+        }
 
-            LongEventHandler.ExecuteWhenFinished(ResourceGraphicLister.Init);
-            LongEventHandler.ExecuteWhenFinished(PangaeaDatabase.Init);
-            LongEventHandler.ExecuteWhenFinished(Production.PangaeaRecipeLister.Init);
+        private void InitAll()
+        {
+            BundleShaderTypeDef.OverrideAllShaders();
+            ResourceGraphicLister.Init();
+            PangaeaDatabase.Init();
+            Production.PangaeaRecipeLister.Init();
 
+            Log.Message("Test1A: " + RimWorld.PawnKindDefOf.Boomalope.race.GetIcon().NullOrBad().ToStringSafe());
+            Log.Message("Test1B: " + (RimWorld.PawnKindDefOf.Boomalope.race.graphic.MatSingle.name));
         }
 
         private const string shaderBundlePath = @"Common\Materials\pangaeashaderbundle";

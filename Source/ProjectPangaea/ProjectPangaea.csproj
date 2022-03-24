@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectPangaea</RootNamespace>
     <AssemblyName>ProjectPangaeaReworked</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <LangVersion>8.0</LangVersion>
@@ -17,6 +17,7 @@
     <RWV>$(LatestRWV)</RWV>
     <RWVFolder>$(RWV)</RWVFolder>
     <RWVFolder Condition="$(RWV) == $(LatestRWV)">Current</RWVFolder>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -57,6 +58,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
@@ -120,6 +124,7 @@
     <Compile Include="Resource\Thing\CompPangaeaResourceHolder.cs" />
     <Compile Include="Resource\Thing\CompProperties_PangaeaResourceHolder.cs" />
     <Compile Include="Resource\Thing\PangaeaThingHyperlinksPatch.cs" />
+    <Compile Include="UI\PangaeaDetailWindow\PangaeaBillDetailWindow.cs" />
     <Compile Include="Utility\MathUtility.cs" />
     <Compile Include="Utility\VatUtility.cs" />
     <Compile Include="Utility\PangaeaEnumExtension.cs" />

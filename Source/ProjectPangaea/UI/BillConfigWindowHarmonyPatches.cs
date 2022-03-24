@@ -13,6 +13,33 @@ namespace ProjectPangaea.PangaeaUI
     [HarmonyPatch(typeof(Bill_Production), "DoConfigInterface")]
     public static class BillConfigWindowHarmonyPatches
     {
+        [HarmonyReversePatch]
+        public static void Extraction_ChangeBillDetailButton(Bill_Production __instance, Rect baseRect, Color baseColor)
+        {
+            IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            {
+                foreach (CodeInstruction code in instructions)
+                {
+                    if (code.opcode == OpCodes.Newobj && (ConstructorInfo)code.operand == AccessTools.Constructor(typeof(Dialog_BillConfig), new System.Type[] { typeof(Bill_Production), typeof(IntVec3) }))
+                    {
+                        code.operand = AccessTools.Constructor(typeof(PangaeaBillDetailWindow), new Type[] { typeof(PangaeaBill), typeof(IntVec3) });
+                    }
+                    yield return code;
+                }
+            }
+            _ = Transpiler(null);
+        }
+
+        [HarmonyPrefix]
+        public static bool BillConfigInterfacePrefix(Bill_Production __instance, Rect baseRect, Color baseColor)
+        {
+            if (__instance is PangaeaBill)
+            {
+                Extraction_ChangeBillDetailButton(__instance, baseRect, baseColor);
+                return false;
+            }
+            return true;
+        }
         //TODO ADD THE WINDOWS
         /*[HarmonyReversePatch]
         public static void Extraction_ChangeBillDetailButton(Bill_Production __instance, Rect baseRect, Color baseColor)

@@ -31,34 +31,30 @@ namespace ProjectPangaea.Production
 
         public ThingDef ResolvedThingDef => thing ?? resource?.Value?.ResourceDef.thingDef;
 
-        public Graphic Graphic => resource?.Value?.Graphic ?? thing?.graphic ?? BaseContent.BadGraphic;
-
-        Texture2D icon = null;
-        public Texture2D Icon 
+        private Texture2D uiIcon;
+        private Material uiMaterial;
+        public void DrawIcon(Rect rect, Rect clipRect)
         {
-            get
+            if (uiMaterial == null)
             {
-                if (icon == null)
+                Graphic graphic;
+                if (resource != null)
                 {
-                    ResolveIcon();
+                    graphic = resource?.Value?.Graphic;
                 }
-                return icon;
+                else
+                {
+                    ThingDef innerThing = thing;
+                    if (thing.IsCorpse) innerThing = thing.ingestible.sourceDef;
+                    graphic = innerThing.graphic;
+                }
+                uiMaterial = graphic.MatAt(ResolvedThingDef.defaultPlacingRot);
             }
-        }
-
-        private void ResolveIcon()
-        {
-            icon = resource?.Value?.Icon;
-            if (!icon.NullOrBad())
+            if (uiIcon == null)
             {
-                return;
+                uiIcon = resource?.Value?.Icon ?? thing?.GetIcon() ?? (Texture2D)uiMaterial?.mainTexture;
             }
-            icon = thing.GetIcon();
-            if (!icon.NullOrBad())
-            {
-                return;
-            }
-            icon = ThingFilter.Icon ?? BaseContent.BadTex;
+            PangaeaUIGen.DrawTexWithMaterialClipped(rect, clipRect, uiIcon, uiMaterial);
         }
 
         public PortionData()

@@ -53,7 +53,7 @@ namespace ProjectPangaea.Production
             if (icon.NullOrBad())
             {
                 ThingDef def = AnyAllowedDef;
-                icon = def?.GetUIIconForStuff(RimWorld.GenStuff.DefaultStuffFor(def)) ?? BaseContent.BadTex;
+                icon = def.GetIcon() ?? BaseContent.BadTex;// def?.GetUIIconForStuff(RimWorld.GenStuff.DefaultStuffFor(def)) ?? BaseContent.BadTex;
             }
         }
 

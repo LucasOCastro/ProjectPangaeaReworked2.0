@@ -1,5 +1,6 @@
 ﻿using Verse;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ProjectPangaea.Production
 {
@@ -47,6 +48,19 @@ namespace ProjectPangaea.Production
             {
                 //TODO placeholder
                 return ingredients.ToStringSafeEnumerable() + " to " + results.ToStringSafeEnumerable();
+            }
+        }
+
+        public PortionData definingPortion;
+        public PortionData DefiningPortion
+        {
+            get
+            {
+                if (definingPortion == null)
+                {
+                    definingPortion = results.FirstOrFallback();
+                }
+                return definingPortion;
             }
         }
 

@@ -17,7 +17,6 @@ namespace ProjectPangaea
         private Dictionary<ResourceTypeDef, PangaeaResource> resources = new Dictionary<ResourceTypeDef, PangaeaResource>();
         public IEnumerable<PangaeaResource> AllResources => resources.Values;
 
-
         public PangaeaThingEntry(ThingDef thingDef)
         {
             ThingDef = thingDef;
@@ -47,7 +46,7 @@ namespace ProjectPangaea
 
         public override string ToString()
         {
-            return base.ToString() + " " + ThingDef.defName;
+            return base.ToString() + "(" + ThingDef.defName + ")";
         }
     }
 }

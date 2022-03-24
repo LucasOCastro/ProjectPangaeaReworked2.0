@@ -44,16 +44,42 @@ namespace ProjectPangaea
             }
             if (thingDef.IsCorpse)
             {
+                Log.Message("is corpse " + thingDef.defName);
                 ThingDef corpseOwner = CorpseOwner(thingDef);
                 return GetIcon(corpseOwner);
             }
-            return thingDef.GetUIIconForDefaultStuff();
+            return GetUIIconForDefaultStuff(thingDef);
         }
+
+        /*private void ResolveIcon()
+        {
+            icon = resource?.Value?.Icon;
+            if (!icon.NullOrBad())
+            {
+                return;
+            }
+            icon = thing.GetIcon();
+            if (!icon.NullOrBad())
+            {
+                return;
+            }
+            icon = ThingFilter.Icon ?? BaseContent.BadTex;
+        }*/
 
         public static Texture2D GetUIIconForDefaultStuff(this ThingDef thingDef)
         {
+            if (thingDef == null)
+            {
+                return null;
+            }
+            //return thingDef?.GetUIIconForStuff(RimWorld.GenStuff.DefaultStuffFor(thingDef)) ?? BaseContent.BadTex;
             ThingDef stuff = GenStuff.DefaultStuffFor(thingDef);
-            return thingDef.GetUIIconForStuff(stuff);
+            Texture2D icon = Widgets.GetIconFor(thingDef, stuff);
+            if (icon.NullOrBad())
+            {
+                icon = thingDef.graphic.MatSingle.mainTexture as Texture2D;
+            }
+            return icon;
         }
 
         private static ThingDef CorpseOwner(ThingDef corpseDef)
